@@ -17,7 +17,7 @@ public class PruebasTexto
     public static void main(String[] args) throws SQLException, Exception
     {
         ConexionBBDD c= new ConexionBBDD();
-        c.hacerInsercion("INSERT INTO TParcela (IdParcela,IdFinca,Descripcion) VALUES (\"Primera LaRomana\",\"La Romana\",\"----------\");");
+        c.hacerInsercion("INSERT INTO TParcela (IdParcela,IdFinca,Descripcion) VALUES (\"uuuu\",\"La Romana\",\"----------\");");
         c.cerrarConexion();
     }
 }
