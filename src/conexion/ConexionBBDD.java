@@ -42,10 +42,14 @@ public class ConexionBBDD
      */
     private Connection conexion = null;
     /**
-     * Clase con la que interactuaremos con la BBDD
+     * Clase con la que interactuaremos con la BBDD, para accesos simples
+     * Como en este caso, pasaremos el String, puede que sea más simple de utilizar en este caso
      */
     private Statement stateman;
-    
+    /**
+     * Clase precompilada, agiliza y facilita la tarea en algunos casos
+     * Puede que en está ocasión no facilite la tarea.
+     */
     private PreparedStatement consulta;
      /**
       *  Constructor que crea la Conexión de la base de datos, deja todo preparado para trabajar
@@ -111,7 +115,16 @@ public class ConexionBBDD
      */
     public boolean hacerBorrado(String delete)
     {
-
-        return false;
+        try
+        {
+            stateman = (Statement) conexion.createStatement();
+            stateman.executeUpdate(delete);
+            return true;
+            
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(ConexionBBDD.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 }
