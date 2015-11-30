@@ -1,7 +1,13 @@
 package gui;
 
-import gui.internal.InternalBase;
-import javax.swing.JButton;
+import gui.internal.InternalTCultivar;
+import gui.internal.InternalTFinca;
+import gui.internal.InternalTParcela;
+import gui.internal.InternalTTipo;
+import gui.internal.InternalTVariedad;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -31,6 +37,10 @@ public class FramePrincipal extends javax.swing.JFrame
         jdpPrincipal = new javax.swing.JDesktopPane();
         jPanel1 = new javax.swing.JPanel();
         jbFinca = new javax.swing.JButton();
+        jbParcela = new javax.swing.JButton();
+        jbProducto = new javax.swing.JButton();
+        jbTipo = new javax.swing.JButton();
+        jbCultivar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -49,18 +59,67 @@ public class FramePrincipal extends javax.swing.JFrame
             }
         });
 
+        jbParcela.setText("Parcela");
+        jbParcela.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jbParcelaActionPerformed(evt);
+            }
+        });
+
+        jbProducto.setText("Producto");
+        jbProducto.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jbProductoActionPerformed(evt);
+            }
+        });
+
+        jbTipo.setText("Tipo");
+        jbTipo.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jbTipoActionPerformed(evt);
+            }
+        });
+
+        jbCultivar.setText("Cultivar");
+        jbCultivar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jbCultivarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jbFinca)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbParcela)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbTipo)
+                .addGap(18, 18, 18)
+                .addComponent(jbProducto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jbCultivar)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jbFinca)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbFinca)
+                    .addComponent(jbParcela)
+                    .addComponent(jbProducto)
+                    .addComponent(jbTipo)
+                    .addComponent(jbCultivar))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -95,10 +154,79 @@ public class FramePrincipal extends javax.swing.JFrame
 
     private void jbFincaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jbFincaActionPerformed
     {//GEN-HEADEREND:event_jbFincaActionPerformed
-        InternalBase ip1 = new InternalBase();
-        jdpPrincipal.add(ip1);
-        
+        try
+        {
+            InternalTFinca ip = new InternalTFinca();
+            jdpPrincipal.add(ip);
+        } catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_jbFincaActionPerformed
+
+    private void jbParcelaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jbParcelaActionPerformed
+    {//GEN-HEADEREND:event_jbParcelaActionPerformed
+        try
+        {
+            InternalTParcela ip = new InternalTParcela();
+            jdpPrincipal.add(ip);
+        } catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbParcelaActionPerformed
+
+    private void jbProductoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jbProductoActionPerformed
+    {//GEN-HEADEREND:event_jbProductoActionPerformed
+        try
+        {
+            InternalTVariedad ip= new InternalTVariedad();
+            jdpPrincipal.add(ip);
+        } catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbProductoActionPerformed
+
+    private void jbTipoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jbTipoActionPerformed
+    {//GEN-HEADEREND:event_jbTipoActionPerformed
+        try
+        {
+            InternalTTipo ip= new InternalTTipo();
+            jdpPrincipal.add(ip);
+        } catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbTipoActionPerformed
+
+    private void jbCultivarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jbCultivarActionPerformed
+    {//GEN-HEADEREND:event_jbCultivarActionPerformed
+        try
+        {
+            InternalTCultivar ip=new InternalTCultivar();
+            jdpPrincipal.add(ip);
+        } catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbCultivarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,7 +281,11 @@ public class FramePrincipal extends javax.swing.JFrame
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jbCultivar;
     private javax.swing.JButton jbFinca;
+    private javax.swing.JButton jbParcela;
+    private javax.swing.JButton jbProducto;
+    private javax.swing.JButton jbTipo;
     private javax.swing.JDesktopPane jdpPrincipal;
     // End of variables declaration//GEN-END:variables
 }
