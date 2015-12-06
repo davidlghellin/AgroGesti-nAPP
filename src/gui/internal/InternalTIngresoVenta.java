@@ -11,16 +11,16 @@ import java.sql.SQLException;
  *
  * @author david
  */
-public class InternalTTipo extends javax.swing.JInternalFrame
+public class InternalTIngresoVenta extends javax.swing.JInternalFrame
 {
 
     /**
-     * Creates new form InternalTTipo
+     * Creates new form InternalTIngresoVenta
      */
-    public InternalTTipo() throws ClassNotFoundException, SQLException, Exception
+    public InternalTIngresoVenta() throws ClassNotFoundException, SQLException, Exception
     {
         initComponents();
-        this.jtbTipo=utils.Utilidades.rellenarJTable("SELECT * FROM TTipo;", jtbTipo);
+        this.jtbIngresoVenta=utils.Utilidades.rellenarJTable("SELECT * FROM TIngresoVenta;", jtbIngresoVenta);
     }
 
     /**
@@ -34,16 +34,17 @@ public class InternalTTipo extends javax.swing.JInternalFrame
     {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtbTipo = new javax.swing.JTable();
+        jtbIngresoVenta = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setMaximumSize(null);
+        setMaximumSize(new java.awt.Dimension(700, 400));
+        setPreferredSize(new java.awt.Dimension(700, 403));
         setVisible(true);
 
-        jtbTipo.setModel(new javax.swing.table.DefaultTableModel(
+        jtbIngresoVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null, null, null, null},
@@ -56,13 +57,13 @@ public class InternalTTipo extends javax.swing.JInternalFrame
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jtbTipo);
+        jScrollPane1.setViewportView(jtbIngresoVenta);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -77,6 +78,6 @@ public class InternalTTipo extends javax.swing.JInternalFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtbTipo;
+    private javax.swing.JTable jtbIngresoVenta;
     // End of variables declaration//GEN-END:variables
 }

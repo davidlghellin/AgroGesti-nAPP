@@ -14,7 +14,7 @@ CREATE TABLE TParcela
 (
     IdParcela       VARCHAR(20)     PRIMARY KEY,
     IdFinca         VARCHAR(20)     NOT NULL,
-    Descripcion     VARCHAR(100)    NOT NULL,
+    IdFinca     VARCHAR(100)    NOT NULL,
     CONSTRAINT Parcela_Finca	FOREIGN KEY (IdFinca) REFERENCES TFinca(Nombre)
 )CHARACTER SET utf8 COLLATE utf8_spanish_ci;
 

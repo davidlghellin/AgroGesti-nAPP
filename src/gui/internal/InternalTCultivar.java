@@ -17,7 +17,7 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
     /**
      * Creates new form InternalTCultivar
      */
-    public InternalTCultivar() throws ClassNotFoundException, SQLException
+    public InternalTCultivar() throws ClassNotFoundException, SQLException, Exception
     {
         initComponents();
         this.jtbCultivar=utils.Utilidades.rellenarJTable("SELECT * FROM TCultivar;", jtbCultivar);
@@ -61,13 +61,13 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 177, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 207, Short.MAX_VALUE))
         );
 
         pack();

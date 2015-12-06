@@ -19,7 +19,7 @@ public class InternalTVariedad extends javax.swing.JInternalFrame
     /**
      * Creates new form InternalProductos
      */
-    public InternalTVariedad()throws ClassNotFoundException, SQLException
+    public InternalTVariedad()throws ClassNotFoundException, SQLException, Exception
     {
         initComponents();
         this.jtbProducto=utils.Utilidades.rellenarJTable("SELECT * FROM TVariedad;", jtbProducto);
@@ -38,6 +38,7 @@ public class InternalTVariedad extends javax.swing.JInternalFrame
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbProducto = new javax.swing.JTable();
 
+        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
@@ -62,14 +63,14 @@ public class InternalTVariedad extends javax.swing.JInternalFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(195, Short.MAX_VALUE))
         );
 
         pack();

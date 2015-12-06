@@ -83,7 +83,7 @@ public class ConexionBBDD
     }
 
     /**
-     * Realiza la inserción en la base de datos pasada como parámetro
+     * Realiza la inserción/modificación en la base de datos pasada como parámetro
      *
      * @param insert Cadena de texto que paseremos a la BBDD para dar de alta
      * una tupla
@@ -102,7 +102,7 @@ public class ConexionBBDD
             return false;
         }
     }
-
+    
     /**
      * Realiza la consulta de la base de datos que se le pasa como parámetro
      *
@@ -123,14 +123,8 @@ public class ConexionBBDD
         DefaultTableModel modelo = (DefaultTableModel) jtable.getModel();
 
         ResultSet rs = stateman.executeQuery(select);
-        System.out.println("___" + rs);
         ResultSetMetaData rsmd = rs.getMetaData();
-
-        System.out.println("___" + rsmd.getColumnCount());
-        System.out.println("col1: " + rsmd.getColumnLabel(1));
-        System.out.println("col2: " + rsmd.getColumnLabel(2));
-        System.out.println("col3: " + rsmd.getColumnLabel(3));
-
+        
         int cantidadColumnas = rsmd.getColumnCount();
         modelo.setColumnCount(0);
         for (int i = 1; i <= cantidadColumnas; i++)
@@ -160,10 +154,10 @@ public class ConexionBBDD
     {
         try
         {
+            System.out.println(delete);
             stateman = (Statement) conexion.createStatement();
             stateman.executeUpdate(delete);
             return true;
-
         } catch (SQLException ex)
         {
             Logger.getLogger(ConexionBBDD.class.getName()).log(Level.SEVERE, null, ex);
