@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui.internal.nuevo;
 
 import conexion.ConexionBBDD;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -244,15 +238,6 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAceptarActionPerformed
     {//GEN-HEADEREND:event_btnAceptarActionPerformed
-        /*
-         Id              INT             PRIMARY KEY AUTO_INCREMENT,
-         Fecha           DATE            NOT NULL,
-         NombreCliente   VARCHAR(20)     NOT NULL,
-         PrecioUnidad    FLOAT           NOT NULL,
-         Cantidad        FLOAT           NOT NULL,
-         Total           FLOAT           NOT NULL,
-         IdCultivar      INT 
-         */
         ConexionBBDD c = null;
         String fecha = null, nombre = null;
         float precioUnidad = 0, cantidad = 0, total = 0;
