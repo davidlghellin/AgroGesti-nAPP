@@ -9,6 +9,7 @@ import gui.internal.nuevo.InternalNuevoCultivar;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 
 /**
  *
@@ -73,6 +74,13 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
         });
 
         btnModificar.setText("Modificación");
+        btnModificar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener()
@@ -123,12 +131,20 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
     {//GEN-HEADEREND:event_btnEliminarActionPerformed
         try
         {
-            utils.Utilidades.borrar("TCultivar", jtbCultivar,1);
+            utils.Utilidades.borrar("TCultivar", jtbCultivar, 1);
         } catch (Exception ex)
         {
             Logger.getLogger(InternalTCultivar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnModificarActionPerformed
+    {//GEN-HEADEREND:event_btnModificarActionPerformed
+        int id = (int) jtbCultivar.getValueAt(jtbCultivar.getSelectedRow(), 0);
+        InternalNuevoCultivar internal = new InternalNuevoCultivar(jtbCultivar, id);
+        this.getParent().add(internal);
+        internal.toFront();
+    }//GEN-LAST:event_btnModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

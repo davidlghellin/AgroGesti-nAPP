@@ -23,7 +23,7 @@ public class InternalNuevoCultivar extends javax.swing.JInternalFrame
 {
 
     JTable jtable;
-    String id;
+    int id;
     boolean modificar;
 
     /**
@@ -46,12 +46,13 @@ public class InternalNuevoCultivar extends javax.swing.JInternalFrame
         }
     }
 
-    public InternalNuevoCultivar(JTable jtb, String id)
+    public InternalNuevoCultivar(JTable jtb, int id)
     {
         initComponents();
         this.jtable = jtb;
         modificar = true;
         this.id = id;
+        rellenarCampos();
     }
 
     @SuppressWarnings("unchecked")
@@ -204,61 +205,110 @@ public class InternalNuevoCultivar extends javax.swing.JInternalFrame
         String variedad, parcela;
 
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-        try
-        {
-            c = new ConexionBBDD();
-        } catch (ClassNotFoundException ex)
-        {
-            Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
         if (modificar)
         {
 
+            try
+            {
+                strInicio = formatoFecha.format(dateInicio.getDate());
+                strFin = formatoFecha.format(dateFin.getDate());
+            } catch (Exception ex)
+            {
+                JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Debe selecionar las fechas correctas");
+                Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String SQL = "UPDATE TCultivar SET FechaInicio = \'" + strInicio
+                    + "\', FechaFin = \'" + strFin
+                    + "\', IdVariedad = \"" + jcbVariedad.getSelectedItem().toString()
+                    + "\", IdParcela = \"" + jcbParcela.getSelectedItem().toString()
+                    + "\" WHERE Id = \"" + id + "\";";
+            try
+            {
+                c = new ConexionBBDD();
+                System.out.println(SQL);
+                c.hacerInsercion(SQL);
+                c.cerrarConexion();
+                dispose();
+            } catch (ClassNotFoundException ex)
+            {
+                Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex)
+            {
+                Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else
         {
             fInicio = dateInicio.getDate();
             fFin = dateFin.getDate();
-
-            try
+            if (fInicio.after(fFin))    //las fechas no están bien introdcidas
             {
-                strInicio = formatoFecha.format(fInicio);
-                strFin = formatoFecha.format(fFin);
-            } catch (Exception ex)
+                JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Debe selecionar las fechas correctas");
+            } else
             {
-                JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Debe selecionar las fechas");
-                Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
+                try
+                {
+                    strInicio = formatoFecha.format(fInicio);
+                    strFin = formatoFecha.format(fFin);
+                } catch (Exception ex)
+                {
+                    JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Debe selecionar las fechas");
+                    Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                variedad = jcbVariedad.getSelectedItem().toString();
+                parcela = jcbParcela.getSelectedItem().toString();
+                String SQL = "INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela) VALUES (\'"
+                        + strInicio + "\',\'" + strFin + "\',\"" + variedad + "\",\"" + parcela + "\");";
+                try
+                {
+                    c = new ConexionBBDD();
+                    c.hacerInsercion(SQL);
+                    c.cerrarConexion();
+                    dispose();
+                } catch (ClassNotFoundException ex)
+                {
+                    Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex)
+                {
+                    Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-
-            variedad = jcbVariedad.getSelectedItem().toString();
-            parcela = jcbParcela.getSelectedItem().toString();
-            String SQL = "INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela) VALUES (\'"
-                    + strInicio + "\',\'" + strFin + "\',\"" + variedad + "\",\"" + parcela + "\");";
-            c.hacerInsercion(SQL);
-            try
-            {
-                c.cerrarConexion();
-            } catch (Exception ex)
-            {
-                Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
         }
 
-        try
+        try // Actualizamos el Jtable
         {
             utils.Utilidades.actualizarJtable(jtable, "TCultivar");
         } catch (Exception ex)
         {
             Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
         }
-        dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void jcbVariedadActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jcbVariedadActionPerformed
     {//GEN-HEADEREND:event_jcbVariedadActionPerformed
 
     }//GEN-LAST:event_jcbVariedadActionPerformed
+    void rellenarCampos()
+    {
+        try
+        {
+            rellenarCombo();
+            ConexionBBDD c = new ConexionBBDD();
+            String SQL = "SELECT * FROM TCultivar WHERE Id = \"" + id + "\";";
+            ResultSet rs = c.hacerConsulta(SQL);
+            rs.next();
+            jtfId.setText(rs.getInt(1) + "");
+            dateInicio.setDate(rs.getDate("FechaInicio"));
+            dateFin.setDate(rs.getDate("FechaFin"));
+            c.cerrarConexion();
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     void rellenarCombo() throws ClassNotFoundException, SQLException, Exception
     {
@@ -276,7 +326,6 @@ public class InternalNuevoCultivar extends javax.swing.JInternalFrame
         {
             jcbParcela.addItem(rs2.getString(1));
         }
-
         c.cerrarConexion();
     }
 

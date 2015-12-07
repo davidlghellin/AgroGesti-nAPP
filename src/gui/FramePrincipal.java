@@ -23,6 +23,8 @@ public class FramePrincipal extends javax.swing.JFrame
     public FramePrincipal()
     {
         initComponents();
+        jdpPrincipal.setBorder(new FondoDesktop());
+        this.setExtendedState(FramePrincipal.MAXIMIZED_BOTH);
     }
 
     /**
@@ -123,7 +125,7 @@ public class FramePrincipal extends javax.swing.JFrame
                 .addComponent(jbCultivar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbIngresoVenta)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 778, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,17 +153,14 @@ public class FramePrincipal extends javax.swing.JFrame
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jdpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 1123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jdpPrincipal)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jdpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jdpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE))
         );
 
         pack();
@@ -173,6 +172,7 @@ public class FramePrincipal extends javax.swing.JFrame
         {
             InternalTFinca internal = new InternalTFinca();
             jdpPrincipal.add(internal);
+            utils.UtilsFrame.centrar(internal,700,400);
         } catch (ClassNotFoundException ex)
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -208,7 +208,7 @@ public class FramePrincipal extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jbProductoActionPerformed
         try
         {
-            InternalTVariedad internal= new InternalTVariedad();
+            InternalTVariedad internal = new InternalTVariedad();
             jdpPrincipal.add(internal);
         } catch (ClassNotFoundException ex)
         {
@@ -226,7 +226,7 @@ public class FramePrincipal extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jbTipoActionPerformed
         try
         {
-            InternalTTipo internal= new InternalTTipo();
+            InternalTTipo internal = new InternalTTipo();
             jdpPrincipal.add(internal);
         } catch (ClassNotFoundException ex)
         {
@@ -244,7 +244,7 @@ public class FramePrincipal extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jbCultivarActionPerformed
         try
         {
-            InternalTCultivar internal=new InternalTCultivar();
+            InternalTCultivar internal = new InternalTCultivar();
             jdpPrincipal.add(internal);
         } catch (ClassNotFoundException ex)
         {
@@ -262,7 +262,7 @@ public class FramePrincipal extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jbIngresoVentaActionPerformed
         try
         {
-            InternalTIngresoVenta internal=new InternalTIngresoVenta();
+            InternalTIngresoVenta internal = new InternalTIngresoVenta();
             jdpPrincipal.add(internal);
         } catch (ClassNotFoundException ex)
         {

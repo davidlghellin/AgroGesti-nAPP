@@ -37,11 +37,11 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
     public InternalNuevaFinca(javax.swing.JTable jtbFinca, String id) throws Exception
     {
         initComponents();
-        rellenarCampos();
         modificar = true;
         this.id = id;
         this.jtbFinca = jtbFinca;
         jtfNombreFinca.setEditable(false);
+        rellenarCampos();
     }
 
     public void rellenarCampos() throws SQLException, Exception

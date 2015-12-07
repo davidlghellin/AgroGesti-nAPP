@@ -14,7 +14,7 @@ CREATE TABLE TParcela
 (
     IdParcela       VARCHAR(20)     PRIMARY KEY,
     IdFinca         VARCHAR(20)     NOT NULL,
-    IdFinca     VARCHAR(100)    NOT NULL,
+    Descripcion     VARCHAR(100)    NOT NULL,
     CONSTRAINT Parcela_Finca	FOREIGN KEY (IdFinca) REFERENCES TFinca(Nombre)
 )CHARACTER SET utf8 COLLATE utf8_spanish_ci;
 
@@ -47,8 +47,8 @@ CREATE TABLE TIngresoVenta
     Id              INT             PRIMARY KEY AUTO_INCREMENT,
     Fecha           DATE            NOT NULL,
     NombreCliente   VARCHAR(20)     NOT NULL,
-    PrecioUnidad    FLOAT           NOT NULL,
-    Cantidad        FLOAT           NOT NULL,
+    PrecioUnidad    FLOAT           ,
+    Cantidad        FLOAT           ,
     Total           FLOAT           NOT NULL,
     IdCultivar      INT             NOT NULL,
     CONSTRAINT IngresoVenta_Cultivar	FOREIGN KEY (IdCultivar) REFERENCES TCultivar(Id)
