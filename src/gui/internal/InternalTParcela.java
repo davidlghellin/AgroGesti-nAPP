@@ -6,7 +6,7 @@
 package gui.internal;
 
 import conexion.ConexionBBDD;
-import gui.internal.nuevo.InternalNuevParcela;
+import gui.internal.nuevo.InternalNuevaParcela;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -126,7 +126,7 @@ public class InternalTParcela extends javax.swing.JInternalFrame
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
     {//GEN-HEADEREND:event_jButton1ActionPerformed
-        InternalNuevParcela internal = new InternalNuevParcela(jtbParcela);
+        InternalNuevaParcela internal = new InternalNuevaParcela(jtbParcela);
         this.getParent().add(internal);
         internal.toFront();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -136,7 +136,7 @@ public class InternalTParcela extends javax.swing.JInternalFrame
         try
         {
             String id = (String) jtbParcela.getValueAt(jtbParcela.getSelectedRow(), 0);
-            InternalNuevParcela internal = new InternalNuevParcela(jtbParcela, id);
+            InternalNuevaParcela internal = new InternalNuevaParcela(jtbParcela, id);
             this.getParent().add(internal);
             internal.toFront();
         } catch (Exception ex)

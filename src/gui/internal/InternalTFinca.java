@@ -32,7 +32,6 @@ public class InternalTFinca extends javax.swing.JInternalFrame
         initComponents();
         modelo = new DefaultTableModel();
         this.jtbFinca = utils.Utilidades.rellenarJTable("SELECT * FROM TFinca;", jtbFinca);
-        //crear();//rellena correcto
     }
 
     /**

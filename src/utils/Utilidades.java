@@ -51,7 +51,7 @@ public class Utilidades
 
     /**
      * Método genérico para borrar el elemento selecionado del jtable
-     *
+     * La clave primaria es String
      * @param nombreTabla Nombre de la tabla en el base de datos
      * @param table JTable donde se visualizará los datos
      * @throws Exception
@@ -67,6 +67,7 @@ public class Utilidades
         try
         {
             id = (String) jtable.getValueAt(jtable.getSelectedRow(), 0);
+            System.out.println(id+"__ID__");
             try
             {
                 String SQLBorrar = "DELETE FROM " + nombreTabla + " WHERE " + rsmd.getColumnName(1) + " = \"" + id + "\";";
@@ -76,12 +77,49 @@ public class Utilidades
                 actualizarJtable(jtable, nombreTabla);
             } catch (Exception e)
             {
-                JOptionPane.showInternalMessageDialog(table.getRootPane(), "Hace referencia a otra tabla");
+                JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Hace referencia a otra tabla");
                 //  Logger.getLogger(Utilidades.class.getName()).log(Level.SEVERE, null, e);
             }
         } catch (Exception e)
+        {e.printStackTrace();
+            JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Tiene que selecionar la fila a modificar");
+        }
+        c.cerrarConexion();
+    }
+    /**
+     * Método genérico para borrar el elemento selecionado del jtable
+     * La clave primaria es int
+     * @param nombreTabla Nombre de la tabla en el base de datos
+     * @param table JTable donde se visualizará los datos
+     * @throws Exception
+     */
+     public static void borrar(String nombreTabla, JTable table,int i) throws Exception
+    {
+        JTable jtable = table;
+        ConexionBBDD c = new ConexionBBDD();
+        String SQLConsulta = "SELECT * FROM " + nombreTabla + ";";
+        ResultSet rs = c.hacerConsulta(SQLConsulta);
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int id ;
+        try
         {
-            JOptionPane.showInternalMessageDialog(table.getRootPane(), "Tiene que selecionar la fila a modificar");
+            id = (int) jtable.getValueAt(jtable.getSelectedRow(), 0);
+            System.out.println(id+"__ID__");
+            try
+            {
+                String SQLBorrar = "DELETE FROM " + nombreTabla + " WHERE " + rsmd.getColumnName(1) + " = \"" + id + "\";";
+                System.out.println(SQLBorrar);
+                c = new ConexionBBDD();
+                c.hacerBorrado(SQLBorrar);
+                actualizarJtable(jtable, nombreTabla);
+            } catch (Exception e)
+            {
+                JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Hace referencia a otra tabla");
+                //  Logger.getLogger(Utilidades.class.getName()).log(Level.SEVERE, null, e);
+            }
+        } catch (Exception e)
+        {e.printStackTrace();
+            JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Tiene que selecionar la fila a modificar");
         }
         c.cerrarConexion();
     }

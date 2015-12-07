@@ -5,7 +5,10 @@
  */
 package gui.internal;
 
+import gui.internal.nuevo.InternalNuevoCultivar;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,7 +23,7 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
     public InternalTCultivar() throws ClassNotFoundException, SQLException, Exception
     {
         initComponents();
-        this.jtbCultivar=utils.Utilidades.rellenarJTable("SELECT * FROM TCultivar;", jtbCultivar);
+        this.jtbCultivar = utils.Utilidades.rellenarJTable("SELECT * FROM TCultivar;", jtbCultivar);
     }
 
     /**
@@ -35,6 +38,9 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbCultivar = new javax.swing.JTable();
+        btnAlta = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -57,24 +63,78 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
         ));
         jScrollPane1.setViewportView(jtbCultivar);
 
+        btnAlta.setText("Alta");
+        btnAlta.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnAltaActionPerformed(evt);
+            }
+        });
+
+        btnModificar.setText("Modificación");
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(192, 192, 192)
+                .addComponent(btnModificar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 207, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAlta)
+                    .addComponent(btnModificar)
+                    .addComponent(btnEliminar))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAltaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAltaActionPerformed
+    {//GEN-HEADEREND:event_btnAltaActionPerformed
+        InternalNuevoCultivar internal = new InternalNuevoCultivar(jtbCultivar);
+        this.getParent().add(internal);
+        internal.toFront();
+    }//GEN-LAST:event_btnAltaActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnEliminarActionPerformed
+    {//GEN-HEADEREND:event_btnEliminarActionPerformed
+        try
+        {
+            utils.Utilidades.borrar("TCultivar", jtbCultivar,1);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(InternalTCultivar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlta;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtbCultivar;
     // End of variables declaration//GEN-END:variables

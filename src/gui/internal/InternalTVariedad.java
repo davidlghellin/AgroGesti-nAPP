@@ -5,7 +5,10 @@
  */
 package gui.internal;
 
+import gui.internal.nuevo.InternalNuevaVariedad;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,15 +17,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class InternalTVariedad extends javax.swing.JInternalFrame
 {
+
     DefaultTableModel modelo;
-    
+
     /**
      * Creates new form InternalProductos
      */
-    public InternalTVariedad()throws ClassNotFoundException, SQLException, Exception
+    public InternalTVariedad() throws ClassNotFoundException, SQLException, Exception
     {
         initComponents();
-        this.jtbProducto=utils.Utilidades.rellenarJTable("SELECT * FROM TVariedad;", jtbProducto);
+        this.jtbProducto = utils.Utilidades.rellenarJTable("SELECT * FROM TVariedad;", jtbProducto);
     }
 
     /**
@@ -37,6 +41,9 @@ public class InternalTVariedad extends javax.swing.JInternalFrame
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbProducto = new javax.swing.JTable();
+        btnAlta = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -59,25 +66,94 @@ public class InternalTVariedad extends javax.swing.JInternalFrame
         ));
         jScrollPane1.setViewportView(jtbProducto);
 
+        btnAlta.setText("Alta");
+        btnAlta.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnAltaActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(234, 234, 234)
+                .addComponent(btnModificar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEliminar)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAlta)
+                    .addComponent(btnEliminar)
+                    .addComponent(btnModificar))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAltaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAltaActionPerformed
+    {//GEN-HEADEREND:event_btnAltaActionPerformed
+        InternalNuevaVariedad internal = new InternalNuevaVariedad(jtbProducto);
+        this.getParent().add(internal);
+        internal.toFront();
+    }//GEN-LAST:event_btnAltaActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnEliminarActionPerformed
+    {//GEN-HEADEREND:event_btnEliminarActionPerformed
+        try
+        {
+            utils.Utilidades.borrar("TVariedad", jtbProducto);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(InternalTVariedad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnModificarActionPerformed
+    {//GEN-HEADEREND:event_btnModificarActionPerformed
+        String id = (String) jtbProducto.getValueAt(jtbProducto.getSelectedRow(), 0);
+        InternalNuevaVariedad internal = new InternalNuevaVariedad(jtbProducto, id);
+        this.getParent().add(internal);
+        internal.toFront();
+    }//GEN-LAST:event_btnModificarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlta;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtbProducto;
     // End of variables declaration//GEN-END:variables

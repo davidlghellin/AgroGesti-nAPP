@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author david
  */
-public class InternalNuevParcela extends javax.swing.JInternalFrame
+public class InternalNuevaParcela extends javax.swing.JInternalFrame
 {
     /*
      IdParcela       VARCHAR(20)     PRIMARY KEY,
@@ -30,7 +30,7 @@ public class InternalNuevParcela extends javax.swing.JInternalFrame
     /**
      * Creates new form InternalNuevParcela
      */
-    public InternalNuevParcela(javax.swing.JTable jtbParcela)
+    public InternalNuevaParcela(javax.swing.JTable jtbParcela)
     {
         initComponents();
 
@@ -40,13 +40,12 @@ public class InternalNuevParcela extends javax.swing.JInternalFrame
         jtfIdParcela.setEditable(true);
     }
 
-    public InternalNuevParcela(javax.swing.JTable jtbParcela, String id)
+    public InternalNuevaParcela(javax.swing.JTable jtbParcela, String id)
     {
         initComponents();
         modificar = false;
         this.jtbParcela = jtbParcela;
         this.id = id;
-        System.out.println("this" + this.id);
         jtfIdParcela.setEditable(false);
         rellenarCampos();
     }
@@ -61,14 +60,15 @@ public class InternalNuevParcela extends javax.swing.JInternalFrame
     private void initComponents()
     {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jcbFinca = new javax.swing.JComboBox();
+        btnAceptarNueva = new javax.swing.JButton();
         jtfIdParcela = new javax.swing.JTextField();
+        jcbFinca = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaDescripcionNuevo = new javax.swing.JTextArea();
-        btnAceptarNueva = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setVisible(true);
@@ -79,11 +79,6 @@ public class InternalNuevParcela extends javax.swing.JInternalFrame
 
         jLabel3.setText("Descripción");
 
-        jtaDescripcionNuevo.setColumns(20);
-        jtaDescripcionNuevo.setLineWrap(true);
-        jtaDescripcionNuevo.setRows(5);
-        jScrollPane1.setViewportView(jtaDescripcionNuevo);
-
         btnAceptarNueva.setText("Aceptar");
         btnAceptarNueva.addActionListener(new java.awt.event.ActionListener()
         {
@@ -92,6 +87,11 @@ public class InternalNuevParcela extends javax.swing.JInternalFrame
                 btnAceptarNuevaActionPerformed(evt);
             }
         });
+
+        jtaDescripcionNuevo.setColumns(20);
+        jtaDescripcionNuevo.setLineWrap(true);
+        jtaDescripcionNuevo.setRows(5);
+        jScrollPane1.setViewportView(jtaDescripcionNuevo);
 
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener()
@@ -102,52 +102,60 @@ public class InternalNuevParcela extends javax.swing.JInternalFrame
             }
         });
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnAceptarNueva)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(50, 50, 50)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jcbFinca, 0, 192, Short.MAX_VALUE)
+                            .addComponent(jtfIdParcela))))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jtfIdParcela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jcbFinca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAceptarNueva)
+                    .addComponent(jButton2))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAceptarNueva)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jcbFinca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                            .addComponent(jtfIdParcela))))
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jtfIdParcela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jcbFinca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAceptarNueva)
-                    .addComponent(jButton2))
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -177,10 +185,10 @@ public class InternalNuevParcela extends javax.swing.JInternalFrame
                 jtbParcela = utils.Utilidades.rellenarJTable("SELECT * FROM TParcela;", jtbParcela);
             } catch (ClassNotFoundException ex)
             {
-                Logger.getLogger(InternalNuevParcela.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex)
             {
-                Logger.getLogger(InternalNuevParcela.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else
         {
@@ -196,10 +204,10 @@ public class InternalNuevParcela extends javax.swing.JInternalFrame
                 jtbParcela = utils.Utilidades.rellenarJTable("SELECT * FROM TParcela;", jtbParcela);
             } catch (ClassNotFoundException ex)
             {
-                Logger.getLogger(InternalNuevParcela.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex)
             {
-                Logger.getLogger(InternalNuevParcela.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         dispose();
@@ -210,10 +218,8 @@ public class InternalNuevParcela extends javax.swing.JInternalFrame
         try
         {
             rellenarCombo();
-            System.out.println(id + "ssssssssssssss");
             ConexionBBDD c = new ConexionBBDD();
             String SQL = "SELECT * FROM TParcela WHERE IdParcela = \"" + id + "\";";
-            System.out.println(SQL);
             ResultSet rs = c.hacerConsulta(SQL);
             rs.next();
 
@@ -223,13 +229,13 @@ public class InternalNuevParcela extends javax.swing.JInternalFrame
             c.cerrarConexion();
         } catch (ClassNotFoundException ex)
         {
-            Logger.getLogger(InternalNuevParcela.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex)
         {
-            Logger.getLogger(InternalNuevParcela.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex)
         {
-            Logger.getLogger(InternalNuevParcela.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -247,13 +253,13 @@ public class InternalNuevParcela extends javax.swing.JInternalFrame
             c.cerrarConexion();
         } catch (ClassNotFoundException ex)
         {
-            Logger.getLogger(InternalNuevParcela.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex)
         {
-            Logger.getLogger(InternalNuevParcela.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex)
         {
-            Logger.getLogger(InternalNuevParcela.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -264,6 +270,7 @@ public class InternalNuevParcela extends javax.swing.JInternalFrame
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox jcbFinca;
     private javax.swing.JTextArea jtaDescripcionNuevo;
