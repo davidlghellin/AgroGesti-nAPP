@@ -43,6 +43,21 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
         }
     }
 
+    public InternalNuevoIngresoVenta(JTable jtb, int id)
+    {
+        try
+        {
+            initComponents();
+            this.jtable = jtb;
+            modificar = true;
+            this.id = id;
+            rellenarCampos();
+        } catch (Exception ex)
+        {
+            Logger.getLogger(InternalNuevoIngresoVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -110,6 +125,22 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 jcbCultivarActionPerformed(evt);
+            }
+        });
+
+        jtfPrecioUnidad.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
+                jtfPrecioUnidadFocusLost(evt);
+            }
+        });
+
+        jtfCantidad.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
+                jtfCantidadFocusLost(evt);
             }
         });
 
@@ -226,8 +257,41 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
         String fecha = null, nombre = null;
         float precioUnidad = 0, cantidad = 0, total = 0;
         int idCultivar = 0;
-        if (modificar); //se modifican datos
-        else// nueva alta
+        if (modificar) //se modifican datos
+        {
+
+            try
+            {
+                c = new ConexionBBDD();
+                SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+                fecha = formatoFecha.format(dateIngreso.getDate());
+                nombre = jtfCliente.getText().toString();
+                precioUnidad = Float.parseFloat(jtfPrecioUnidad.getText().toString());
+                cantidad = Float.parseFloat(jtfCantidad.getText().toString());
+                if (!jtfPrecioUnidad.getText().toString().equals("") && !jtfCantidad.getText().toString().equals(""))
+                {
+                    total = precioUnidad * cantidad;
+                } else
+                {
+                    total = Float.parseFloat(jtfTotal.getText().toString());
+                }
+                idCultivar = Integer.parseInt(jcbCultivar.getSelectedItem().toString());
+                String SQL = "UPDATE TIngresoVenta SET Fecha = \'" + fecha
+                        + "\', NombreCliente = \"" + nombre + "\", PrecioUnidad = \""
+                        + precioUnidad + "\", Cantidad = \"" + cantidad + "\", Total = \""
+                        + total + "\", IdCultivar = \"" + idCultivar + "\" WHERE Id = \"" + id + "\";";
+                System.out.println(SQL);
+                c.hacerInsercion(SQL);
+                c.cerrarConexion();
+                dispose();
+                utils.Utilidades.actualizarJtable(jtable, "TIngresoVenta");
+            } catch (Exception ex)
+            {
+                JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Debe introducir todos los datos, use \'.\' para los decimales");
+                Logger.getLogger(InternalNuevoIngresoVenta.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else// nueva alta
         {
 
             try
@@ -271,6 +335,22 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
 
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void jtfCantidadFocusLost(java.awt.event.FocusEvent evt)//GEN-FIRST:event_jtfCantidadFocusLost
+    {//GEN-HEADEREND:event_jtfCantidadFocusLost
+        if (!jtfPrecioUnidad.getText().toString().equals("") && !jtfCantidad.getText().toString().equals(""))
+        {
+            jtfTotal.setText(Float.parseFloat(jtfPrecioUnidad.getText().toString()) * Float.parseFloat(jtfCantidad.getText().toString()) + "");
+        }
+    }//GEN-LAST:event_jtfCantidadFocusLost
+
+    private void jtfPrecioUnidadFocusLost(java.awt.event.FocusEvent evt)//GEN-FIRST:event_jtfPrecioUnidadFocusLost
+    {//GEN-HEADEREND:event_jtfPrecioUnidadFocusLost
+        if (!jtfPrecioUnidad.getText().toString().equals("") && !jtfCantidad.getText().toString().equals(""))
+        {
+            jtfTotal.setText(Float.parseFloat(jtfPrecioUnidad.getText().toString()) * Float.parseFloat(jtfCantidad.getText().toString()) + "");
+        }
+    }//GEN-LAST:event_jtfPrecioUnidadFocusLost
     void rellenarCombo() throws ClassNotFoundException, SQLException, Exception
     {
         ConexionBBDD c = new ConexionBBDD();
@@ -281,6 +361,32 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
             jcbCultivar.addItem(rs.getString(1));
         }
         c.cerrarConexion();
+    }
+
+    void rellenarCampos()
+    {
+        try
+        {
+            rellenarCombo();
+            ConexionBBDD c = new ConexionBBDD();
+            String SQL = "SELECT * FROM TIngresoVenta WHERE Id = \"" + id + "\";";
+            ResultSet rs = c.hacerConsulta(SQL);
+            rs.next();
+
+            jtfId.setText(rs.getInt("Id") + "");
+            dateIngreso.setDate(rs.getDate("Fecha"));
+            jtfCliente.setText(rs.getString("NombreCliente"));
+            jtfPrecioUnidad.setText(rs.getFloat("PrecioUnidad") + "");
+            jtfCantidad.setText(rs.getFloat("Cantidad") + "");
+            jtfTotal.setText(rs.getFloat("Total") + "");
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(InternalNuevoIngresoVenta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(InternalNuevoIngresoVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -2,6 +2,7 @@ package gui;
 
 import gui.internal.InternalTCultivar;
 import gui.internal.InternalTFinca;
+import gui.internal.InternalTIngresoOtro;
 import gui.internal.InternalTIngresoVenta;
 import gui.internal.InternalTParcela;
 import gui.internal.InternalTTipo;
@@ -16,6 +17,9 @@ import java.util.logging.Logger;
  */
 public class FramePrincipal extends javax.swing.JFrame
 {
+
+    static final int ANCHO_INTERNAL = 700;
+    static final int ALTO_INTERNAL = 400;
 
     /**
      * Creates new form FramPrincipal
@@ -45,6 +49,7 @@ public class FramePrincipal extends javax.swing.JFrame
         jbTipo = new javax.swing.JButton();
         jbCultivar = new javax.swing.JButton();
         jbIngresoVenta = new javax.swing.JButton();
+        jbIngresoOtro = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -109,6 +114,15 @@ public class FramePrincipal extends javax.swing.JFrame
             }
         });
 
+        jbIngresoOtro.setText("Otro ingreso");
+        jbIngresoOtro.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jbIngresoOtroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -125,7 +139,9 @@ public class FramePrincipal extends javax.swing.JFrame
                 .addComponent(jbCultivar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbIngresoVenta)
-                .addGap(0, 778, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbIngresoOtro, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 641, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,7 +152,8 @@ public class FramePrincipal extends javax.swing.JFrame
                     .addComponent(jbProducto)
                     .addComponent(jbTipo)
                     .addComponent(jbCultivar)
-                    .addComponent(jbIngresoVenta))
+                    .addComponent(jbIngresoVenta)
+                    .addComponent(jbIngresoOtro))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -172,7 +189,7 @@ public class FramePrincipal extends javax.swing.JFrame
         {
             InternalTFinca internal = new InternalTFinca();
             jdpPrincipal.add(internal);
-            utils.UtilsFrame.centrar(internal,700,400);
+            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
         } catch (ClassNotFoundException ex)
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -192,6 +209,7 @@ public class FramePrincipal extends javax.swing.JFrame
         {
             InternalTParcela internal = new InternalTParcela();
             jdpPrincipal.add(internal);
+            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
         } catch (ClassNotFoundException ex)
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -210,6 +228,7 @@ public class FramePrincipal extends javax.swing.JFrame
         {
             InternalTVariedad internal = new InternalTVariedad();
             jdpPrincipal.add(internal);
+            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
         } catch (ClassNotFoundException ex)
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -228,6 +247,7 @@ public class FramePrincipal extends javax.swing.JFrame
         {
             InternalTTipo internal = new InternalTTipo();
             jdpPrincipal.add(internal);
+            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
         } catch (ClassNotFoundException ex)
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -246,6 +266,7 @@ public class FramePrincipal extends javax.swing.JFrame
         {
             InternalTCultivar internal = new InternalTCultivar();
             jdpPrincipal.add(internal);
+            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
         } catch (ClassNotFoundException ex)
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -264,6 +285,7 @@ public class FramePrincipal extends javax.swing.JFrame
         {
             InternalTIngresoVenta internal = new InternalTIngresoVenta();
             jdpPrincipal.add(internal);
+            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
         } catch (ClassNotFoundException ex)
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -275,6 +297,20 @@ public class FramePrincipal extends javax.swing.JFrame
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbIngresoVentaActionPerformed
+
+    private void jbIngresoOtroActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jbIngresoOtroActionPerformed
+    {//GEN-HEADEREND:event_jbIngresoOtroActionPerformed
+        try
+        {
+            InternalTIngresoOtro internal = new InternalTIngresoOtro();
+            jdpPrincipal.add(internal);
+            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jbIngresoOtroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -331,6 +367,7 @@ public class FramePrincipal extends javax.swing.JFrame
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbCultivar;
     private javax.swing.JButton jbFinca;
+    private javax.swing.JButton jbIngresoOtro;
     private javax.swing.JButton jbIngresoVenta;
     private javax.swing.JButton jbParcela;
     private javax.swing.JButton jbProducto;

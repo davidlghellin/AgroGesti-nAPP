@@ -51,6 +51,7 @@ public class InternalTParcela extends javax.swing.JInternalFrame
         setResizable(true);
         setVisible(true);
 
+        jtbParcela.setAutoCreateRowSorter(true);
         jtbParcela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {

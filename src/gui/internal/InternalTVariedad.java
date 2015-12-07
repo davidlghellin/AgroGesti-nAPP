@@ -51,6 +51,7 @@ public class InternalTVariedad extends javax.swing.JInternalFrame
         setResizable(true);
         setVisible(true);
 
+        jtbProducto.setAutoCreateRowSorter(true);
         jtbProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {

@@ -49,6 +49,7 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
         setResizable(true);
         setVisible(true);
 
+        jtbCultivar.setAutoCreateRowSorter(true);
         jtbCultivar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {

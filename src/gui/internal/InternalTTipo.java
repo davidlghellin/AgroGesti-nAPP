@@ -49,6 +49,7 @@ public class InternalTTipo extends javax.swing.JInternalFrame
         setMaximumSize(null);
         setVisible(true);
 
+        jtbTipo.setAutoCreateRowSorter(true);
         jtbTipo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
