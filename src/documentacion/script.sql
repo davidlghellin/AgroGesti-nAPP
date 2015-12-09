@@ -120,19 +120,26 @@ SHOW FULL TABLES FROM BAgroGestion;
 ####################################
 ####        TFinca
 ####################################
-INSERT INTO TFinca (Nombre,Localizacion,Descripcion) VALUES ("La Romana","Albacete","Finca especializada en brocolis");   
-INSERT INTO TFinca (Nombre,Localizacion,Descripcion) VALUES ("La Gineta","Albacete","Finca especializada en patatas");   
-INSERT INTO TFinca (Nombre,Localizacion,Descripcion) VALUES ("Las Cobatillas","Albacete","Finca para la caza, gracias a la viña");   
-INSERT INTO TFinca (Nombre,Localizacion,Descripcion) VALUES ("Pinilla","Albacete","La mejor finca de todas, al lado de Molinicos");   
-INSERT INTO TFinca (Nombre,Localizacion,Descripcion) VALUES ("Fuente Higuera","Albacete","Finca donde reposan los toros");
+INSERT INTO TFinca (Nombre,Localizacion,Descripcion)  
+    VALUES ("La Romana","Albacete","Finca especializada en brocolis");   
+INSERT INTO TFinca (Nombre,Localizacion,Descripcion)  
+    VALUES ("La Gineta","Albacete","Finca especializada en patatas");   
+INSERT INTO TFinca (Nombre,Localizacion,Descripcion)  
+    VALUES ("Las Cobatillas","Albacete","Finca para la caza, gracias a la viña");   
+INSERT INTO TFinca (Nombre,Localizacion,Descripcion)  
+    VALUES ("Pinilla","Albacete","La mejor finca de todas, al lado de Molinicos");   
+INSERT INTO TFinca (Nombre,Localizacion,Descripcion)  
+    VALUES ("Fuente Higuera","Albacete","Finca donde reposan los toros");
 
 SELECT * FROM TFinca;  
 
 ####################################
 ####        TParcela
 ####################################
-INSERT INTO TParcela (IdParcela,IdFinca,Descripcion) VALUES ("Primera LaRomana","La Romana","Descripcion de una parcela de la romana");
-INSERT INTO TParcela (IdParcela,IdFinca,Descripcion) VALUES ("Segunda LaRomana","La Romana","Segunda escripcion de una parcela de la romana");
+INSERT INTO TParcela (IdParcela,IdFinca,Descripcion)  
+    VALUES ("Primera LaRomana","La Romana","Descripcion de una parcela de la romana");
+INSERT INTO TParcela (IdParcela,IdFinca,Descripcion)  
+    VALUES ("Segunda LaRomana","La Romana","Segunda escripcion de una parcela de la romana");
 
 
 
@@ -142,11 +149,17 @@ SELECT * FROM TParcela;
 ####################################
 ####        TTipo
 ####################################
-INSERT INTO TTipo (Nombre,Descripcion) VALUES ("Brocoli","El brócoli, es una de las verduras más saludables y ricas que podemos preparar en la cocina, porque además queda bien de muchas formas diferentes.");
-INSERT INTO TTipo (Nombre,Descripcion) VALUES ("Patata","La patata, es una planta perteneciente a la familia de las solanáceas originaria de Sudamérica y cultivada por todo el mundo.");
-INSERT INTO TTipo (Nombre,Descripcion) VALUES ("Zanahoria","La zanahoria,una hortaliza que pertenece a la familia de las umbelíferas, también denominadas apiáceas, y considerada la especie más importante y de mayor consumo dentro de esta familia.");
-INSERT INTO TTipo (Nombre,Descripcion) VALUES ("Tomate","El tomáte, es una especie de la familia de las solanáceas originaria de América (desde México a norte de Chile) y cultivada en todo el mundo para su consumo tanto fresco como procesado de diferentes modos.");
-INSERT INTO TTipo (Nombre,Descripcion) VALUES ("Cebolla","La cebolla es uno de los ingredientes que más utilizamos en la cocina. Ya sea cruda, en ensaladas, rebozada y frita, o picada para preparar todo tipo de platos, desde un buen guiso de carne hasta un pescado al horno.");
+INSERT INTO TTipo (Nombre,Descripcion)  
+    VALUES ("Brocoli","El brócoli, es una de las verduras más saludables y ricas que podemos preparar en la cocina, porque además queda bien de muchas formas diferentes.");
+INSERT INTO TTipo (Nombre,Descripcion)  
+    VALUES ("Patata","La patata, es una planta perteneciente a la familia de las solanáceas originaria de Sudamérica y cultivada por todo el mundo.");
+INSERT INTO TTipo (Nombre,Descripcion)  
+    VALUES ("Zanahoria","La zanahoria,una hortaliza que pertenece a la familia de las umbelíferas, también denominadas apiáceas, y considerada la especie más importante y de mayor consumo dentro de esta familia.");
+INSERT INTO TTipo (Nombre,Descripcion)  
+    VALUES ("Tomate","El tomáte, es una especie de la familia de las solanáceas originaria de América (desde México a norte de Chile) y cultivada en todo el mundo para su consumo tanto fresco como procesado de diferentes modos.");
+INSERT INTO TTipo (Nombre,Descripcion)  
+    VALUES ("Cebolla","La cebolla es uno de los ingredientes que más utilizamos en la cocina. Ya sea cruda, en ensaladas, rebozada y frita, o picada para preparar todo tipo de platos, desde un buen guiso de carne hasta un pescado al horno.");
+
 SELECT * FROM TTipo;  
 
 
@@ -270,14 +283,22 @@ SELECT * FROM TVariedad;
 ####################################
 ####        TCultivar
 ####################################
-INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela) VALUES ('1999-01-01','1999-01-03',"Morada","Primera LaRomana");
-INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela) VALUES ('1999-01-01','1999-01-03',"Japanesse black","Segunda LaRomana");
-INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela) VALUES ('2000-01-01','2000-01-03',"Puerro","Primera LaRomana");
-INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela) VALUES ('2000-01-01','2000-01-03',"Baladre","Segunda LaRomana");
-INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela) VALUES ('2001-01-01','2001-01-03',"Larga","Primera LaRomana");
-INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela) VALUES ('2001-01-01','2001-01-03',"Patio","Segunda LaRomana");
-INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela) VALUES ('2002-01-01','2002-01-03',"Dorada","Primera LaRomana");
-INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela) VALUES ('2002-01-01','2002-01-03',"Kumato","Segunda LaRomana");
+INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela) 
+    VALUES ('1999-01-01','1999-01-03',"Morada","Primera LaRomana");
+INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela)  
+    VALUES ('1999-01-01','1999-01-03',"Japanesse black","Segunda LaRomana");
+INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela)  
+    VALUES ('2000-01-01','2000-01-03',"Puerro","Primera LaRomana");
+INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela)  
+    VALUES ('2000-01-01','2000-01-03',"Baladre","Segunda LaRomana");
+INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela)  
+    VALUES ('2001-01-01','2001-01-03',"Larga","Primera LaRomana");
+INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela)  
+    VALUES ('2001-01-01','2001-01-03',"Patio","Segunda LaRomana");
+INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela)  
+    VALUES ('2002-01-01','2002-01-03',"Dorada","Primera LaRomana");
+INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela)  
+    VALUES ('2002-01-01','2002-01-03',"Kumato","Segunda LaRomana");
 
 SELECT * FROM TCultivar;  
 
@@ -309,10 +330,51 @@ INSERT INTO TIngresoOtro (Fecha,Procedencia,Descripcion,Total,IdCultivar)
 INSERT INTO TIngresoOtro (Fecha,Procedencia,Descripcion,Total,IdCultivar) 
     VALUES ('2004-03-01',"Albacte","Subvención de Albacete por promover la siembra","15000","4");
 
-
-
 SELECT * FROM TIngresoOtro;  
 
+
+####################################
+####        TTrabajador
+####################################
+INSERT INTO TTrabajador (DNI,Nombre) VALUES ("78264","Pepe");
+INSERT INTO TTrabajador (DNI,Nombre) VALUES ("7a64","Andres");
+INSERT INTO TTrabajador (DNI,Nombre) VALUES ("78add64","Juean");
+
+SELECT * FROM TTrabajador;  
+
+
+####################################
+####        TGastosManoObra
+####################################
+
+
+####################################
+####        TGastoProducto
+####################################
+INSERT INTO TGastoProducto (FechaFatura,Proveedor,Descripcion,Cantidad,Total,IdCultivar) 
+    VALUES ('2012-01-02',"PEPE","Peazo gastazo de pepe","333","4444","1");
+INSERT INTO TGastoProducto (FechaFatura,Proveedor,Descripcion,Cantidad,Total,IdCultivar) 
+    VALUES ('2013-01-02',"PEPE","Peazo gastazo de pepe","333","4444","1");
+
+SELECT * FROM TGastoProducto;  
+
+
+####################################
+####        TGastoOtro
+####################################
+INSERT INTO TGastoOtro (FechaFatura,Descripcion,Total,IdCultivar) 
+    VALUES ('2012-01-02',"Peazo gastazo enero","4444","1");
+INSERT INTO TGastoOtro (FechaFatura,Descripcion,Total,IdCultivar) 
+    VALUES ('2012-03-02',"Peazo gastazo marzo","555","2");
+INSERT INTO TGastoOtro (FechaFatura,Descripcion,Total,IdCultivar) 
+    VALUES ('2012-06-02',"Peazo gastazo junio","4666444","2");
+
+SELECT * FROM TGastoOtro;  
+
+
+####################################
+####################################
+####################################
 SELECT * 
     FROM TIngresoOtro i
     INNER JOIN TCultivar c 

@@ -17,15 +17,9 @@ import javax.swing.table.DefaultTableModel;
 public class InternalTFinca extends javax.swing.JInternalFrame
 {
 
-    DefaultTableModel modelo;
-
-    /**
-     * Creates new form internalP1
-     */
     public InternalTFinca() throws ClassNotFoundException, SQLException, Exception
     {
         initComponents();
-        modelo = new DefaultTableModel();
         this.jtbFinca = utils.Utilidades.rellenarJTable("SELECT * FROM TFinca;", jtbFinca);
     }
 
@@ -307,31 +301,7 @@ public class InternalTFinca extends javax.swing.JInternalFrame
             Logger.getLogger(InternalTFinca.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jteDescripcionBuscarFincaKeyTyped
-    public void crear() throws ClassNotFoundException, SQLException
-    {
-        ConexionBBDD c = new ConexionBBDD();
-        ResultSet rs = c.hacerConsulta("SELECT * FROM TFinca;");
-        modelo = (DefaultTableModel) this.jtbFinca.getModel();
-        ResultSetMetaData rsmd = rs.getMetaData();
-
-        int cantidadColumnas = rsmd.getColumnCount();
-        modelo.setColumnCount(0);
-        modelo.setRowCount(0);
-        for (int i = 1; i <= cantidadColumnas; i++)
-        {
-            modelo.addColumn(rsmd.getColumnLabel(i));
-        }
-        while (rs.next())
-        {
-            Object[] fila = new Object[cantidadColumnas];
-            for (int i = 0; i < cantidadColumnas; i++)
-            {
-                fila[i] = rs.getObject(i + 1);
-            }
-            modelo.addRow(fila);
-        }
-        rs.close();
-    }
+  
 
     //Actualizar en las busquedas
     void buscarFiltro() throws SQLException, Exception

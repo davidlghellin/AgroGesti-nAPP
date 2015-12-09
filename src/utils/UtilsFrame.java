@@ -16,15 +16,16 @@ public class UtilsFrame
 	 * 
 	 * @param jframe
 	 */
-	public static void centrar(JInternalFrame jframe)
+	public static void centrar(JInternalFrame jiframe)
 	{
 		Toolkit miPantalla = Toolkit.getDefaultToolkit();
 		Dimension resolucion = miPantalla.getScreenSize();
 		int altura = resolucion.height;
 		int anchura = resolucion.width;
 		int tamano = 400;
-		jframe.setBounds((anchura - tamano) / 2, ((altura - tamano) / 2)-200,
+		jiframe.setBounds((anchura - tamano) / 2, ((altura - tamano) / 2)-200,
 				tamano, tamano);
+                jiframe.toFront();
 	}
 
 	/**
@@ -33,13 +34,14 @@ public class UtilsFrame
 	 * @param jframe
 	 * @param tamano = ancho y alto
 	 */
-	public static void centrar(JInternalFrame jframe, int tamano)
+	public static void centrar(JInternalFrame jiframe, int tamano)
 	{
 		Toolkit miPantalla = Toolkit.getDefaultToolkit();
 		Dimension resolucion = miPantalla.getScreenSize();
 		int altura = resolucion.height;
 		int anchura = resolucion.width;
-		jframe.setBounds((anchura - tamano) / 2, ((altura - tamano) / 2)-200, tamano, tamano);
+		jiframe.setBounds((anchura - tamano) / 2, ((altura - tamano) / 2)-200, tamano, tamano);
+                jiframe.toFront();
 	}
 
 	/**
@@ -49,13 +51,14 @@ public class UtilsFrame
 	 * @param anchoFrame
 	 * @param altoFrame
 	 */
-	public static void centrar(JInternalFrame jframe, int anchoFrame, int altoFrame)
+	public static void centrar(JInternalFrame jiframe, int anchoFrame, int altoFrame)
 	{
 		Toolkit miPantalla = Toolkit.getDefaultToolkit();
 		Dimension resolucion = miPantalla.getScreenSize();
 		int altura = resolucion.height;
 		int anchura = resolucion.width;
-		jframe.setBounds((anchura - anchoFrame) / 2,
+		jiframe.setBounds((anchura - anchoFrame) / 2,
 				((altura - altoFrame) / 2)-200, anchoFrame, altoFrame);
+                jiframe.toFront();
 	}
 }

@@ -63,6 +63,13 @@ public class InternalTIngresoOtro extends javax.swing.JInternalFrame
         });
 
         jbtModificar.setText("Modifcación");
+        jbtModificar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jbtModificarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener()
@@ -133,6 +140,11 @@ public class InternalTIngresoOtro extends javax.swing.JInternalFrame
             Logger.getLogger(InternalTIngresoOtro.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void jbtModificarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jbtModificarActionPerformed
+    {//GEN-HEADEREND:event_jbtModificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

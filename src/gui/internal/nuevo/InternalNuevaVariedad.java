@@ -18,9 +18,7 @@ public class InternalNuevaVariedad extends javax.swing.JInternalFrame
     String id;
     boolean modificar;
 
-    /**
-     * Creates new form InternalNuevaVariedad
-     */
+   
     public InternalNuevaVariedad(JTable jt)
     {
         initComponents();

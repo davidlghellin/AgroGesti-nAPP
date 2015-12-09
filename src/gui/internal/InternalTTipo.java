@@ -4,6 +4,7 @@ import gui.internal.nuevo.InternalNuevoTipo;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -136,10 +137,16 @@ public class InternalTTipo extends javax.swing.JInternalFrame
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
     {//GEN-HEADEREND:event_jButton2ActionPerformed
-        String id = (String) jtbTipo.getValueAt(jtbTipo.getSelectedRow(), 0);
-        InternalNuevoTipo internal = new InternalNuevoTipo(jtbTipo,id);
-        this.getParent().add(internal);
-        internal.toFront();
+        try
+        {
+            String id = (String) jtbTipo.getValueAt(jtbTipo.getSelectedRow(), 0);
+            InternalNuevoTipo internal = new InternalNuevoTipo(jtbTipo, id);
+            this.getParent().add(internal);
+            internal.toFront();
+        } catch (Exception ex)
+        {
+            JOptionPane.showInternalMessageDialog(jtbTipo.getRootPane(), "Tiene que selecionar la fila a modificar");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

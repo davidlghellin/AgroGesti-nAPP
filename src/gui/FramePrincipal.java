@@ -6,6 +6,7 @@ import gui.internal.InternalTIngresoOtro;
 import gui.internal.InternalTIngresoVenta;
 import gui.internal.InternalTParcela;
 import gui.internal.InternalTTipo;
+import gui.internal.InternalTTrabajador;
 import gui.internal.InternalTVariedad;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -50,6 +51,7 @@ public class FramePrincipal extends javax.swing.JFrame
         jbCultivar = new javax.swing.JButton();
         jbIngresoVenta = new javax.swing.JButton();
         jbIngresoOtro = new javax.swing.JButton();
+        btnTrabajador = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -123,6 +125,15 @@ public class FramePrincipal extends javax.swing.JFrame
             }
         });
 
+        btnTrabajador.setText("Trabajador");
+        btnTrabajador.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnTrabajadorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -141,7 +152,9 @@ public class FramePrincipal extends javax.swing.JFrame
                 .addComponent(jbIngresoVenta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbIngresoOtro, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 641, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 526, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,7 +166,8 @@ public class FramePrincipal extends javax.swing.JFrame
                     .addComponent(jbTipo)
                     .addComponent(jbCultivar)
                     .addComponent(jbIngresoVenta)
-                    .addComponent(jbIngresoOtro))
+                    .addComponent(jbIngresoOtro)
+                    .addComponent(btnTrabajador))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -312,6 +326,13 @@ public class FramePrincipal extends javax.swing.JFrame
 
     }//GEN-LAST:event_jbIngresoOtroActionPerformed
 
+    private void btnTrabajadorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnTrabajadorActionPerformed
+    {//GEN-HEADEREND:event_btnTrabajadorActionPerformed
+        InternalTTrabajador internal =new InternalTTrabajador();
+        jdpPrincipal.add(internal);
+        utils.UtilsFrame.centrar(internal,ANCHO_INTERNAL,ALTO_INTERNAL);
+    }//GEN-LAST:event_btnTrabajadorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -361,6 +382,7 @@ public class FramePrincipal extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTrabajador;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
