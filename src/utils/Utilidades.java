@@ -73,7 +73,7 @@ public class Utilidades
                 c = new ConexionBBDD();
                 if (!c.hacerBorrado(SQLBorrar))
                 {
-                    JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Hace referencia a otra tabla, revise  Parcela");
+                    JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Hace referencia a otra tabla, revise  las otras tablas");
                 }
                 actualizarJtable(jtable, nombreTabla);
             } catch (Exception e)

@@ -336,8 +336,8 @@ SELECT * FROM TIngresoOtro;
 ####################################
 ####        TTrabajador
 ####################################
-INSERT INTO TTrabajador (DNI,Nombre) VALUES ("78264","Pepe");
-INSERT INTO TTrabajador (DNI,Nombre) VALUES ("7a64","Andres");
+INSERT INTO TTrabajador (DNI,Nombre) VALUES ("12345600J","Pepe");
+INSERT INTO TTrabajador (DNI,Nombre) VALUES ("53138898X","Andres");
 INSERT INTO TTrabajador (DNI,Nombre) VALUES ("78add64","Juean");
 
 SELECT * FROM TTrabajador;  
@@ -346,7 +346,22 @@ SELECT * FROM TTrabajador;
 ####################################
 ####        TGastosManoObra
 ####################################
-
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('2015-01-02','2015-01-03',"2","12345600J","Dias","2","66","122","Podar","2");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('2015-01-03','2015-01-03',"2","53138898X","Dias","1","99","99","Labrar","2");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('2015-02-02','2015-02-03',"2","12345600J","Dias","2","66","122","Podar","2");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('2015-02-03','2015-02-03',"2","53138898X","Dias","1","99","99","Labrar","2");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('2015-03-02','2015-03-03',"2","12345600J","Dias","2","66","122","Podar","2");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('2015-03-03','2015-03-03',"2","53138898X","Dias","1","99","99","Labrar","2");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('2015-04-02','2015-04-03',"2","12345600J","Dias","2","66","122","Podar","2");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('2015-04-03','2015-04-03',"2","53138898X","Dias","1","99","99","Labrar","2");
 
 ####################################
 ####        TGastoProducto

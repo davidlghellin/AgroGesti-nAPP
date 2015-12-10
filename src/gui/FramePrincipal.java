@@ -2,6 +2,9 @@ package gui;
 
 import gui.internal.InternalTCultivar;
 import gui.internal.InternalTFinca;
+import gui.internal.InternalTGastoManoObra;
+import gui.internal.InternalTGastoOtro;
+import gui.internal.InternalTGastoProducto;
 import gui.internal.InternalTIngresoOtro;
 import gui.internal.InternalTIngresoVenta;
 import gui.internal.InternalTParcela;
@@ -11,6 +14,7 @@ import gui.internal.InternalTVariedad;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,12 +23,11 @@ import java.util.logging.Logger;
 public class FramePrincipal extends javax.swing.JFrame
 {
 
+    // Variables para controlar los parámetros de alto y ancho de los JInternalFrame con los que se trabajará
+
     static final int ANCHO_INTERNAL = 700;
     static final int ALTO_INTERNAL = 400;
 
-    /**
-     * Creates new form FramPrincipal
-     */
     public FramePrincipal()
     {
         initComponents();
@@ -52,9 +55,16 @@ public class FramePrincipal extends javax.swing.JFrame
         jbIngresoVenta = new javax.swing.JButton();
         jbIngresoOtro = new javax.swing.JButton();
         btnTrabajador = new javax.swing.JButton();
+        btnGastosManoObra = new javax.swing.JButton();
+        btnGastoProducto = new javax.swing.JButton();
+        btnGastoOtros = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jmiSalir = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jmiAPP = new javax.swing.JMenuItem();
+        jmiVersion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("AgroGestiónApp");
@@ -134,27 +144,61 @@ public class FramePrincipal extends javax.swing.JFrame
             }
         });
 
+        btnGastosManoObra.setText("Gastos de mano de obra");
+        btnGastosManoObra.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnGastosManoObraActionPerformed(evt);
+            }
+        });
+
+        btnGastoProducto.setText("Gasto producto");
+        btnGastoProducto.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnGastoProductoActionPerformed(evt);
+            }
+        });
+
+        btnGastoOtros.setText("Otros gastos");
+        btnGastoOtros.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnGastoOtrosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jbFinca)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jbParcela)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jbTipo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jbProducto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jbCultivar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jbIngresoVenta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jbIngresoOtro, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 526, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnGastosManoObra)
+                .addGap(18, 18, 18)
+                .addComponent(btnGastoProducto)
+                .addGap(18, 18, 18)
+                .addComponent(btnGastoOtros)
+                .addContainerGap(109, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,14 +211,52 @@ public class FramePrincipal extends javax.swing.JFrame
                     .addComponent(jbCultivar)
                     .addComponent(jbIngresoVenta)
                     .addComponent(jbIngresoOtro)
-                    .addComponent(btnTrabajador))
+                    .addComponent(btnTrabajador)
+                    .addComponent(btnGastosManoObra)
+                    .addComponent(btnGastoProducto)
+                    .addComponent(btnGastoOtros))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("File");
+        jMenu1.setText("Archivo");
+
+        jmiSalir.setText("Salir");
+        jmiSalir.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmiSalirActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmiSalir);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Información");
+
+        jMenuItem1.setText("APP");
+        jMenu2.add(jMenuItem1);
+
+        jmiAPP.setText("Versión");
+        jmiAPP.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmiAPPActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmiAPP);
+
+        jmiVersion.setText("Autor");
+        jmiVersion.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmiVersionActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmiVersion);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -328,10 +410,71 @@ public class FramePrincipal extends javax.swing.JFrame
 
     private void btnTrabajadorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnTrabajadorActionPerformed
     {//GEN-HEADEREND:event_btnTrabajadorActionPerformed
-        InternalTTrabajador internal =new InternalTTrabajador();
-        jdpPrincipal.add(internal);
-        utils.UtilsFrame.centrar(internal,ANCHO_INTERNAL,ALTO_INTERNAL);
+        try
+        {
+            InternalTTrabajador internal = new InternalTTrabajador();
+            jdpPrincipal.add(internal);
+            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnTrabajadorActionPerformed
+
+    private void btnGastosManoObraActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnGastosManoObraActionPerformed
+    {//GEN-HEADEREND:event_btnGastosManoObraActionPerformed
+        try
+        {
+            InternalTGastoManoObra internal = new InternalTGastoManoObra();
+            jdpPrincipal.add(internal);
+            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnGastosManoObraActionPerformed
+
+    private void btnGastoProductoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnGastoProductoActionPerformed
+    {//GEN-HEADEREND:event_btnGastoProductoActionPerformed
+        try
+        {
+            InternalTGastoProducto internal = new InternalTGastoProducto();
+            jdpPrincipal.add(internal);
+            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnGastoProductoActionPerformed
+
+    private void btnGastoOtrosActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnGastoOtrosActionPerformed
+    {//GEN-HEADEREND:event_btnGastoOtrosActionPerformed
+        try
+        {
+            InternalTGastoOtro internal = new InternalTGastoOtro();
+            jdpPrincipal.add(internal);
+            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnGastoOtrosActionPerformed
+
+    private void jmiSalirActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiSalirActionPerformed
+    {//GEN-HEADEREND:event_jmiSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jmiSalirActionPerformed
+
+    private void jmiVersionActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiVersionActionPerformed
+    {//GEN-HEADEREND:event_jmiVersionActionPerformed
+        JOptionPane.showMessageDialog(this, "David López González\nDesarrollo de Interfaces\nDAM\nIES Alquerías", "Autor:", 1);
+    }//GEN-LAST:event_jmiVersionActionPerformed
+
+    private void jmiAPPActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmiAPPActionPerformed
+    {//GEN-HEADEREND:event_jmiAPPActionPerformed
+        JOptionPane.showMessageDialog(this, "Alpha", "Versión", 1);
+    }//GEN-LAST:event_jmiAPPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -382,10 +525,14 @@ public class FramePrincipal extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGastoOtros;
+    private javax.swing.JButton btnGastoProducto;
+    private javax.swing.JButton btnGastosManoObra;
     private javax.swing.JButton btnTrabajador;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbCultivar;
     private javax.swing.JButton jbFinca;
@@ -395,5 +542,8 @@ public class FramePrincipal extends javax.swing.JFrame
     private javax.swing.JButton jbProducto;
     private javax.swing.JButton jbTipo;
     private javax.swing.JDesktopPane jdpPrincipal;
+    private javax.swing.JMenuItem jmiAPP;
+    private javax.swing.JMenuItem jmiSalir;
+    private javax.swing.JMenuItem jmiVersion;
     // End of variables declaration//GEN-END:variables
 }
