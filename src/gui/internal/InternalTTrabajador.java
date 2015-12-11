@@ -9,6 +9,7 @@ import gui.internal.nuevo.InternalNuevoTrabajador;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,10 +19,17 @@ import javax.swing.JOptionPane;
 public class InternalTTrabajador extends javax.swing.JInternalFrame
 {
 
-    public InternalTTrabajador() throws SQLException, Exception
+    JButton btnTrabajador;
+
+    public InternalTTrabajador(JButton btnTrabajador) throws SQLException, Exception
     {
         initComponents();
-        jtbTrabajador = utils.Utilidades.rellenarJTable("SELECT * FROM TTrabajador;", jtbTrabajador);
+        this.btnTrabajador = btnTrabajador;
+        jtbTrabajador = utils.UtilisSql.rellenarJTable("SELECT * FROM TTrabajador;", jtbTrabajador);
+        //Imagenes
+        btnAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_01.png")));
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_02.png")));
+        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_03.png")));
     }
 
     /**
@@ -40,12 +48,42 @@ public class InternalTTrabajador extends javax.swing.JInternalFrame
         btnAlta = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jtfDNIBuscar = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jtfNombreBuscar = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Trabajador");
         setVisible(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener()
+        {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt)
+            {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+        });
 
         jtbTrabajador.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
@@ -80,12 +118,32 @@ public class InternalTTrabajador extends javax.swing.JInternalFrame
             }
         });
 
-        btnEliminar.setText("Eliminar");
+        btnEliminar.setText("Baja");
         btnEliminar.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 btnEliminarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("DNI");
+
+        jtfDNIBuscar.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                jtfDNIBuscarKeyReleased(evt);
+            }
+        });
+
+        jLabel2.setText("Nombre");
+
+        jtfNombreBuscar.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                jtfNombreBuscarKeyReleased(evt);
             }
         });
 
@@ -95,17 +153,30 @@ public class InternalTTrabajador extends javax.swing.JInternalFrame
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(124, 124, 124)
-                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtfDNIBuscar, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAlta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jtfNombreBuscar))
+                .addGap(18, 18, 18)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(76, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfDNIBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfNombreBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAlta)
                     .addComponent(btnModificar)
@@ -117,7 +188,7 @@ public class InternalTTrabajador extends javax.swing.JInternalFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -143,7 +214,7 @@ public class InternalTTrabajador extends javax.swing.JInternalFrame
     {//GEN-HEADEREND:event_btnEliminarActionPerformed
         try
         {
-            utils.Utilidades.borrar("TTrabajador", jtbTrabajador);
+            utils.UtilisSql.borrar("TTrabajador", jtbTrabajador);
         } catch (Exception ex)
         {
             JOptionPane.showInternalMessageDialog(jtbTrabajador.getRootPane(), "Tiene que selecionar la fila a eliminar");
@@ -167,13 +238,54 @@ public class InternalTTrabajador extends javax.swing.JInternalFrame
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt)//GEN-FIRST:event_formInternalFrameClosing
+    {//GEN-HEADEREND:event_formInternalFrameClosing
+        btnTrabajador.setEnabled(true);
+    }//GEN-LAST:event_formInternalFrameClosing
+
+    private void jtfNombreBuscarKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfNombreBuscarKeyReleased
+    {//GEN-HEADEREND:event_jtfNombreBuscarKeyReleased
+        try
+        {
+            buscarFiltro();
+        } catch (Exception ex)
+        {
+            Logger.getLogger(InternalTTrabajador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jtfNombreBuscarKeyReleased
+
+    private void jtfDNIBuscarKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfDNIBuscarKeyReleased
+    {//GEN-HEADEREND:event_jtfDNIBuscarKeyReleased
+        try
+        {
+            buscarFiltro();
+        } catch (Exception ex)
+        {
+            Logger.getLogger(InternalTTrabajador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jtfDNIBuscarKeyReleased
+
+    //Actualizar en las busquedas
+    void buscarFiltro() throws SQLException, Exception
+    {
+        String dni = jtfDNIBuscar.getText().toString();
+        String nombre = jtfNombreBuscar.getText().toString();
+
+        this.jtbTrabajador = utils.UtilisSql.rellenarJTable(
+                "SELECT * FROM TTrabajador WHERE DNI LIKE \'%" + dni
+                + "%\' AND Nombre LIKE \'%" + nombre + "%\' ;", jtbTrabajador);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlta;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtbTrabajador;
+    private javax.swing.JTextField jtfDNIBuscar;
+    private javax.swing.JTextField jtfNombreBuscar;
     // End of variables declaration//GEN-END:variables
 }

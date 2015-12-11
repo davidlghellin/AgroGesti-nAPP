@@ -175,7 +175,7 @@ public class InternalNuevoTrabajador extends javax.swing.JInternalFrame
                         + "\" WHERE DNI = \"" + id + "\";";
                 c.hacerInsercion(SQL);
                 c.cerrarConexion();
-                utils.Utilidades.actualizarJtable(jTable, "TTrabajador");
+                utils.UtilisSql.actualizarJtable(jTable, "TTrabajador");
             } catch (ClassNotFoundException ex)
             {
                 Logger.getLogger(InternalNuevoTrabajador.class.getName()).log(Level.SEVERE, null, ex);
@@ -195,7 +195,7 @@ public class InternalNuevoTrabajador extends javax.swing.JInternalFrame
                         + dni + "\",\"" + nombre + "\");";
                 c.hacerInsercion(SQL);
                 c.cerrarConexion();
-                utils.Utilidades.actualizarJtable(jTable, "TTrabajador");
+                utils.UtilisSql.actualizarJtable(jTable, "TTrabajador");
             } catch (ClassNotFoundException ex)
             {
                 Logger.getLogger(InternalNuevoTrabajador.class.getName()).log(Level.SEVERE, null, ex);

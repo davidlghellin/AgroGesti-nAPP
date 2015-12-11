@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author david
  */
-public class Utilidades
+public class UtilisSql
 {
 
     public static JTable rellenarJTable(String consulta, JTable table) throws ClassNotFoundException, SQLException, Exception
@@ -24,7 +24,6 @@ public class Utilidades
         ResultSet rs = c.hacerConsulta(consulta);
         DefaultTableModel modelo = (DefaultTableModel) jtable.getModel();
         ResultSetMetaData rsmd = rs.getMetaData();
-
         int cantidadColumnas = rsmd.getColumnCount();
         modelo.setColumnCount(0);
         modelo.setRowCount(0);
@@ -43,6 +42,7 @@ public class Utilidades
         }
         rs.close();
         c.cerrarConexion();
+        System.out.println(consulta);
         return jtable;
     }
 
@@ -79,7 +79,7 @@ public class Utilidades
             } catch (Exception e)
             {
                  // JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Hace referencia a otra tabla");
-                Logger.getLogger(Utilidades.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(UtilisSql.class.getName()).log(Level.SEVERE, null, e);
             }
         } catch (Exception e)
         {
@@ -119,7 +119,7 @@ public class Utilidades
             } catch (Exception e)
             {
                 JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Hace referencia a otra tabla");
-                //  Logger.getLogger(Utilidades.class.getName()).log(Level.SEVERE, null, e);
+                //  Logger.getLogger(UtilisSql.class.getName()).log(Level.SEVERE, null, e);
             }
         } catch (Exception e)
         {
@@ -139,6 +139,6 @@ public class Utilidades
      */
     public static void actualizarJtable(JTable jtable, String tabla) throws SQLException, Exception
     {
-        jtable = utils.Utilidades.rellenarJTable("SELECT * FROM " + tabla + ";", jtable);
+        jtable = utils.UtilisSql.rellenarJTable("SELECT * FROM " + tabla + ";", jtable);
     }
 }

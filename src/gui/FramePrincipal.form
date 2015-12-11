@@ -108,19 +108,19 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jbFinca" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnFinca" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jbParcela" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnParcela" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jbTipo" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnTipo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jbProducto" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnVariedad" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jbCultivar" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnCultivar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jbIngresoVenta" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnIngresoVenta" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jbIngresoOtro" min="-2" pref="131" max="-2" attributes="0"/>
+                  <Component id="btnIngresoOtro" min="-2" pref="131" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnTrabajador" min="-2" pref="103" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -129,7 +129,7 @@
                   <Component id="btnGastoProducto" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnGastoOtros" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="109" max="32767" attributes="0"/>
+                  <EmptySpace pref="52" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -137,13 +137,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jbFinca" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbParcela" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbProducto" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbTipo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbCultivar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbIngresoVenta" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbIngresoOtro" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnFinca" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnParcela" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnVariedad" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnTipo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnCultivar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnIngresoVenta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnIngresoOtro" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnTrabajador" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnGastosManoObra" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnGastoProducto" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -155,60 +155,60 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jbFinca">
+        <Component class="javax.swing.JButton" name="btnFinca">
           <Properties>
             <Property name="text" type="java.lang.String" value="Finca"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbFincaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFincaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jbParcela">
+        <Component class="javax.swing.JButton" name="btnParcela">
           <Properties>
             <Property name="text" type="java.lang.String" value="Parcela"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbParcelaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnParcelaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jbProducto">
+        <Component class="javax.swing.JButton" name="btnVariedad">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Producto"/>
+            <Property name="text" type="java.lang.String" value="Variedad"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbProductoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVariedadActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jbTipo">
+        <Component class="javax.swing.JButton" name="btnTipo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Tipo"/>
+            <Property name="text" type="java.lang.String" value="Tipo producto"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbTipoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTipoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jbCultivar">
+        <Component class="javax.swing.JButton" name="btnCultivar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cultivar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCultivarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCultivarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jbIngresoVenta">
+        <Component class="javax.swing.JButton" name="btnIngresoVenta">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ingreso por Venta"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbIngresoVentaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresoVentaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jbIngresoOtro">
+        <Component class="javax.swing.JButton" name="btnIngresoOtro">
           <Properties>
             <Property name="text" type="java.lang.String" value="Otro ingreso"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbIngresoOtroActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresoOtroActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnTrabajador">

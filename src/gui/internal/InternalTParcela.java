@@ -5,6 +5,7 @@ import gui.internal.nuevo.InternalNuevaParcela;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,14 +14,19 @@ import javax.swing.JOptionPane;
  */
 public class InternalTParcela extends javax.swing.JInternalFrame
 {
-
+JButton btnParcela;
     /**
      * Creates new form InternalTParcela
      */
-    public InternalTParcela() throws ClassNotFoundException, SQLException, Exception
+    public InternalTParcela(JButton btnParcela) throws ClassNotFoundException, SQLException, Exception
     {
         initComponents();
-        this.jtbParcela = utils.Utilidades.rellenarJTable("SELECT * FROM TParcela;", jtbParcela);
+        this.btnParcela=btnParcela;
+        this.jtbParcela = utils.UtilisSql.rellenarJTable("SELECT * FROM TParcela;", jtbParcela);
+        //Imagenes
+        btnAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_01.png")));
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_02.png")));
+        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_03.png")));
     }
 
     /**
@@ -33,46 +39,51 @@ public class InternalTParcela extends javax.swing.JInternalFrame
     private void initComponents()
     {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jtbParcela = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        btnAlta = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jtfParcelaBuscar = new javax.swing.JTextField();
+        jtfFincaBuscar = new javax.swing.JTextField();
+        jtfDescripcionBuscar = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Parcela");
         setVisible(true);
-
-        jButton1.setText("Alta");
-        jButton1.addActionListener(new java.awt.event.ActionListener()
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener()
         {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt)
             {
-                jButton1ActionPerformed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt)
+            {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt)
+            {
             }
         });
 
-        jButton2.setText("Modificación");
-        jButton2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Baja");
-        jButton3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jtbParcela.setAutoCreateRowSorter(true);
         jtbParcela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
@@ -86,50 +97,141 @@ public class InternalTParcela extends javax.swing.JInternalFrame
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jtbParcela);
+        jScrollPane2.setViewportView(jtbParcela);
+
+        btnAlta.setText("Alta");
+        btnAlta.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnAltaActionPerformed(evt);
+            }
+        });
+
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setText("Baja");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Parcela");
+
+        jLabel2.setText("Finca");
+
+        jLabel3.setText("Descripción");
+
+        jtfParcelaBuscar.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jtfParcelaBuscarKeyTyped(evt);
+            }
+        });
+
+        jtfFincaBuscar.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jtfFincaBuscarKeyTyped(evt);
+            }
+        });
+
+        jtfDescripcionBuscar.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jtfDescripcionBuscarKeyTyped(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfParcelaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtfFincaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtfDescripcionBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(233, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfParcelaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfFincaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfDescripcionBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAlta)
+                    .addComponent(btnModificar)
+                    .addComponent(btnEliminar))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jButton1)
-                .addGap(179, 179, 179)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(80, 80, 80))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE))
+            .addComponent(jScrollPane2)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(369, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addGap(29, 29, 29))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 268, Short.MAX_VALUE)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
-    {//GEN-HEADEREND:event_jButton1ActionPerformed
+    private void btnAltaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAltaActionPerformed
+    {//GEN-HEADEREND:event_btnAltaActionPerformed
         InternalNuevaParcela internal = new InternalNuevaParcela(jtbParcela);
         this.getParent().add(internal);
         internal.toFront();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        utils.UtilsFrame.centrar(internal);
+    }//GEN-LAST:event_btnAltaActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
-    {//GEN-HEADEREND:event_jButton2ActionPerformed
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnModificarActionPerformed
+    {//GEN-HEADEREND:event_btnModificarActionPerformed
         try
         {
             String id = (String) jtbParcela.getValueAt(jtbParcela.getSelectedRow(), 0);
@@ -140,25 +242,81 @@ public class InternalTParcela extends javax.swing.JInternalFrame
         {
             JOptionPane.showInternalMessageDialog(jtbParcela.getRootPane(), "Tiene que selecionar la fila a modificar");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnModificarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton3ActionPerformed
-    {//GEN-HEADEREND:event_jButton3ActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnEliminarActionPerformed
+    {//GEN-HEADEREND:event_btnEliminarActionPerformed
         try
         {
-            utils.Utilidades.borrar("TParcela", jtbParcela);
+            utils.UtilisSql.borrar("TParcela", jtbParcela);
         } catch (Exception ex)
         {
             Logger.getLogger(InternalTParcela.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt)//GEN-FIRST:event_formInternalFrameClosing
+    {//GEN-HEADEREND:event_formInternalFrameClosing
+        btnParcela.setEnabled(true);
+    }//GEN-LAST:event_formInternalFrameClosing
+
+    private void jtfParcelaBuscarKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfParcelaBuscarKeyTyped
+    {//GEN-HEADEREND:event_jtfParcelaBuscarKeyTyped
+       try
+    {
+        buscarFiltro();
+    } catch (Exception ex)
+    {
+        Logger.getLogger(InternalTParcela.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_jtfParcelaBuscarKeyTyped
+
+    private void jtfFincaBuscarKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfFincaBuscarKeyTyped
+    {//GEN-HEADEREND:event_jtfFincaBuscarKeyTyped
+       try
+    {
+        buscarFiltro();
+    } catch (Exception ex)
+    {
+        Logger.getLogger(InternalTParcela.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_jtfFincaBuscarKeyTyped
+
+    private void jtfDescripcionBuscarKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfDescripcionBuscarKeyTyped
+    {//GEN-HEADEREND:event_jtfDescripcionBuscarKeyTyped
+    try
+    {
+        buscarFiltro();
+    } catch (Exception ex)
+    {
+        Logger.getLogger(InternalTParcela.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_jtfDescripcionBuscarKeyTyped
+
+    //Actualizar en las busquedas
+    void buscarFiltro() throws SQLException, Exception
+    {
+        String parcela = jtfParcelaBuscar.getText().toString();
+        String finca = jtfFincaBuscar.getText().toString();
+        String descripcion = jtfDescripcionBuscar.getText().toString();
+        this.jtbParcela = utils.UtilisSql.rellenarJTable(
+                "SELECT * FROM TParcela WHERE IdParcela LIKE \'%" + parcela
+                + "%\' AND IdFinca LIKE \'%" + finca
+                + "%\' AND Descripcion LIKE \'%" + descripcion + "%\' ;", jtbParcela);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton btnAlta;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jtbParcela;
+    private javax.swing.JTextField jtfDescripcionBuscar;
+    private javax.swing.JTextField jtfFincaBuscar;
+    private javax.swing.JTextField jtfParcelaBuscar;
     // End of variables declaration//GEN-END:variables
 }

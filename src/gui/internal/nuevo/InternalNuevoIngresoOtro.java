@@ -128,9 +128,8 @@ public class InternalNuevoIngresoOtro extends javax.swing.JInternalFrame
                     .addComponent(jLabel3)
                     .addComponent(jLabel6)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(112, 112, 112)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(dateFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -169,7 +168,7 @@ public class InternalNuevoIngresoOtro extends javax.swing.JInternalFrame
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jcbCultivar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
@@ -234,7 +233,7 @@ public class InternalNuevoIngresoOtro extends javax.swing.JInternalFrame
                     c = new ConexionBBDD();
                     c.hacerInsercion(SQL);
                     c.cerrarConexion();
-                    utils.Utilidades.actualizarJtable(jtable, "TIngresoOtro");
+                    utils.UtilisSql.actualizarJtable(jtable, "TIngresoOtro");
                     dispose();
                 } catch (ClassNotFoundException ex)
                 {
@@ -258,6 +257,7 @@ public class InternalNuevoIngresoOtro extends javax.swing.JInternalFrame
             {
                 jcbCultivar.addItem(rs.getString(1));
             }
+            jcbCultivar.getModel().setSelectedItem(id);
             c.cerrarConexion();
         } catch (ClassNotFoundException ex)
         {

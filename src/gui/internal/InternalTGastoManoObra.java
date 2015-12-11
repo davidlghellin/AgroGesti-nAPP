@@ -8,6 +8,7 @@ package gui.internal;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 
 /**
  *
@@ -16,13 +17,18 @@ import java.util.logging.Logger;
 public class InternalTGastoManoObra extends javax.swing.JInternalFrame
 {
 
-    /**
-     * Creates new form InternalTGastoManoObra
-     */
-    public InternalTGastoManoObra() throws SQLException, Exception
+    JButton btnGastosManoObra;
+
+    public InternalTGastoManoObra(JButton btnGastosManoObra) throws SQLException, Exception
     {
         initComponents();
-        this.jtbTGastosManoObra = utils.Utilidades.rellenarJTable("SELECT * FROM TGastosManoObra;", jtbTGastosManoObra);
+        this.btnGastosManoObra = btnGastosManoObra;
+        this.jtbTGastosManoObra = utils.UtilisSql.rellenarJTable("SELECT * FROM TGastosManoObra;", jtbTGastosManoObra);
+        
+        //Imagenes
+        btnAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_01.png")));
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_02.png")));
+        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_03.png")));
     }
 
     /**
@@ -39,6 +45,12 @@ public class InternalTGastoManoObra extends javax.swing.JInternalFrame
         btnAlta = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        jcbTipo = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jtfDescripcionBuscar = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jtfDNIBuscar = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtbTGastosManoObra = new javax.swing.JTable();
 
@@ -46,18 +58,89 @@ public class InternalTGastoManoObra extends javax.swing.JInternalFrame
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Gasto de mano de obra");
         setVisible(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener()
+        {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt)
+            {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+        });
 
         btnAlta.setText("Alta");
+        btnAlta.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnAltaActionPerformed(evt);
+            }
+        });
 
         btnModificar.setText("Modificar");
 
-        btnEliminar.setText("Eliminar");
+        btnEliminar.setText("Baja");
         btnEliminar.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 btnEliminarActionPerformed(evt);
+            }
+        });
+
+        jcbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Días/Horas", "Días", "Horas" }));
+        jcbTipo.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jcbTipoActionPerformed(evt);
+            }
+        });
+        jcbTipo.addPropertyChangeListener(new java.beans.PropertyChangeListener()
+        {
+            public void propertyChange(java.beans.PropertyChangeEvent evt)
+            {
+                jcbTipoPropertyChange(evt);
+            }
+        });
+
+        jLabel1.setText("Tipo");
+
+        jLabel2.setText("Descripción");
+
+        jtfDescripcionBuscar.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                jtfDescripcionBuscarKeyReleased(evt);
+            }
+        });
+
+        jLabel3.setText("DNI");
+
+        jtfDNIBuscar.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                jtfDNIBuscarKeyReleased(evt);
             }
         });
 
@@ -67,17 +150,42 @@ public class InternalTGastoManoObra extends javax.swing.JInternalFrame
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(129, 129, 129)
-                .addComponent(btnModificar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEliminar)
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jtfDNIBuscar, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtfDescripcionBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(105, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtfDNIBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfDescripcionBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAlta)
                     .addComponent(btnModificar)
@@ -106,13 +214,13 @@ public class InternalTGastoManoObra extends javax.swing.JInternalFrame
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -123,20 +231,93 @@ public class InternalTGastoManoObra extends javax.swing.JInternalFrame
     {//GEN-HEADEREND:event_btnEliminarActionPerformed
         try
         {
-            utils.Utilidades.borrar("TGastosManoObra", jtbTGastosManoObra, 1);
+            utils.UtilisSql.borrar("TGastosManoObra", jtbTGastosManoObra, 1);
         } catch (Exception ex)
         {
             Logger.getLogger(InternalTGastoManoObra.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void btnAltaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAltaActionPerformed
+    {//GEN-HEADEREND:event_btnAltaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAltaActionPerformed
+
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt)//GEN-FIRST:event_formInternalFrameClosing
+    {//GEN-HEADEREND:event_formInternalFrameClosing
+        btnGastosManoObra.setEnabled(true);
+    }//GEN-LAST:event_formInternalFrameClosing
+
+    private void jtfDNIBuscarKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfDNIBuscarKeyReleased
+    {//GEN-HEADEREND:event_jtfDNIBuscarKeyReleased
+        try
+        {
+            buscarFiltro();
+        } catch (Exception ex)
+        {
+            Logger.getLogger(InternalTGastoManoObra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jtfDNIBuscarKeyReleased
+
+    private void jtfDescripcionBuscarKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfDescripcionBuscarKeyReleased
+    {//GEN-HEADEREND:event_jtfDescripcionBuscarKeyReleased
+        try
+        {
+            buscarFiltro();
+        } catch (Exception ex)
+        {
+            Logger.getLogger(InternalTGastoManoObra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jtfDescripcionBuscarKeyReleased
+
+    private void jcbTipoPropertyChange(java.beans.PropertyChangeEvent evt)//GEN-FIRST:event_jcbTipoPropertyChange
+    {//GEN-HEADEREND:event_jcbTipoPropertyChange
+        
+    }//GEN-LAST:event_jcbTipoPropertyChange
+
+    private void jcbTipoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jcbTipoActionPerformed
+    {//GEN-HEADEREND:event_jcbTipoActionPerformed
+        try
+        {
+            buscarFiltro();
+        } catch (Exception ex)
+        {
+            Logger.getLogger(InternalTGastoManoObra.class.getName()).log(Level.SEVERE, null, ex);
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_jcbTipoActionPerformed
+
+    //Actualizar en las busquedas
+    void buscarFiltro() throws SQLException, Exception
+    {
+        String dni = jtfDNIBuscar.getText().toString();
+        String descripcion = jtfDescripcionBuscar.getText().toString();
+        String tipo = "";
+        if (jcbTipo.getSelectedIndex() == 1)
+        {
+            tipo = "Dias";
+        } else if (jcbTipo.getSelectedIndex() == 2)
+        {
+            tipo = "Horas";
+        }
+        System.out.println(tipo);
+        this.jtbTGastosManoObra = utils.UtilisSql.rellenarJTable(
+                "SELECT * FROM TGastosManoObra WHERE DNI LIKE \'%" + dni + "%\'"
+                + " AND Descripcion LIKE \'%" + descripcion + "%\' "
+                + " AND Tipo LIKE \'%" + tipo + "%\';", jtbTGastosManoObra);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlta;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JComboBox jcbTipo;
     private javax.swing.JTable jtbTGastosManoObra;
+    private javax.swing.JTextField jtfDNIBuscar;
+    private javax.swing.JTextField jtfDescripcionBuscar;
     // End of variables declaration//GEN-END:variables
 }

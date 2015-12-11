@@ -117,11 +117,11 @@ public class InternalNuevaVariedad extends javax.swing.JInternalFrame
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelarVariedad)
-                    .addComponent(btnAceptarVariedad))
-                .addGap(21, 21, 21))
+                    .addComponent(btnAceptarVariedad)
+                    .addComponent(btnCancelarVariedad))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -153,7 +153,7 @@ public class InternalNuevaVariedad extends javax.swing.JInternalFrame
                 System.out.println(SQL);
                 c.hacerInsercion(SQL);
                 c.cerrarConexion();
-                utils.Utilidades.actualizarJtable(jTable, "TVariedad");
+                utils.UtilisSql.actualizarJtable(jTable, "TVariedad");
             } catch (ClassNotFoundException ex)
             {
                 Logger.getLogger(InternalNuevaVariedad.class.getName()).log(Level.SEVERE, null, ex);
@@ -169,7 +169,7 @@ public class InternalNuevaVariedad extends javax.swing.JInternalFrame
                 String SQL = "INSERT INTO TVariedad (Nombre,IdTipo) VALUES (\"" + nombre + "\",\"" + tipo + "\");";
                 c.hacerInsercion(SQL);
                 c.cerrarConexion();
-                utils.Utilidades.actualizarJtable(jTable, "TVariedad");
+                utils.UtilisSql.actualizarJtable(jTable, "TVariedad");
             } catch (ClassNotFoundException ex)
             {
                 Logger.getLogger(InternalNuevaVariedad.class.getName()).log(Level.SEVERE, null, ex);
@@ -196,6 +196,7 @@ public class InternalNuevaVariedad extends javax.swing.JInternalFrame
             {
                 jcbTipo.addItem(rs.getString("Nombre"));
             }
+            jcbTipo.getModel().setSelectedItem(id);
             c.cerrarConexion();
            
         } catch (ClassNotFoundException ex)

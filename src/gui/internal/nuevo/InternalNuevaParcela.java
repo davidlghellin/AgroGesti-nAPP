@@ -177,7 +177,7 @@ public class InternalNuevaParcela extends javax.swing.JInternalFrame
                         + "\" WHERE IdParcela = \"" + NombreParcela + "\";";
                 c.hacerInsercion(SQL);
                 c.cerrarConexion();
-                jtbParcela = utils.Utilidades.rellenarJTable("SELECT * FROM TParcela;", jtbParcela);
+                jtbParcela = utils.UtilisSql.rellenarJTable("SELECT * FROM TParcela;", jtbParcela);
             } catch (ClassNotFoundException ex)
             {
                 Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
@@ -196,7 +196,7 @@ public class InternalNuevaParcela extends javax.swing.JInternalFrame
                 c.hacerInsercion("INSERT INTO TParcela (IdParcela,IdFinca,Descripcion) VALUES (\""
                         + NombreParcela + "\",\"" + Finca + "\",\"" + Descripcion + "\")");
                 c.cerrarConexion();
-                jtbParcela = utils.Utilidades.rellenarJTable("SELECT * FROM TParcela;", jtbParcela);
+                jtbParcela = utils.UtilisSql.rellenarJTable("SELECT * FROM TParcela;", jtbParcela);
             } catch (ClassNotFoundException ex)
             {
                 Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
@@ -245,6 +245,8 @@ public class InternalNuevaParcela extends javax.swing.JInternalFrame
             {
                 jcbFinca.addItem(rs.getString("Nombre"));
             }
+            // jcbFinca.setSelectedIndex(3);
+            jcbFinca.getModel().setSelectedItem(id);
             c.cerrarConexion();
         } catch (ClassNotFoundException ex)
         {

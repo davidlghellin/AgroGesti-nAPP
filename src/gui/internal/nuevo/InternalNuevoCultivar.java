@@ -165,7 +165,7 @@ public class InternalNuevoCultivar extends javax.swing.JInternalFrame
                         .addComponent(jcbVariedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
                         .addComponent(jcbParcela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
@@ -272,7 +272,7 @@ public class InternalNuevoCultivar extends javax.swing.JInternalFrame
 
         try // Actualizamos el Jtable
         {
-            utils.Utilidades.actualizarJtable(jtable, "TCultivar");
+            utils.UtilisSql.actualizarJtable(jtable, "TCultivar");
         } catch (Exception ex)
         {
             Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
@@ -295,6 +295,14 @@ public class InternalNuevoCultivar extends javax.swing.JInternalFrame
             jtfId.setText(rs.getInt(1) + "");
             dateInicio.setDate(rs.getDate("FechaInicio"));
             dateFin.setDate(rs.getDate("FechaFin"));
+            
+            // Marcamos los seleccionados
+            String SQLRellenar = "SELECT IdVariedad, IdParcela  FROM TCultivar WHERE Id =\"" + id + "\";";
+            ResultSet rs3 = c.hacerConsulta(SQLRellenar);
+            rs3.next();
+            jcbVariedad.getModel().setSelectedItem(rs3.getString(1));
+            jcbParcela.getModel().setSelectedItem(rs3.getString(2));
+            
             c.cerrarConexion();
         } catch (SQLException ex)
         {
@@ -310,7 +318,7 @@ public class InternalNuevoCultivar extends javax.swing.JInternalFrame
         ConexionBBDD c = new ConexionBBDD();
         String SQLparcela = "SELECT IdParcela FROM TParcela;";
         String SQLvariedad = "SELECT Nombre FROM TVariedad;";
-
+        // Rellenamos los comboBox
         ResultSet rs = c.hacerConsulta(SQLvariedad);
         while (rs.next())
         {
@@ -321,6 +329,7 @@ public class InternalNuevoCultivar extends javax.swing.JInternalFrame
         {
             jcbParcela.addItem(rs2.getString(1));
         }
+
         c.cerrarConexion();
     }
 

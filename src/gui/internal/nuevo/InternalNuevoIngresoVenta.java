@@ -114,6 +114,8 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
 
         jLabel7.setText("Cultivar");
 
+        jtfId.setEditable(false);
+
         jcbCultivar.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -205,7 +207,7 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
                     .addComponent(jcbCultivar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
@@ -269,7 +271,7 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
                 c.hacerInsercion(SQL);
                 c.cerrarConexion();
                 dispose();
-                utils.Utilidades.actualizarJtable(jtable, "TIngresoVenta");
+                utils.UtilisSql.actualizarJtable(jtable, "TIngresoVenta");
             } catch (Exception ex)
             {
                 JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Debe introducir todos los datos, use \'.\' para los decimales");
@@ -309,7 +311,7 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
                 c.hacerInsercion(SQL);
                 c.cerrarConexion();
                 dispose();
-                utils.Utilidades.actualizarJtable(jtable, "TIngresoVenta");
+                utils.UtilisSql.actualizarJtable(jtable, "TIngresoVenta");
             } catch (ClassNotFoundException ex)
             {
                 Logger.getLogger(InternalNuevoIngresoVenta.class.getName()).log(Level.SEVERE, null, ex);

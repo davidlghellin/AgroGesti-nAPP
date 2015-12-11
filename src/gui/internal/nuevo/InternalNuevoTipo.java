@@ -156,7 +156,7 @@ public class InternalNuevoTipo extends javax.swing.JInternalFrame
                 System.out.println(SQL);
                 c.hacerInsercion(SQL);
                 dispose();
-                utils.Utilidades.actualizarJtable(jtbTipo, "TTipo");
+                utils.UtilisSql.actualizarJtable(jtbTipo, "TTipo");
             } catch (ClassNotFoundException ex)
             {
                 Logger.getLogger(InternalNuevoTipo.class.getName()).log(Level.SEVERE, null, ex);
@@ -175,7 +175,7 @@ public class InternalNuevoTipo extends javax.swing.JInternalFrame
                 String SQL = "INSERT INTO TTipo (Nombre,Descripcion) VALUES (\"" + nombre + "\",\"" + descripcion + "\")";
                 c.hacerInsercion(SQL);
                 dispose();
-                utils.Utilidades.actualizarJtable(jtbTipo, "TTipo");
+                utils.UtilisSql.actualizarJtable(jtbTipo, "TTipo");
             } catch (ClassNotFoundException ex)
             {
                 Logger.getLogger(InternalNuevoTipo.class.getName()).log(Level.SEVERE, null, ex);
@@ -188,7 +188,7 @@ public class InternalNuevoTipo extends javax.swing.JInternalFrame
 
     private void btnCancelarNuevaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCancelarNuevaActionPerformed
     {//GEN-HEADEREND:event_btnCancelarNuevaActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btnCancelarNuevaActionPerformed
 
     public void rellenarCampo()

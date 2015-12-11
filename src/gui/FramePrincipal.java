@@ -47,13 +47,13 @@ public class FramePrincipal extends javax.swing.JFrame
 
         jdpPrincipal = new javax.swing.JDesktopPane();
         jPanel1 = new javax.swing.JPanel();
-        jbFinca = new javax.swing.JButton();
-        jbParcela = new javax.swing.JButton();
-        jbProducto = new javax.swing.JButton();
-        jbTipo = new javax.swing.JButton();
-        jbCultivar = new javax.swing.JButton();
-        jbIngresoVenta = new javax.swing.JButton();
-        jbIngresoOtro = new javax.swing.JButton();
+        btnFinca = new javax.swing.JButton();
+        btnParcela = new javax.swing.JButton();
+        btnVariedad = new javax.swing.JButton();
+        btnTipo = new javax.swing.JButton();
+        btnCultivar = new javax.swing.JButton();
+        btnIngresoVenta = new javax.swing.JButton();
+        btnIngresoOtro = new javax.swing.JButton();
         btnTrabajador = new javax.swing.JButton();
         btnGastosManoObra = new javax.swing.JButton();
         btnGastoProducto = new javax.swing.JButton();
@@ -72,66 +72,66 @@ public class FramePrincipal extends javax.swing.JFrame
         jdpPrincipal.setBackground(new java.awt.Color(0, 0, 0));
         jdpPrincipal.setBorder(new javax.swing.border.MatteBorder(null));
 
-        jbFinca.setText("Finca");
-        jbFinca.addActionListener(new java.awt.event.ActionListener()
+        btnFinca.setText("Finca");
+        btnFinca.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jbFincaActionPerformed(evt);
+                btnFincaActionPerformed(evt);
             }
         });
 
-        jbParcela.setText("Parcela");
-        jbParcela.addActionListener(new java.awt.event.ActionListener()
+        btnParcela.setText("Parcela");
+        btnParcela.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jbParcelaActionPerformed(evt);
+                btnParcelaActionPerformed(evt);
             }
         });
 
-        jbProducto.setText("Producto");
-        jbProducto.addActionListener(new java.awt.event.ActionListener()
+        btnVariedad.setText("Variedad");
+        btnVariedad.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jbProductoActionPerformed(evt);
+                btnVariedadActionPerformed(evt);
             }
         });
 
-        jbTipo.setText("Tipo");
-        jbTipo.addActionListener(new java.awt.event.ActionListener()
+        btnTipo.setText("Tipo producto");
+        btnTipo.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jbTipoActionPerformed(evt);
+                btnTipoActionPerformed(evt);
             }
         });
 
-        jbCultivar.setText("Cultivar");
-        jbCultivar.addActionListener(new java.awt.event.ActionListener()
+        btnCultivar.setText("Cultivar");
+        btnCultivar.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jbCultivarActionPerformed(evt);
+                btnCultivarActionPerformed(evt);
             }
         });
 
-        jbIngresoVenta.setText("Ingreso por Venta");
-        jbIngresoVenta.addActionListener(new java.awt.event.ActionListener()
+        btnIngresoVenta.setText("Ingreso por Venta");
+        btnIngresoVenta.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jbIngresoVentaActionPerformed(evt);
+                btnIngresoVentaActionPerformed(evt);
             }
         });
 
-        jbIngresoOtro.setText("Otro ingreso");
-        jbIngresoOtro.addActionListener(new java.awt.event.ActionListener()
+        btnIngresoOtro.setText("Otro ingreso");
+        btnIngresoOtro.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jbIngresoOtroActionPerformed(evt);
+                btnIngresoOtroActionPerformed(evt);
             }
         });
 
@@ -177,19 +177,19 @@ public class FramePrincipal extends javax.swing.JFrame
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jbFinca)
+                .addComponent(btnFinca)
                 .addGap(18, 18, 18)
-                .addComponent(jbParcela)
+                .addComponent(btnParcela)
                 .addGap(18, 18, 18)
-                .addComponent(jbTipo)
+                .addComponent(btnTipo)
                 .addGap(18, 18, 18)
-                .addComponent(jbProducto)
+                .addComponent(btnVariedad)
                 .addGap(18, 18, 18)
-                .addComponent(jbCultivar)
+                .addComponent(btnCultivar)
                 .addGap(18, 18, 18)
-                .addComponent(jbIngresoVenta)
+                .addComponent(btnIngresoVenta)
                 .addGap(18, 18, 18)
-                .addComponent(jbIngresoOtro, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnIngresoOtro, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnTrabajador, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -198,19 +198,19 @@ public class FramePrincipal extends javax.swing.JFrame
                 .addComponent(btnGastoProducto)
                 .addGap(18, 18, 18)
                 .addComponent(btnGastoOtros)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbFinca)
-                    .addComponent(jbParcela)
-                    .addComponent(jbProducto)
-                    .addComponent(jbTipo)
-                    .addComponent(jbCultivar)
-                    .addComponent(jbIngresoVenta)
-                    .addComponent(jbIngresoOtro)
+                    .addComponent(btnFinca)
+                    .addComponent(btnParcela)
+                    .addComponent(btnVariedad)
+                    .addComponent(btnTipo)
+                    .addComponent(btnCultivar)
+                    .addComponent(btnIngresoVenta)
+                    .addComponent(btnIngresoOtro)
                     .addComponent(btnTrabajador)
                     .addComponent(btnGastosManoObra)
                     .addComponent(btnGastoProducto)
@@ -279,13 +279,14 @@ public class FramePrincipal extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbFincaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jbFincaActionPerformed
-    {//GEN-HEADEREND:event_jbFincaActionPerformed
+    private void btnFincaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnFincaActionPerformed
+    {//GEN-HEADEREND:event_btnFincaActionPerformed
         try
         {
-            InternalTFinca internal = new InternalTFinca();
+            InternalTFinca internal = new InternalTFinca(btnFinca);
             jdpPrincipal.add(internal);
             utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
+            btnFinca.setEnabled(false);
         } catch (ClassNotFoundException ex)
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -297,14 +298,15 @@ public class FramePrincipal extends javax.swing.JFrame
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_jbFincaActionPerformed
+    }//GEN-LAST:event_btnFincaActionPerformed
 
-    private void jbParcelaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jbParcelaActionPerformed
-    {//GEN-HEADEREND:event_jbParcelaActionPerformed
+    private void btnParcelaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnParcelaActionPerformed
+    {//GEN-HEADEREND:event_btnParcelaActionPerformed
         try
         {
-            InternalTParcela internal = new InternalTParcela();
+            InternalTParcela internal = new InternalTParcela(btnParcela);
             jdpPrincipal.add(internal);
+            btnParcela.setEnabled(false);
             utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
         } catch (ClassNotFoundException ex)
         {
@@ -316,14 +318,15 @@ public class FramePrincipal extends javax.swing.JFrame
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jbParcelaActionPerformed
+    }//GEN-LAST:event_btnParcelaActionPerformed
 
-    private void jbProductoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jbProductoActionPerformed
-    {//GEN-HEADEREND:event_jbProductoActionPerformed
+    private void btnVariedadActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnVariedadActionPerformed
+    {//GEN-HEADEREND:event_btnVariedadActionPerformed
         try
         {
-            InternalTVariedad internal = new InternalTVariedad();
+            InternalTVariedad internal = new InternalTVariedad(btnVariedad);
             jdpPrincipal.add(internal);
+            btnVariedad.setEnabled(false);
             utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
         } catch (ClassNotFoundException ex)
         {
@@ -335,14 +338,15 @@ public class FramePrincipal extends javax.swing.JFrame
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jbProductoActionPerformed
+    }//GEN-LAST:event_btnVariedadActionPerformed
 
-    private void jbTipoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jbTipoActionPerformed
-    {//GEN-HEADEREND:event_jbTipoActionPerformed
+    private void btnTipoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnTipoActionPerformed
+    {//GEN-HEADEREND:event_btnTipoActionPerformed
         try
         {
-            InternalTTipo internal = new InternalTTipo();
+            InternalTTipo internal = new InternalTTipo(btnTipo);
             jdpPrincipal.add(internal);
+            btnTipo.setEnabled(false);
             utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
         } catch (ClassNotFoundException ex)
         {
@@ -354,14 +358,15 @@ public class FramePrincipal extends javax.swing.JFrame
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jbTipoActionPerformed
+    }//GEN-LAST:event_btnTipoActionPerformed
 
-    private void jbCultivarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jbCultivarActionPerformed
-    {//GEN-HEADEREND:event_jbCultivarActionPerformed
+    private void btnCultivarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCultivarActionPerformed
+    {//GEN-HEADEREND:event_btnCultivarActionPerformed
         try
         {
-            InternalTCultivar internal = new InternalTCultivar();
+            InternalTCultivar internal = new InternalTCultivar(btnCultivar);
             jdpPrincipal.add(internal);
+            btnCultivar.setEnabled(false);
             utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
         } catch (ClassNotFoundException ex)
         {
@@ -373,14 +378,15 @@ public class FramePrincipal extends javax.swing.JFrame
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jbCultivarActionPerformed
+    }//GEN-LAST:event_btnCultivarActionPerformed
 
-    private void jbIngresoVentaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jbIngresoVentaActionPerformed
-    {//GEN-HEADEREND:event_jbIngresoVentaActionPerformed
+    private void btnIngresoVentaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnIngresoVentaActionPerformed
+    {//GEN-HEADEREND:event_btnIngresoVentaActionPerformed
         try
         {
-            InternalTIngresoVenta internal = new InternalTIngresoVenta();
+            InternalTIngresoVenta internal = new InternalTIngresoVenta(btnIngresoVenta);
             jdpPrincipal.add(internal);
+            btnIngresoVenta.setEnabled(false);
             utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
         } catch (ClassNotFoundException ex)
         {
@@ -392,28 +398,30 @@ public class FramePrincipal extends javax.swing.JFrame
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jbIngresoVentaActionPerformed
+    }//GEN-LAST:event_btnIngresoVentaActionPerformed
 
-    private void jbIngresoOtroActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jbIngresoOtroActionPerformed
-    {//GEN-HEADEREND:event_jbIngresoOtroActionPerformed
+    private void btnIngresoOtroActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnIngresoOtroActionPerformed
+    {//GEN-HEADEREND:event_btnIngresoOtroActionPerformed
         try
         {
-            InternalTIngresoOtro internal = new InternalTIngresoOtro();
+            InternalTIngresoOtro internal = new InternalTIngresoOtro(btnIngresoOtro);
             jdpPrincipal.add(internal);
+            btnIngresoOtro.setEnabled(false);
             utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
         } catch (Exception ex)
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_jbIngresoOtroActionPerformed
+    }//GEN-LAST:event_btnIngresoOtroActionPerformed
 
     private void btnTrabajadorActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnTrabajadorActionPerformed
     {//GEN-HEADEREND:event_btnTrabajadorActionPerformed
         try
         {
-            InternalTTrabajador internal = new InternalTTrabajador();
+            InternalTTrabajador internal = new InternalTTrabajador(btnTrabajador);
             jdpPrincipal.add(internal);
+            btnTrabajador.setEnabled(false);
             utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
         } catch (Exception ex)
         {
@@ -425,8 +433,9 @@ public class FramePrincipal extends javax.swing.JFrame
     {//GEN-HEADEREND:event_btnGastosManoObraActionPerformed
         try
         {
-            InternalTGastoManoObra internal = new InternalTGastoManoObra();
+            InternalTGastoManoObra internal = new InternalTGastoManoObra(btnGastosManoObra);
             jdpPrincipal.add(internal);
+            btnGastosManoObra.setEnabled(false);
             utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
         } catch (Exception ex)
         {
@@ -438,8 +447,9 @@ public class FramePrincipal extends javax.swing.JFrame
     {//GEN-HEADEREND:event_btnGastoProductoActionPerformed
         try
         {
-            InternalTGastoProducto internal = new InternalTGastoProducto();
+            InternalTGastoProducto internal = new InternalTGastoProducto(btnGastoProducto);
             jdpPrincipal.add(internal);
+            btnGastoProducto.setEnabled(false);
             utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
         } catch (Exception ex)
         {
@@ -451,8 +461,9 @@ public class FramePrincipal extends javax.swing.JFrame
     {//GEN-HEADEREND:event_btnGastoOtrosActionPerformed
         try
         {
-            InternalTGastoOtro internal = new InternalTGastoOtro();
+            InternalTGastoOtro internal = new InternalTGastoOtro(btnGastoOtros);
             jdpPrincipal.add(internal);
+            btnGastoOtros.setEnabled(false);
             utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
         } catch (Exception ex)
         {
@@ -525,22 +536,22 @@ public class FramePrincipal extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCultivar;
+    private javax.swing.JButton btnFinca;
     private javax.swing.JButton btnGastoOtros;
     private javax.swing.JButton btnGastoProducto;
     private javax.swing.JButton btnGastosManoObra;
+    private javax.swing.JButton btnIngresoOtro;
+    private javax.swing.JButton btnIngresoVenta;
+    private javax.swing.JButton btnParcela;
+    private javax.swing.JButton btnTipo;
     private javax.swing.JButton btnTrabajador;
+    private javax.swing.JButton btnVariedad;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton jbCultivar;
-    private javax.swing.JButton jbFinca;
-    private javax.swing.JButton jbIngresoOtro;
-    private javax.swing.JButton jbIngresoVenta;
-    private javax.swing.JButton jbParcela;
-    private javax.swing.JButton jbProducto;
-    private javax.swing.JButton jbTipo;
     private javax.swing.JDesktopPane jdpPrincipal;
     private javax.swing.JMenuItem jmiAPP;
     private javax.swing.JMenuItem jmiSalir;

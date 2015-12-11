@@ -1,6 +1,10 @@
 package gui.internal.nuevo;
 
 import conexion.ConexionBBDD;
+import java.awt.AWTException;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.Robot;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -89,11 +93,22 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
             e1.printStackTrace();
         }
         setVisible(true);
+        addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
+                formMouseExited(evt);
+            }
+        });
         addFocusListener(new java.awt.event.FocusAdapter()
         {
             public void focusGained(java.awt.event.FocusEvent evt)
             {
                 formFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
+                formFocusLost(evt);
             }
         });
 
@@ -161,26 +176,25 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnAceptarNuevaFinca)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelarNuevaFinca)
-                        .addContainerGap())
+                        .addComponent(btnCancelarNuevaFinca))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jtfLocalizacionFinca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE))
+                        .addGap(67, 67, 67)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE))
-                                .addGap(79, 79, 79)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtfLocalizacionFinca)
-                                    .addComponent(jtfNombreFinca)
-                                    .addComponent(jScrollPane1))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane1)
+                            .addComponent(jtfNombreFinca))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jtfNombreFinca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -191,16 +205,15 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAceptarNuevaFinca)
-                            .addComponent(btnCancelarNuevaFinca))
-                        .addGap(32, 32, 32))
+                        .addComponent(jLabel3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAceptarNuevaFinca)
+                    .addComponent(btnCancelarNuevaFinca))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -251,7 +264,7 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
             }
             try
             {
-                jtbFinca = utils.Utilidades.rellenarJTable("SELECT * FROM TFinca;", jtbFinca);
+                jtbFinca = utils.UtilisSql.rellenarJTable("SELECT * FROM TFinca;", jtbFinca);
             } catch (SQLException ex)
             {
                 Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
@@ -278,7 +291,7 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
                 {
                     Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                jtbFinca = utils.Utilidades.rellenarJTable("SELECT * FROM TFinca;", jtbFinca);
+                jtbFinca = utils.UtilisSql.rellenarJTable("SELECT * FROM TFinca;", jtbFinca);
                 this.dispose();
             } catch (SQLException ex)
             {
@@ -315,6 +328,32 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
             jtfDescripcionFinca.setText(jtfDescripcionFinca.getText().toString().substring(0, 99));
         }
     }//GEN-LAST:event_jtfDescripcionFincaKeyTyped
+
+    private void formFocusLost(java.awt.event.FocusEvent evt)//GEN-FIRST:event_formFocusLost
+    {//GEN-HEADEREND:event_formFocusLost
+        this.moveToFront();
+    }//GEN-LAST:event_formFocusLost
+
+    private void formMouseExited(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseExited
+    {//GEN-HEADEREND:event_formMouseExited
+        Point punto = MouseInfo.getPointerInfo().getLocation();
+        int x = punto.x;
+        int y = punto.y;
+        System.out.println(punto);
+        /*// No puedo usar los botones ni entrar a los campos de texto, 
+         Robot robot = null;
+         try
+         {
+         robot = new Robot();
+         } catch (AWTException ex)
+         {
+         Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
+         }
+ 
+         //cambia la posición en pantalla del puntero a las coordenadas
+         //X=300 e Y=600.
+         robot.mouseMove(this.getParent().getWidth()/2,this.getParent().getHeight()/2 );*/
+    }//GEN-LAST:event_formMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -2,11 +2,14 @@ package gui.internal;
 
 import conexion.ConexionBBDD;
 import gui.internal.nuevo.InternalNuevaFinca;
+import java.awt.Dimension;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,10 +20,17 @@ import javax.swing.table.DefaultTableModel;
 public class InternalTFinca extends javax.swing.JInternalFrame
 {
 
-    public InternalTFinca() throws ClassNotFoundException, SQLException, Exception
+    JButton btnFinca;
+
+    public InternalTFinca(JButton btnFinca) throws ClassNotFoundException, SQLException, Exception
     {
         initComponents();
-        this.jtbFinca = utils.Utilidades.rellenarJTable("SELECT * FROM TFinca;", jtbFinca);
+        this.btnFinca = btnFinca;
+        this.jtbFinca = utils.UtilisSql.rellenarJTable("SELECT * FROM TFinca;", jtbFinca);
+
+        btnAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_01.png")));
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_02.png")));
+        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_03.png")));
     }
 
     /**
@@ -34,24 +44,50 @@ public class InternalTFinca extends javax.swing.JInternalFrame
     {
 
         jPanel2 = new javax.swing.JPanel();
-        btnAltaFinca = new javax.swing.JButton();
-        btnModificarFinca = new javax.swing.JButton();
-        btnEliminarFinca = new javax.swing.JButton();
-        jteNombreBuscarFinca = new javax.swing.JTextField();
-        jteLocalizacionBuscarFinca = new javax.swing.JTextField();
-        jteDescripcionBuscarFinca = new javax.swing.JTextField();
+        jteNombreBuscar = new javax.swing.JTextField();
+        jteLocalizacionBuscar = new javax.swing.JTextField();
+        jteDescripcionBuscar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbFinca = new javax.swing.JTable();
+        btnAlta = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(237, 0, 0));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Finca");
         setVisible(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener()
+        {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt)
+            {
+                formInternalFrameClosing(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt)
+            {
+            }
+        });
         addFocusListener(new java.awt.event.FocusAdapter()
         {
             public void focusGained(java.awt.event.FocusEvent evt)
@@ -60,54 +96,27 @@ public class InternalTFinca extends javax.swing.JInternalFrame
             }
         });
 
-        btnAltaFinca.setText("Alta");
-        btnAltaFinca.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btnAltaFincaActionPerformed(evt);
-            }
-        });
-
-        btnModificarFinca.setText("Modificar");
-        btnModificarFinca.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btnModificarFincaActionPerformed(evt);
-            }
-        });
-
-        btnEliminarFinca.setText("Eliminar");
-        btnEliminarFinca.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btnEliminarFincaActionPerformed(evt);
-            }
-        });
-
-        jteNombreBuscarFinca.addKeyListener(new java.awt.event.KeyAdapter()
+        jteNombreBuscar.addKeyListener(new java.awt.event.KeyAdapter()
         {
             public void keyTyped(java.awt.event.KeyEvent evt)
             {
-                jteNombreBuscarFincaKeyTyped(evt);
+                jteNombreBuscarKeyTyped(evt);
             }
         });
 
-        jteLocalizacionBuscarFinca.addKeyListener(new java.awt.event.KeyAdapter()
+        jteLocalizacionBuscar.addKeyListener(new java.awt.event.KeyAdapter()
         {
             public void keyTyped(java.awt.event.KeyEvent evt)
             {
-                jteLocalizacionBuscarFincaKeyTyped(evt);
+                jteLocalizacionBuscarKeyTyped(evt);
             }
         });
 
-        jteDescripcionBuscarFinca.addKeyListener(new java.awt.event.KeyAdapter()
+        jteDescripcionBuscar.addKeyListener(new java.awt.event.KeyAdapter()
         {
             public void keyTyped(java.awt.event.KeyEvent evt)
             {
-                jteDescripcionBuscarFincaKeyTyped(evt);
+                jteDescripcionBuscarKeyTyped(evt);
             }
         });
 
@@ -125,48 +134,35 @@ public class InternalTFinca extends javax.swing.JInternalFrame
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jteNombreBuscarFinca, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jteLocalizacionBuscarFinca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jteNombreBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jteLocalizacionBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jteDescripcionBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnAltaFinca, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnModificarFinca, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(206, 206, 206)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                    .addComponent(jteDescripcionBuscarFinca)
-                    .addComponent(btnEliminarFinca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(372, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel1)))
-                        .addGap(12, 12, 12)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jteLocalizacionBuscarFinca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jteDescripcionBuscarFinca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel3))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addComponent(jteNombreBuscarFinca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAltaFinca)
-                            .addComponent(btnModificarFinca)
-                            .addComponent(btnEliminarFinca))))
-                .addContainerGap(109, Short.MAX_VALUE))
+                            .addComponent(jteNombreBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jteLocalizacionBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jteDescripcionBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         jtbFinca.setAutoCreateRowSorter(true);
@@ -185,37 +181,79 @@ public class InternalTFinca extends javax.swing.JInternalFrame
         ));
         jScrollPane1.setViewportView(jtbFinca);
 
+        btnAlta.setText("Alta");
+        btnAlta.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnAltaActionPerformed(evt);
+            }
+        });
+
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setText("Baja");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(372, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAlta)
+                    .addComponent(btnModificar)
+                    .addComponent(btnEliminar))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAltaFincaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAltaFincaActionPerformed
-    {//GEN-HEADEREND:event_btnAltaFincaActionPerformed
+    private void btnAltaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAltaActionPerformed
+    {//GEN-HEADEREND:event_btnAltaActionPerformed
         InternalNuevaFinca internal = new InternalNuevaFinca(jtbFinca);
         this.getParent().add(internal);
         internal.toFront();
-    }//GEN-LAST:event_btnAltaFincaActionPerformed
+        utils.UtilsFrame.centrar(internal);
+    }//GEN-LAST:event_btnAltaActionPerformed
 
-    private void btnModificarFincaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnModificarFincaActionPerformed
-    {//GEN-HEADEREND:event_btnModificarFincaActionPerformed
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnModificarActionPerformed
+    {//GEN-HEADEREND:event_btnModificarActionPerformed
         try
         {
             String id = (String) jtbFinca.getValueAt(jtbFinca.getSelectedRow(), 0);
-            System.out.println("iddd_"+id);
+            System.out.println("iddd_" + id);
             InternalNuevaFinca internal = new InternalNuevaFinca(jtbFinca, id);
             this.getParent().add(internal);
             internal.toFront();
@@ -223,10 +261,10 @@ public class InternalTFinca extends javax.swing.JInternalFrame
         {
             JOptionPane.showInternalMessageDialog(jtbFinca.getRootPane(), "Tiene que selecionar la fila a modificar");
         }
-    }//GEN-LAST:event_btnModificarFincaActionPerformed
+    }//GEN-LAST:event_btnModificarActionPerformed
 
-    private void btnEliminarFincaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnEliminarFincaActionPerformed
-    {//GEN-HEADEREND:event_btnEliminarFincaActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnEliminarActionPerformed
+    {//GEN-HEADEREND:event_btnEliminarActionPerformed
         /* try
          {
          String id = (String) jtbFinca.getValueAt(jtbFinca.getSelectedRow(), 0);
@@ -247,7 +285,7 @@ public class InternalTFinca extends javax.swing.JInternalFrame
          }
          try
          {
-         this.jtbFinca = utils.Utilidades.rellenarJTable("SELECT * FROM TFinca;", jtbFinca);
+         this.jtbFinca = utils.UtilisSql.rellenarJTable("SELECT * FROM TFinca;", jtbFinca);
          } catch (SQLException ex)
          {
          Logger.getLogger(InternalTFinca.class.getName()).log(Level.SEVERE, null, ex);
@@ -257,20 +295,20 @@ public class InternalTFinca extends javax.swing.JInternalFrame
          }*/
         try
         {
-            utils.Utilidades.borrar("TFinca", jtbFinca);
+            utils.UtilisSql.borrar("TFinca", jtbFinca);
         } catch (Exception ex)
         {
             Logger.getLogger(InternalTFinca.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnEliminarFincaActionPerformed
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void formFocusGained(java.awt.event.FocusEvent evt)//GEN-FIRST:event_formFocusGained
     {//GEN-HEADEREND:event_formFocusGained
 
     }//GEN-LAST:event_formFocusGained
 
-    private void jteNombreBuscarFincaKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jteNombreBuscarFincaKeyTyped
-    {//GEN-HEADEREND:event_jteNombreBuscarFincaKeyTyped
+    private void jteNombreBuscarKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jteNombreBuscarKeyTyped
+    {//GEN-HEADEREND:event_jteNombreBuscarKeyTyped
         try
         {
             buscarFiltro();
@@ -278,10 +316,10 @@ public class InternalTFinca extends javax.swing.JInternalFrame
         {
             Logger.getLogger(InternalTFinca.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jteNombreBuscarFincaKeyTyped
+    }//GEN-LAST:event_jteNombreBuscarKeyTyped
 
-    private void jteLocalizacionBuscarFincaKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jteLocalizacionBuscarFincaKeyTyped
-    {//GEN-HEADEREND:event_jteLocalizacionBuscarFincaKeyTyped
+    private void jteLocalizacionBuscarKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jteLocalizacionBuscarKeyTyped
+    {//GEN-HEADEREND:event_jteLocalizacionBuscarKeyTyped
         try
         {
             buscarFiltro();
@@ -289,10 +327,10 @@ public class InternalTFinca extends javax.swing.JInternalFrame
         {
             Logger.getLogger(InternalTFinca.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jteLocalizacionBuscarFincaKeyTyped
+    }//GEN-LAST:event_jteLocalizacionBuscarKeyTyped
 
-    private void jteDescripcionBuscarFincaKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jteDescripcionBuscarFincaKeyTyped
-    {//GEN-HEADEREND:event_jteDescripcionBuscarFincaKeyTyped
+    private void jteDescripcionBuscarKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jteDescripcionBuscarKeyTyped
+    {//GEN-HEADEREND:event_jteDescripcionBuscarKeyTyped
         try
         {
             buscarFiltro();
@@ -300,33 +338,36 @@ public class InternalTFinca extends javax.swing.JInternalFrame
         {
             Logger.getLogger(InternalTFinca.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jteDescripcionBuscarFincaKeyTyped
-  
+    }//GEN-LAST:event_jteDescripcionBuscarKeyTyped
+
+    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt)//GEN-FIRST:event_formInternalFrameClosing
+    {//GEN-HEADEREND:event_formInternalFrameClosing
+        btnFinca.setEnabled(true);
+    }//GEN-LAST:event_formInternalFrameClosing
 
     //Actualizar en las busquedas
     void buscarFiltro() throws SQLException, Exception
     {
-        String descripcion = jteDescripcionBuscarFinca.getText();
-        String localizacion = jteLocalizacionBuscarFinca.getText();
-        String nombre = jteNombreBuscarFinca.getText();
-        //select * from TPersonas WHERE Apellido1 LIKE '
-        this.jtbFinca = utils.Utilidades.rellenarJTable(
+        String descripcion = jteDescripcionBuscar.getText();
+        String localizacion = jteLocalizacionBuscar.getText();
+        String nombre = jteNombreBuscar.getText();
+        this.jtbFinca = utils.UtilisSql.rellenarJTable(
                 "SELECT * FROM TFinca WHERE Nombre LIKE \'%" + nombre
                 + "%\' AND Localizacion LIKE \'%" + localizacion
                 + "%\' AND Descripcion LIKE \'%" + descripcion + "%\' ;", jtbFinca);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAltaFinca;
-    private javax.swing.JButton btnEliminarFinca;
-    private javax.swing.JButton btnModificarFinca;
+    private javax.swing.JButton btnAlta;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtbFinca;
-    private javax.swing.JTextField jteDescripcionBuscarFinca;
-    private javax.swing.JTextField jteLocalizacionBuscarFinca;
-    private javax.swing.JTextField jteNombreBuscarFinca;
+    private javax.swing.JTextField jteDescripcionBuscar;
+    private javax.swing.JTextField jteLocalizacionBuscar;
+    private javax.swing.JTextField jteNombreBuscar;
     // End of variables declaration//GEN-END:variables
 }
