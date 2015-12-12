@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,10 +16,8 @@ public class InternalTTipo extends javax.swing.JInternalFrame
 {
 
     JButton btnTipo;
+    JLabel lblTipo;
 
-    /**
-     * Creates new form InternalTTipo
-     */
     public InternalTTipo(JButton btnTipo) throws ClassNotFoundException, SQLException, Exception
     {
         initComponents();
@@ -28,6 +27,21 @@ public class InternalTTipo extends javax.swing.JInternalFrame
         btnAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_01.png")));
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_02.png")));
         btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_03.png")));
+        btnSelecionar.setEnabled(false);
+    }
+
+    public InternalTTipo(JLabel lblTipo) throws ClassNotFoundException, SQLException, Exception
+    {
+        initComponents();
+        this.jtbTipo = utils.UtilisSql.rellenarJTable("SELECT * FROM TTipo;", jtbTipo);
+        this.lblTipo = lblTipo;
+        //Imagenes
+        btnAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_01.png")));
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_02.png")));
+        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_03.png")));
+        btnAlta.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnModificar.setEnabled(false);
     }
 
     /**
@@ -49,6 +63,7 @@ public class InternalTTipo extends javax.swing.JInternalFrame
         jtfNombreBuscar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jtfDescripcionBuscar = new javax.swing.JTextField();
+        btnSelecionar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -146,6 +161,15 @@ public class InternalTTipo extends javax.swing.JInternalFrame
             }
         });
 
+        btnSelecionar.setText("Selecionar");
+        btnSelecionar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnSelecionarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -159,22 +183,27 @@ public class InternalTTipo extends javax.swing.JInternalFrame
                         .addGap(18, 18, 18)
                         .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jtfNombreBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtfDescripcionBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jtfNombreBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtfDescripcionBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
@@ -182,11 +211,12 @@ public class InternalTTipo extends javax.swing.JInternalFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfNombreBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfDescripcionBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAlta)
                     .addComponent(btnModificar)
-                    .addComponent(btnEliminar))
+                    .addComponent(btnEliminar)
+                    .addComponent(btnSelecionar))
                 .addContainerGap())
         );
 
@@ -220,6 +250,7 @@ public class InternalTTipo extends javax.swing.JInternalFrame
             InternalNuevoTipo internal = new InternalNuevoTipo(jtbTipo, id);
             this.getParent().add(internal);
             internal.toFront();
+            utils.UtilsFrame.centrar(internal);
         } catch (Exception ex)
         {
             JOptionPane.showInternalMessageDialog(jtbTipo.getRootPane(), "Tiene que selecionar la fila a modificar");
@@ -228,7 +259,12 @@ public class InternalTTipo extends javax.swing.JInternalFrame
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt)//GEN-FIRST:event_formInternalFrameClosing
     {//GEN-HEADEREND:event_formInternalFrameClosing
-        btnTipo.setEnabled(true);
+        try
+        {
+            btnTipo.setEnabled(true);
+        } catch (Exception e)
+        {
+        }
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void jtfNombreBuscarKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfNombreBuscarKeyTyped
@@ -252,7 +288,15 @@ public class InternalTTipo extends javax.swing.JInternalFrame
             Logger.getLogger(InternalTTipo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jtfDescripcionBuscarKeyTyped
+
+    private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSelecionarActionPerformed
+    {//GEN-HEADEREND:event_btnSelecionarActionPerformed
+        lblTipo.setText(jtbTipo.getValueAt(jtbTipo.getSelectedRow(), 0)+"");
+        System.out.println("eee");
+        dispose();
+    }//GEN-LAST:event_btnSelecionarActionPerformed
     //Actualizar en las busquedas
+
     void buscarFiltro() throws SQLException, Exception
     {
         String nombre = jtfNombreBuscar.getText().toString();
@@ -267,6 +311,7 @@ public class InternalTTipo extends javax.swing.JInternalFrame
     private javax.swing.JButton btnAlta;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnSelecionar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

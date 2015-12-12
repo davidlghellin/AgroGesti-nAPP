@@ -1,10 +1,13 @@
 package gui.internal.nuevo;
 
 import conexion.ConexionBBDD;
+import gui.internal.InternalTFinca;
+import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,20 +32,21 @@ public class InternalNuevaParcela extends javax.swing.JInternalFrame
     {
         initComponents();
 
-        rellenarCombo();
+        //  rellenarCombo();
         modificar = false;
         this.jtbParcela = jtbParcela;
-        jtfIdParcela.setEditable(true);
+        jtfINombredParcela.setEditable(true);
     }
 
     public InternalNuevaParcela(javax.swing.JTable jtbParcela, String id)
     {
         initComponents();
-        modificar = false;
+        modificar = true;
         this.jtbParcela = jtbParcela;
         this.id = id;
-        jtfIdParcela.setEditable(false);
+        jtfINombredParcela.setEditable(false);
         rellenarCampos();
+        jtfINombredParcela.setBackground(new Color(200, 200, 200));
     }
 
     /**
@@ -60,11 +64,12 @@ public class InternalNuevaParcela extends javax.swing.JInternalFrame
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnAceptarNueva = new javax.swing.JButton();
-        jtfIdParcela = new javax.swing.JTextField();
-        jcbFinca = new javax.swing.JComboBox();
+        jtfINombredParcela = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaDescripcionNuevo = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
+        lblFinca = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
 
         setVisible(true);
 
@@ -97,6 +102,15 @@ public class InternalNuevaParcela extends javax.swing.JInternalFrame
             }
         });
 
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/lupa.png"))); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -116,8 +130,11 @@ public class InternalNuevaParcela extends javax.swing.JInternalFrame
                         .addGap(50, 50, 50)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jcbFinca, 0, 192, Short.MAX_VALUE)
-                            .addComponent(jtfIdParcela))))
+                            .addComponent(jtfINombredParcela)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblFinca, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                                .addComponent(btnBuscar)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -126,16 +143,17 @@ public class InternalNuevaParcela extends javax.swing.JInternalFrame
                 .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jtfIdParcela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jcbFinca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfINombredParcela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBuscar)
+                    .addComponent(lblFinca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptarNueva)
                     .addComponent(jButton2))
@@ -163,63 +181,89 @@ public class InternalNuevaParcela extends javax.swing.JInternalFrame
 
     private void btnAceptarNuevaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAceptarNuevaActionPerformed
     {//GEN-HEADEREND:event_btnAceptarNuevaActionPerformed
-        String NombreParcela = (String) jtfIdParcela.getText().toString();
-        String Descripcion = (String) jtaDescripcionNuevo.getText().toString();
-        String Finca = (String) jcbFinca.getSelectedItem();
+        String nombreParcela = (String) jtfINombredParcela.getText().toString();
+        String descripcion = (String) jtaDescripcionNuevo.getText().toString();
+        String finca = (String) lblFinca.getText().toString();
         ConexionBBDD c = null;
-        if (modificar)//modificar datos ==> distinto sql
+        if (nombreParcela.equals("") || descripcion.equals("") || finca.equals(""))
         {
-            try
-            {
-                c = new ConexionBBDD();
-                String SQL = "UPDATE TParcela SET IdFinca = \"" + Finca
-                        + "\", Descripcion =\"" + Descripcion
-                        + "\" WHERE IdParcela = \"" + NombreParcela + "\";";
-                c.hacerInsercion(SQL);
-                c.cerrarConexion();
-                jtbParcela = utils.UtilisSql.rellenarJTable("SELECT * FROM TParcela;", jtbParcela);
-            } catch (ClassNotFoundException ex)
-            {
-                Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex)
-            {
-                Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            JOptionPane.showMessageDialog(this.getParent(), "Tiene que insertar nombre y descripción y selecionar finca asociada");
         } else
         {
-            try
+            if (modificar)//modificar datos ==> distinto sql
             {
-                c = new ConexionBBDD();
+                try
+                {
+                    c = new ConexionBBDD();
+                    String SQL = "UPDATE TParcela SET IdFinca = \"" + finca
+                            + "\", Descripcion =\"" + descripcion
+                            + "\" WHERE IdParcela = \"" + id + "\";";
+                    c.hacerInsercion(SQL);
+                    c.cerrarConexion();
+                    jtbParcela = utils.UtilisSql.rellenarJTable("SELECT * FROM TParcela;", jtbParcela);
+                    dispose();
+                } catch (ClassNotFoundException ex)
+                {
+                    Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex)
+                {
+                    Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else
+            {
+                try
+                {
+                    c = new ConexionBBDD();
                 // String SQL = "INSERT INTO TParcela (IdParcela,IdFinca,Descripcion) VALUES (\""
-                //         + NombreParcela + "\",\"" + Finca + "\",\"" + Descripcion + "\")";
-                // System.out.println(SQL);
-                c.hacerInsercion("INSERT INTO TParcela (IdParcela,IdFinca,Descripcion) VALUES (\""
-                        + NombreParcela + "\",\"" + Finca + "\",\"" + Descripcion + "\")");
-                c.cerrarConexion();
-                jtbParcela = utils.UtilisSql.rellenarJTable("SELECT * FROM TParcela;", jtbParcela);
-            } catch (ClassNotFoundException ex)
-            {
-                Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex)
-            {
-                Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
+                    //         + NombreParcela + "\",\"" + Finca + "\",\"" + Descripcion + "\")";
+                    // System.out.println(SQL);
+                    c.hacerInsercion("INSERT INTO TParcela (IdParcela,IdFinca,Descripcion) VALUES (\""
+                            + nombreParcela + "\",\"" + finca + "\",\"" + descripcion + "\")");
+                    c.cerrarConexion();
+                    jtbParcela = utils.UtilisSql.rellenarJTable("SELECT * FROM TParcela;", jtbParcela);
+                    dispose();
+                } catch (ClassNotFoundException ex)
+                {
+                    Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex)
+                {
+                    Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
-        dispose();
+
     }//GEN-LAST:event_btnAceptarNuevaActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBuscarActionPerformed
+    {//GEN-HEADEREND:event_btnBuscarActionPerformed
+        try
+        {
+            InternalTFinca internal = new InternalTFinca(lblFinca);
+            this.getParent().add(internal);
+            internal.moveToFront();
+            utils.UtilsFrame.centrar(internal, 700, 400);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     void rellenarCampos()
     {
         try
         {
-            rellenarCombo();
+            //  rellenarCombo();
             ConexionBBDD c = new ConexionBBDD();
             String SQL = "SELECT * FROM TParcela WHERE IdParcela = \"" + id + "\";";
             ResultSet rs = c.hacerConsulta(SQL);
             rs.next();
 
-            jtfIdParcela.setText(rs.getString("IdFinca") + "");
+            jtfINombredParcela.setText(id);
             jtaDescripcionNuevo.setText(rs.getString("Descripcion"));
+            lblFinca.setText(rs.getString("IdFinca"));
 
             c.cerrarConexion();
         } catch (ClassNotFoundException ex)
@@ -234,43 +278,49 @@ public class InternalNuevaParcela extends javax.swing.JInternalFrame
         }
     }
 
-    void rellenarCombo()
-    {
-        try
-        {
-            conexion.ConexionBBDD c = new ConexionBBDD();
-            String SQL = "SELECT Nombre FROM TFinca";
-            ResultSet rs = c.hacerConsulta(SQL);
-            while (rs.next())
-            {
-                jcbFinca.addItem(rs.getString("Nombre"));
-            }
-            // jcbFinca.setSelectedIndex(3);
-            jcbFinca.getModel().setSelectedItem(id);
-            c.cerrarConexion();
-        } catch (ClassNotFoundException ex)
-        {
-            Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex)
-        {
-            Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex)
-        {
-            Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    /*  void rellenarCombo()
+     {
+     try
+     {
+     conexion.ConexionBBDD c = new ConexionBBDD();
+     String SQL = "SELECT Nombre FROM TFinca";
+     ResultSet rs = c.hacerConsulta(SQL);
+     while (rs.next())
+     {
+     jcbFinca.addItem(rs.getString("Nombre"));
+     }
 
-    }
+     String SQLConsulta = "SELECT IdFinca FROM TParcela WHERE IdParcela = \"" + id + "\";";
+     System.out.println(SQLConsulta);
+     ResultSet rsSQLConsulta = c.hacerConsulta(SQLConsulta);
+     rsSQLConsulta.next();
+     //jcbFinca.getModel().setSelectedItem(rsSQLConsulta.getString(1));
+
+     c.cerrarConexion();
+     } catch (ClassNotFoundException ex)
+     {
+     Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
+     } catch (SQLException ex)
+     {
+     Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
+     } catch (Exception ex)
+     {
+     Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
+     }
+
+     }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptarNueva;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox jcbFinca;
     private javax.swing.JTextArea jtaDescripcionNuevo;
-    private javax.swing.JTextField jtfIdParcela;
+    private javax.swing.JTextField jtfINombredParcela;
+    private javax.swing.JLabel lblFinca;
     // End of variables declaration//GEN-END:variables
 }

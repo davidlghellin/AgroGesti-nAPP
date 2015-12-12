@@ -1,10 +1,12 @@
 package gui.internal.nuevo;
 
 import conexion.ConexionBBDD;
+import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,6 +39,7 @@ public class InternalNuevoTipo extends javax.swing.JInternalFrame
         this.jtbTipo = jTable;
         this.id = id;
         jtfNombre.setEditable(false);
+        jtfNombre.setBackground(new Color(200, 200, 200));
         rellenarCampo();
     }
 
@@ -143,45 +146,50 @@ public class InternalNuevoTipo extends javax.swing.JInternalFrame
 
     private void btnAceptarNuevaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAceptarNuevaActionPerformed
     {//GEN-HEADEREND:event_btnAceptarNuevaActionPerformed
-        if (modificar)//modificar datos ==> distinto sql
+        String nombre = jtfNombre.getText().toString();
+        String descripcion = jtaDescripcion.getText().toString();
+        if (nombre.equals("") || descripcion.equals(""))
         {
-            try
-            {
-                String nombre = jtfNombre.getText().toString();
-                String descripcion = jtaDescripcion.getText().toString();
-                ConexionBBDD c = null;
-                c = new ConexionBBDD();
-                String SQL = "UPDATE TTipo SET Descripcion = \"" + descripcion
-                        + "\" WHERE Nombre = \"" + nombre + "\";";
-                System.out.println(SQL);
-                c.hacerInsercion(SQL);
-                dispose();
-                utils.UtilisSql.actualizarJtable(jtbTipo, "TTipo");
-            } catch (ClassNotFoundException ex)
-            {
-                Logger.getLogger(InternalNuevoTipo.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex)
-            {
-                Logger.getLogger(InternalNuevoTipo.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            JOptionPane.showMessageDialog(this.getParent(), "Tiene que introducir nombre y descripción");
         } else
         {
-            try
+            if (modificar)//modificar datos ==> distinto sql
             {
-                String nombre = jtfNombre.getText().toString();
-                String descripcion = jtaDescripcion.getText().toString();
-                ConexionBBDD c = null;
-                c = new ConexionBBDD();
-                String SQL = "INSERT INTO TTipo (Nombre,Descripcion) VALUES (\"" + nombre + "\",\"" + descripcion + "\")";
-                c.hacerInsercion(SQL);
-                dispose();
-                utils.UtilisSql.actualizarJtable(jtbTipo, "TTipo");
-            } catch (ClassNotFoundException ex)
+                try
+                {
+
+                    ConexionBBDD c = null;
+                    c = new ConexionBBDD();
+                    String SQL = "UPDATE TTipo SET Descripcion = \"" + descripcion
+                            + "\" WHERE Nombre = \"" + nombre + "\";";
+                    System.out.println(SQL);
+                    c.hacerInsercion(SQL);
+                    dispose();
+                    utils.UtilisSql.actualizarJtable(jtbTipo, "TTipo");
+                } catch (ClassNotFoundException ex)
+                {
+                    Logger.getLogger(InternalNuevoTipo.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex)
+                {
+                    Logger.getLogger(InternalNuevoTipo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else
             {
-                Logger.getLogger(InternalNuevoTipo.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex)
-            {
-                Logger.getLogger(InternalNuevoTipo.class.getName()).log(Level.SEVERE, null, ex);
+                try
+                {
+                    ConexionBBDD c = null;
+                    c = new ConexionBBDD();
+                    String SQL = "INSERT INTO TTipo (Nombre,Descripcion) VALUES (\"" + nombre + "\",\"" + descripcion + "\")";
+                    c.hacerInsercion(SQL);
+                    dispose();
+                    utils.UtilisSql.actualizarJtable(jtbTipo, "TTipo");
+                } catch (ClassNotFoundException ex)
+                {
+                    Logger.getLogger(InternalNuevoTipo.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex)
+                {
+                    Logger.getLogger(InternalNuevoTipo.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }//GEN-LAST:event_btnAceptarNuevaActionPerformed

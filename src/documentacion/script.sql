@@ -79,7 +79,7 @@ CREATE TABLE TGastosManoObra
     Categoria       INT             NOT NULL,
     DNI             VARCHAR(10)     NOT NULL,
     Tipo            ENUM('Horas','Dias') NOT NULL DEFAULT 'Dias',
-    CantidadTipo    INT             ,
+    CantidadTipo    FLOAT             ,
     PrecioTipo      FLOAT           ,
     Total           FLOAT           NOT NULL,
     Descripcion     VARCHAR(300)    NOT NULL,

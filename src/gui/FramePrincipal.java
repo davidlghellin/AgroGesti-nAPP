@@ -26,6 +26,7 @@ public class FramePrincipal extends javax.swing.JFrame
     // Variables para controlar los parámetros de alto y ancho de los JInternalFrame con los que se trabajará
 
     static final int ANCHO_INTERNAL = 700;
+    static final int ANCHO_INTERNAL_GRANDE = 1000;
     static final int ALTO_INTERNAL = 400;
 
     public FramePrincipal()
@@ -387,7 +388,7 @@ public class FramePrincipal extends javax.swing.JFrame
             InternalTIngresoVenta internal = new InternalTIngresoVenta(btnIngresoVenta);
             jdpPrincipal.add(internal);
             btnIngresoVenta.setEnabled(false);
-            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
+            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL_GRANDE, ALTO_INTERNAL);
         } catch (ClassNotFoundException ex)
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -407,7 +408,7 @@ public class FramePrincipal extends javax.swing.JFrame
             InternalTIngresoOtro internal = new InternalTIngresoOtro(btnIngresoOtro);
             jdpPrincipal.add(internal);
             btnIngresoOtro.setEnabled(false);
-            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
+            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL_GRANDE, ALTO_INTERNAL);
         } catch (Exception ex)
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -436,7 +437,7 @@ public class FramePrincipal extends javax.swing.JFrame
             InternalTGastoManoObra internal = new InternalTGastoManoObra(btnGastosManoObra);
             jdpPrincipal.add(internal);
             btnGastosManoObra.setEnabled(false);
-            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
+            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL_GRANDE, ALTO_INTERNAL);
         } catch (Exception ex)
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -450,7 +451,7 @@ public class FramePrincipal extends javax.swing.JFrame
             InternalTGastoProducto internal = new InternalTGastoProducto(btnGastoProducto);
             jdpPrincipal.add(internal);
             btnGastoProducto.setEnabled(false);
-            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
+            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL_GRANDE, ALTO_INTERNAL);
         } catch (Exception ex)
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -464,7 +465,7 @@ public class FramePrincipal extends javax.swing.JFrame
             InternalTGastoOtro internal = new InternalTGastoOtro(btnGastoOtros);
             jdpPrincipal.add(internal);
             btnGastoOtros.setEnabled(false);
-            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL, ALTO_INTERNAL);
+            utils.UtilsFrame.centrar(internal, ANCHO_INTERNAL_GRANDE, ALTO_INTERNAL);
         } catch (Exception ex)
         {
             Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);

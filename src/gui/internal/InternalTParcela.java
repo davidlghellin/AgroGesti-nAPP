@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,19 +15,36 @@ import javax.swing.JOptionPane;
  */
 public class InternalTParcela extends javax.swing.JInternalFrame
 {
-JButton btnParcela;
+
+    JButton btnParcela;
+JLabel lblParcela;
     /**
      * Creates new form InternalTParcela
      */
     public InternalTParcela(JButton btnParcela) throws ClassNotFoundException, SQLException, Exception
     {
         initComponents();
-        this.btnParcela=btnParcela;
+        this.btnParcela = btnParcela;
         this.jtbParcela = utils.UtilisSql.rellenarJTable("SELECT * FROM TParcela;", jtbParcela);
         //Imagenes
         btnAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_01.png")));
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_02.png")));
         btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_03.png")));
+        btnSelecionar.setEnabled(false);
+    }
+
+    public InternalTParcela(JLabel lblParcela) throws ClassNotFoundException, SQLException, Exception
+    {
+        initComponents();
+        this.jtbParcela = utils.UtilisSql.rellenarJTable("SELECT * FROM TParcela;", jtbParcela);
+        //Imagenes
+        btnAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_01.png")));
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_02.png")));
+        btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_03.png")));
+        btnAlta.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnModificar.setEnabled(false);
+        this.lblParcela=lblParcela;
     }
 
     /**
@@ -51,6 +69,7 @@ JButton btnParcela;
         jtfParcelaBuscar = new javax.swing.JTextField();
         jtfFincaBuscar = new javax.swing.JTextField();
         jtfDescripcionBuscar = new javax.swing.JTextField();
+        btnSelecionar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -156,6 +175,15 @@ JButton btnParcela;
             }
         });
 
+        btnSelecionar.setText("Seleccionar parcela");
+        btnSelecionar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnSelecionarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -168,25 +196,27 @@ JButton btnParcela;
                         .addGap(18, 18, 18)
                         .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSelecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfParcelaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jtfParcelaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfFincaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jtfFincaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfDescripcionBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(233, Short.MAX_VALUE))
+                        .addComponent(jtfDescripcionBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
@@ -196,11 +226,12 @@ JButton btnParcela;
                     .addComponent(jtfParcelaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfFincaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfDescripcionBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAlta)
                     .addComponent(btnModificar)
-                    .addComponent(btnEliminar))
+                    .addComponent(btnEliminar)
+                    .addComponent(btnSelecionar))
                 .addContainerGap())
         );
 
@@ -214,9 +245,9 @@ JButton btnParcela;
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -238,6 +269,7 @@ JButton btnParcela;
             InternalNuevaParcela internal = new InternalNuevaParcela(jtbParcela, id);
             this.getParent().add(internal);
             internal.toFront();
+            utils.UtilsFrame.centrar(internal);
         } catch (Exception ex)
         {
             JOptionPane.showInternalMessageDialog(jtbParcela.getRootPane(), "Tiene que selecionar la fila a modificar");
@@ -257,41 +289,52 @@ JButton btnParcela;
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt)//GEN-FIRST:event_formInternalFrameClosing
     {//GEN-HEADEREND:event_formInternalFrameClosing
-        btnParcela.setEnabled(true);
+        try
+        {
+            btnParcela.setEnabled(true);
+        } catch (Exception e)
+        {/*nada*/
+        }
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void jtfParcelaBuscarKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfParcelaBuscarKeyTyped
     {//GEN-HEADEREND:event_jtfParcelaBuscarKeyTyped
-       try
-    {
-        buscarFiltro();
-    } catch (Exception ex)
-    {
-        Logger.getLogger(InternalTParcela.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        try
+        {
+            buscarFiltro();
+        } catch (Exception ex)
+        {
+            Logger.getLogger(InternalTParcela.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jtfParcelaBuscarKeyTyped
 
     private void jtfFincaBuscarKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfFincaBuscarKeyTyped
     {//GEN-HEADEREND:event_jtfFincaBuscarKeyTyped
-       try
-    {
-        buscarFiltro();
-    } catch (Exception ex)
-    {
-        Logger.getLogger(InternalTParcela.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        try
+        {
+            buscarFiltro();
+        } catch (Exception ex)
+        {
+            Logger.getLogger(InternalTParcela.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jtfFincaBuscarKeyTyped
 
     private void jtfDescripcionBuscarKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfDescripcionBuscarKeyTyped
     {//GEN-HEADEREND:event_jtfDescripcionBuscarKeyTyped
-    try
-    {
-        buscarFiltro();
-    } catch (Exception ex)
-    {
-        Logger.getLogger(InternalTParcela.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        try
+        {
+            buscarFiltro();
+        } catch (Exception ex)
+        {
+            Logger.getLogger(InternalTParcela.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jtfDescripcionBuscarKeyTyped
+
+    private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSelecionarActionPerformed
+    {//GEN-HEADEREND:event_btnSelecionarActionPerformed
+        lblParcela.setText(jtbParcela.getValueAt(jtbParcela.getSelectedRow(), 0)+"");
+        dispose();
+    }//GEN-LAST:event_btnSelecionarActionPerformed
 
     //Actualizar en las busquedas
     void buscarFiltro() throws SQLException, Exception
@@ -309,6 +352,7 @@ JButton btnParcela;
     private javax.swing.JButton btnAlta;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnSelecionar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

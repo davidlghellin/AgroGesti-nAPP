@@ -1,10 +1,14 @@
 package gui.internal.nuevo;
 
 import conexion.ConexionBBDD;
+import gui.internal.InternalTFinca;
+import gui.internal.InternalTTipo;
+import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 /**
@@ -18,14 +22,13 @@ public class InternalNuevaVariedad extends javax.swing.JInternalFrame
     String id;
     boolean modificar;
 
-   
     public InternalNuevaVariedad(JTable jt)
     {
         initComponents();
         modificar = false;
         jTable = jt;
         jtfNombre.setEditable(true);
-        rellenarCombo();
+        // rellenarCombo();
     }
 
     public InternalNuevaVariedad(JTable jt, String id)
@@ -33,14 +36,12 @@ public class InternalNuevaVariedad extends javax.swing.JInternalFrame
         initComponents();
         modificar = true;
         jTable = jt;
-        jtfNombre.setEditable(false);
         this.id = id;
-        rellenarCombo();
+        //   rellenarCombo();
         jtfNombre.setText(id);
-        // TODO no funciona
-        // XXX
-       jcbTipo.setSelectedIndex(3);
-          // jcbTipo.setSelectedItem(id);
+        jtfNombre.setEditable(false);
+        jtfNombre.setBackground(new Color(200, 200, 200));
+        rellenar();
     }
 
     /**
@@ -56,10 +57,11 @@ public class InternalNuevaVariedad extends javax.swing.JInternalFrame
         jPanel1 = new javax.swing.JPanel();
         btnCancelarVariedad = new javax.swing.JButton();
         btnAceptarVariedad = new javax.swing.JButton();
-        jcbTipo = new javax.swing.JComboBox();
         jtfNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        lblTipo = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
 
         setVisible(true);
 
@@ -85,6 +87,15 @@ public class InternalNuevaVariedad extends javax.swing.JInternalFrame
 
         jLabel1.setText("Nombre");
 
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/lupa.png"))); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -102,8 +113,11 @@ public class InternalNuevaVariedad extends javax.swing.JInternalFrame
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jcbTipo, 0, 259, Short.MAX_VALUE)
-                            .addComponent(jtfNombre))))
+                            .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(lblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnBuscar)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -113,11 +127,12 @@ public class InternalNuevaVariedad extends javax.swing.JInternalFrame
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(35, 35, 35)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptarVariedad)
                     .addComponent(btnCancelarVariedad))
@@ -140,65 +155,117 @@ public class InternalNuevaVariedad extends javax.swing.JInternalFrame
 
     private void btnAceptarVariedadActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAceptarVariedadActionPerformed
     {//GEN-HEADEREND:event_btnAceptarVariedadActionPerformed
-        String nombre = jtfNombre.getText().toString();
-        String tipo = (String) jcbTipo.getSelectedItem();
-
         ConexionBBDD c = null;
-        if (modificar)
+        String nombre = jtfNombre.getText().toString();
+        String tipo = lblTipo.getText().toString();
+        if (nombre.equals("") || tipo.equals(""))
         {
-            try
-            {
-                c = new ConexionBBDD();
-                String SQL = "UPDATE TVariedad SET IdTipo = \"" + tipo + "\" WHERE Nombre = \"" + id + "\";";
-                System.out.println(SQL);
-                c.hacerInsercion(SQL);
-                c.cerrarConexion();
-                utils.UtilisSql.actualizarJtable(jTable, "TVariedad");
-            } catch (ClassNotFoundException ex)
-            {
-                Logger.getLogger(InternalNuevaVariedad.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex)
-            {
-                Logger.getLogger(InternalNuevaVariedad.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            JOptionPane.showMessageDialog(this.getParent(),"Tiene que introducir nombre y seleccionar tipo");
         } else
         {
-            try
+            if (modificar)
             {
-                c = new ConexionBBDD();
-                String SQL = "INSERT INTO TVariedad (Nombre,IdTipo) VALUES (\"" + nombre + "\",\"" + tipo + "\");";
-                c.hacerInsercion(SQL);
-                c.cerrarConexion();
-                utils.UtilisSql.actualizarJtable(jTable, "TVariedad");
-            } catch (ClassNotFoundException ex)
+                try
+                {
+                    c = new ConexionBBDD();
+                    String SQL = "UPDATE TVariedad SET IdTipo = \"" + tipo + "\" WHERE Nombre = \"" + id + "\";";
+                    System.out.println(SQL);
+                    c.hacerInsercion(SQL);
+                    c.cerrarConexion();
+                    utils.UtilisSql.actualizarJtable(jTable, "TVariedad");
+                    dispose();
+                } catch (ClassNotFoundException ex)
+                {
+                    Logger.getLogger(InternalNuevaVariedad.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex)
+                {
+                    Logger.getLogger(InternalNuevaVariedad.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else
             {
-                Logger.getLogger(InternalNuevaVariedad.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex)
-            {
-                Logger.getLogger(InternalNuevaVariedad.class.getName()).log(Level.SEVERE, null, ex);
+                try
+                {
+                    c = new ConexionBBDD();
+                    String SQL = "INSERT INTO TVariedad (Nombre,IdTipo) VALUES (\"" + nombre + "\",\"" + tipo + "\");";
+                    c.hacerInsercion(SQL);
+                    c.cerrarConexion();
+                    utils.UtilisSql.actualizarJtable(jTable, "TVariedad");
+                    dispose();
+                } catch (ClassNotFoundException ex)
+                {
+                    Logger.getLogger(InternalNuevaVariedad.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex)
+                {
+                    Logger.getLogger(InternalNuevaVariedad.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
-        dispose();
+
     }//GEN-LAST:event_btnAceptarVariedadActionPerformed
 
     private void btnCancelarVariedadActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCancelarVariedadActionPerformed
     {//GEN-HEADEREND:event_btnCancelarVariedadActionPerformed
         dispose();
     }//GEN-LAST:event_btnCancelarVariedadActionPerformed
-    void rellenarCombo()
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBuscarActionPerformed
+    {//GEN-HEADEREND:event_btnBuscarActionPerformed
+        try
+        {
+            InternalTTipo internal = new InternalTTipo(lblTipo);
+            this.getParent().add(internal);
+            internal.moveToFront();
+            utils.UtilsFrame.centrar(internal, 700, 400);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(InternalNuevaVariedad.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(InternalNuevaVariedad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+    /*  void rellenarCombo()
+     {
+     try
+     {
+     conexion.ConexionBBDD c = new ConexionBBDD();
+     String SQL = "SELECT Nombre FROM TTipo";
+     ResultSet rs = c.hacerConsulta(SQL);
+     while (rs.next())
+     {
+     jcbTipo.addItem(rs.getString("Nombre"));
+     }
+     String SQLConsulta = "SELECT IdTipo FROM TVariedad WHERE Nombre = \"" + id + "\";";
+     System.out.println(SQLConsulta);
+     ResultSet rsSQLConsulta = c.hacerConsulta(SQLConsulta);
+     rsSQLConsulta.next();
+     jcbTipo.getModel().setSelectedItem(rsSQLConsulta.getString(1));
+
+     c.cerrarConexion();
+
+     } catch (ClassNotFoundException ex)
+     {
+     Logger.getLogger(InternalNuevaVariedad.class.getName()).log(Level.SEVERE, null, ex);
+     } catch (SQLException ex)
+     {
+     Logger.getLogger(InternalNuevaVariedad.class.getName()).log(Level.SEVERE, null, ex);
+     } catch (Exception ex)
+     {
+     Logger.getLogger(InternalNuevaVariedad.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     }*/
+
+    public void rellenar()
     {
         try
         {
             conexion.ConexionBBDD c = new ConexionBBDD();
-            String SQL = "SELECT Nombre FROM TTipo";
-            ResultSet rs = c.hacerConsulta(SQL);
-            while (rs.next())
-            {
-                jcbTipo.addItem(rs.getString("Nombre"));
-            }
-            jcbTipo.getModel().setSelectedItem(id);
+            String SQLConsulta = "SELECT IdTipo FROM TVariedad WHERE Nombre = \"" + id + "\";";
+            System.out.println(SQLConsulta);
+            ResultSet rs = c.hacerConsulta(SQLConsulta);
+            rs.next();
+            lblTipo.setText(rs.getString(1));
             c.cerrarConexion();
-           
         } catch (ClassNotFoundException ex)
         {
             Logger.getLogger(InternalNuevaVariedad.class.getName()).log(Level.SEVERE, null, ex);
@@ -209,15 +276,17 @@ public class InternalNuevaVariedad extends javax.swing.JInternalFrame
         {
             Logger.getLogger(InternalNuevaVariedad.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptarVariedad;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelarVariedad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JComboBox jcbTipo;
     private javax.swing.JTextField jtfNombre;
+    private javax.swing.JLabel lblTipo;
     // End of variables declaration//GEN-END:variables
 }

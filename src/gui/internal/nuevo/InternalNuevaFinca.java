@@ -40,34 +40,6 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
         rellenarCampos();
     }
 
-    public void rellenarCampos() throws SQLException, Exception
-    {
-        try
-        {
-            ConexionBBDD c = new ConexionBBDD();
-            String SQL = "SELECT * FROM TFinca WHERE Nombre = \"" + id + "\";";
-            System.out.println(SQL);
-            ResultSet rs = c.hacerConsulta(SQL);
-            System.out.println(rs + " =rs");
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int cantidadColumnas = rsmd.getColumnCount();
-            System.out.println(cantidadColumnas);
-            System.out.println(rsmd.getColumnName(1));
-            System.out.println(rsmd.getColumnName(2));
-            System.out.println(rsmd.getColumnName(3));
-            rs.next();
-            System.out.println(rs.getString(1).toString() + "");
-
-            jtfNombreFinca.setText(rs.getString("Nombre") + "");
-            jtfLocalizacionFinca.setText(rs.getString("Localizacion") + "");
-            jtfDescripcionFinca.setText(rs.getString("Descripcion") + "");
-            c.cerrarConexion();
-        } catch (ClassNotFoundException ex)
-        {
-            Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents()
@@ -354,7 +326,33 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
          //X=300 e Y=600.
          robot.mouseMove(this.getParent().getWidth()/2,this.getParent().getHeight()/2 );*/
     }//GEN-LAST:event_formMouseExited
+    public void rellenarCampos() throws SQLException, Exception
+    {
+        try
+        {
+            ConexionBBDD c = new ConexionBBDD();
+            String SQL = "SELECT * FROM TFinca WHERE Nombre = \"" + id + "\";";
+            System.out.println(SQL);
+            ResultSet rs = c.hacerConsulta(SQL);
+            System.out.println(rs + " =rs");
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int cantidadColumnas = rsmd.getColumnCount();
+            System.out.println(cantidadColumnas);
+            System.out.println(rsmd.getColumnName(1));
+            System.out.println(rsmd.getColumnName(2));
+            System.out.println(rsmd.getColumnName(3));
+            rs.next();
+            System.out.println(rs.getString(1).toString() + "");
 
+            jtfNombreFinca.setText(rs.getString("Nombre") + "");
+            jtfLocalizacionFinca.setText(rs.getString("Localizacion") + "");
+            jtfDescripcionFinca.setText(rs.getString("Descripcion") + "");
+            c.cerrarConexion();
+        } catch (ClassNotFoundException ex)
+        {
+            Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptarNuevaFinca;

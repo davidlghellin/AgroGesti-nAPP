@@ -1,6 +1,7 @@
 package gui.internal.nuevo;
 
 import conexion.ConexionBBDD;
+import gui.internal.InternalTCultivar;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -27,10 +28,6 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
             initComponents();
             this.jtable = jtb;
             modificar = false;
-            rellenarCombo();
-        } catch (SQLException ex)
-        {
-            Logger.getLogger(InternalNuevoIngresoVenta.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex)
         {
             Logger.getLogger(InternalNuevoIngresoVenta.class.getName()).log(Level.SEVERE, null, ex);
@@ -75,10 +72,11 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
         jtfId = new javax.swing.JTextField();
         dateIngreso = new com.toedter.calendar.JDateChooser();
         jtfCliente = new javax.swing.JTextField();
-        jcbCultivar = new javax.swing.JComboBox();
         jtfPrecioUnidad = new javax.swing.JTextField();
         jtfCantidad = new javax.swing.JTextField();
         jtfTotal = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        lblCultivar = new javax.swing.JLabel();
 
         setVisible(true);
 
@@ -115,14 +113,7 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
         jLabel7.setText("Cultivar");
 
         jtfId.setEditable(false);
-
-        jcbCultivar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jcbCultivarActionPerformed(evt);
-            }
-        });
+        jtfId.setBackground(new java.awt.Color(200, 200, 200));
 
         jtfPrecioUnidad.addFocusListener(new java.awt.event.FocusAdapter()
         {
@@ -137,6 +128,15 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
             public void focusLost(java.awt.event.FocusEvent evt)
             {
                 jtfCantidadFocusLost(evt);
+            }
+        });
+
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/lupa.png"))); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -157,7 +157,7 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(98, 98, 98)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dateIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dateIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                             .addComponent(jtfId)
                             .addComponent(jtfCliente)
                             .addComponent(jtfPrecioUnidad)
@@ -172,8 +172,12 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
                                 .addGap(98, 98, 98)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfTotal)
-                            .addComponent(jcbCultivar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(lblCultivar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBuscar)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -203,10 +207,15 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addComponent(jtfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7)
-                    .addComponent(jcbCultivar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(lblCultivar, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
@@ -228,11 +237,6 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jcbCultivarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jcbCultivarActionPerformed
-    {//GEN-HEADEREND:event_jcbCultivarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbCultivarActionPerformed
-
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCancelarActionPerformed
     {//GEN-HEADEREND:event_btnCancelarActionPerformed
         dispose();
@@ -241,85 +245,104 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAceptarActionPerformed
     {//GEN-HEADEREND:event_btnAceptarActionPerformed
         ConexionBBDD c = null;
-        String fecha = null, nombre = null;
-        float precioUnidad = 0, cantidad = 0, total = 0;
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        String fecha = null;
+        String nombre = null;
+        float precioUnidad = 0;
+        float cantidad = 0;
+        float total = 0;
         int idCultivar = 0;
-        if (modificar) //se modifican datos
+        boolean error = false;
+        try
         {
-
-            try
+            fecha = formatoFecha.format(dateIngreso.getDate());
+            nombre = jtfCliente.getText().toString();
+            precioUnidad = Float.parseFloat(jtfPrecioUnidad.getText().toString());
+            cantidad = Float.parseFloat(jtfCantidad.getText().toString());
+            // total = 0;
+            idCultivar = Integer.parseInt(lblCultivar.getText().toString());
+        } catch (Exception e)
+        {
+            error = true;
+            JOptionPane.showMessageDialog(this.getParent(), "Tiene que rellenar todos los campos, recuerde que total es calculado");
+        }
+        if (!error)
+        {
+            if (modificar) //se modifican datos
             {
-                c = new ConexionBBDD();
-                SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-                fecha = formatoFecha.format(dateIngreso.getDate());
-                nombre = jtfCliente.getText().toString();
-                precioUnidad = Float.parseFloat(jtfPrecioUnidad.getText().toString());
-                cantidad = Float.parseFloat(jtfCantidad.getText().toString());
-                if (!jtfPrecioUnidad.getText().toString().equals("") && !jtfCantidad.getText().toString().equals(""))
+
+                try
                 {
-                    total = precioUnidad * cantidad;
-                } else
+                    c = new ConexionBBDD();
+
+                //fecha = formatoFecha.format(dateIngreso.getDate());
+                    //  precioUnidad = Float.parseFloat(jtfPrecioUnidad.getText().toString());
+                    // cantidad = Float.parseFloat(jtfCantidad.getText().toString());
+                    if (!jtfPrecioUnidad.getText().toString().equals("") && !jtfCantidad.getText().toString().equals(""))
+                    {
+                        total = precioUnidad * cantidad;
+                    } else
+                    {
+                        total = Float.parseFloat(jtfTotal.getText().toString());
+                    }
+                    // idCultivar = Integer.parseInt(lblCultivar.getText().toString());
+                    String SQL = "UPDATE TIngresoVenta SET Fecha = \'" + fecha
+                            + "\', NombreCliente = \"" + nombre + "\", PrecioUnidad = \""
+                            + precioUnidad + "\", Cantidad = \"" + cantidad + "\", Total = \""
+                            + total + "\", IdCultivar = \"" + idCultivar + "\" WHERE Id = \"" + id + "\";";
+                    System.out.println(SQL);
+                    c.hacerInsercion(SQL);
+                    c.cerrarConexion();
+                    dispose();
+                    utils.UtilisSql.actualizarJtable(jtable, "TIngresoVenta");
+                } catch (Exception ex)
                 {
-                    total = Float.parseFloat(jtfTotal.getText().toString());
+                    JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Debe introducir todos los datos, use \'.\' para los decimales");
+                    Logger.getLogger(InternalNuevoIngresoVenta.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                idCultivar = Integer.parseInt(jcbCultivar.getSelectedItem().toString());
-                String SQL = "UPDATE TIngresoVenta SET Fecha = \'" + fecha
-                        + "\', NombreCliente = \"" + nombre + "\", PrecioUnidad = \""
-                        + precioUnidad + "\", Cantidad = \"" + cantidad + "\", Total = \""
-                        + total + "\", IdCultivar = \"" + idCultivar + "\" WHERE Id = \"" + id + "\";";
+
+            } else// nueva alta
+            {
+
+                try
+                {
+                // fecha = formatoFecha.format(dateIngreso.getDate());
+                    //nombre = jtfCliente.getText().toString();
+                    // precioUnidad = Float.parseFloat(jtfPrecioUnidad.getText().toString());
+                    // cantidad = Float.parseFloat(jtfCantidad.getText().toString());
+                    if (!jtfPrecioUnidad.getText().toString().equals("") && !jtfCantidad.getText().toString().equals(""))
+                    {
+                        total = precioUnidad * cantidad;
+                    } else
+                    {
+                        total = Float.parseFloat(jtfTotal.getText().toString());
+                    }
+                    //idCultivar = Integer.parseInt(lblCultivar.getText().toString());
+                } catch (Exception ex)
+                {
+                    JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Debe introducir todos los datos, use \'.\' para los decimales");
+                }
+                String SQL = "INSERT INTO TIngresoVenta (Fecha,NombreCliente,PrecioUnidad,Cantidad,Total,IdCultivar) \n"
+                        + "    VALUES (\'" + fecha + "\',\"" + nombre + "\",\""
+                        + precioUnidad + "\",\"" + cantidad + "\",\"" + total + "\",\""
+                        + idCultivar + "\");";
                 System.out.println(SQL);
-                c.hacerInsercion(SQL);
-                c.cerrarConexion();
-                dispose();
-                utils.UtilisSql.actualizarJtable(jtable, "TIngresoVenta");
-            } catch (Exception ex)
-            {
-                JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Debe introducir todos los datos, use \'.\' para los decimales");
-                Logger.getLogger(InternalNuevoIngresoVenta.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } else// nueva alta
-        {
-
-            try
-            {
-                SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-                fecha = formatoFecha.format(dateIngreso.getDate());
-                nombre = jtfCliente.getText().toString();
-                precioUnidad = Float.parseFloat(jtfPrecioUnidad.getText().toString());
-                cantidad = Float.parseFloat(jtfCantidad.getText().toString());
-                if (!jtfPrecioUnidad.getText().toString().equals("") && !jtfCantidad.getText().toString().equals(""))
+                try
                 {
-                    total = precioUnidad * cantidad;
-                } else
+                    c = new ConexionBBDD();
+                    c.hacerInsercion(SQL);
+                    c.cerrarConexion();
+                    dispose();
+                    utils.UtilisSql.actualizarJtable(jtable, "TIngresoVenta");
+                } catch (ClassNotFoundException ex)
                 {
-                    total = Float.parseFloat(jtfTotal.getText().toString());
+                    Logger.getLogger(InternalNuevoIngresoVenta.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex)
+                {
+                    Logger.getLogger(InternalNuevoIngresoVenta.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                idCultivar = Integer.parseInt(jcbCultivar.getSelectedItem().toString());
-            } catch (Exception ex)
-            {
-                JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Debe introducir todos los datos, use \'.\' para los decimales");
-            }
-            String SQL = "INSERT INTO TIngresoVenta (Fecha,NombreCliente,PrecioUnidad,Cantidad,Total,IdCultivar) \n"
-                    + "    VALUES (\'" + fecha + "\',\"" + nombre + "\",\""
-                    + precioUnidad + "\",\"" + cantidad + "\",\"" + total + "\",\""
-                    + idCultivar + "\");";
-            System.out.println(SQL);
-            try
-            {
-                c = new ConexionBBDD();
-                c.hacerInsercion(SQL);
-                c.cerrarConexion();
-                dispose();
-                utils.UtilisSql.actualizarJtable(jtable, "TIngresoVenta");
-            } catch (ClassNotFoundException ex)
-            {
-                Logger.getLogger(InternalNuevoIngresoVenta.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex)
-            {
-                Logger.getLogger(InternalNuevoIngresoVenta.class.getName()).log(Level.SEVERE, null, ex);
-            }
 
+            }
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
@@ -338,23 +361,42 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
             jtfTotal.setText(Float.parseFloat(jtfPrecioUnidad.getText().toString()) * Float.parseFloat(jtfCantidad.getText().toString()) + "");
         }
     }//GEN-LAST:event_jtfPrecioUnidadFocusLost
-    void rellenarCombo() throws ClassNotFoundException, SQLException, Exception
-    {
-        ConexionBBDD c = new ConexionBBDD();
-        String SQL = "SELECT Id FROM TCultivar ORDER BY 1;";
-        ResultSet rs = c.hacerConsulta(SQL);
-        while (rs.next())
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnBuscarActionPerformed
+    {//GEN-HEADEREND:event_btnBuscarActionPerformed
+        try
         {
-            jcbCultivar.addItem(rs.getString(1));
+            InternalTCultivar internal = new InternalTCultivar(lblCultivar);
+            this.getParent().add(internal);
+            internal.toFront();
+            utils.UtilsFrame.centrar(internal, 800, 400);
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(InternalNuevoIngresoVenta.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(InternalNuevoIngresoVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
-        c.cerrarConexion();
-    }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+    /*  void rellenarCombo() throws ClassNotFoundException, SQLException, Exception
+     {
+     ConexionBBDD c = new ConexionBBDD();
+     String SQL = "SELECT Id,IdParcela FROM TCultivar ORDER BY 1;";
+     ResultSet rs = c.hacerConsulta(SQL);
+     while (rs.next())
+     {
+     jcbCultivar.addItem(rs.getString(1)+ " --> " +rs.getString(2));
+     }
+     // TODO
+     c.cerrarConexion();
+     }
+     */
 
     void rellenarCampos()
     {
         try
         {
-            rellenarCombo();
+            // rellenarCombo();
             ConexionBBDD c = new ConexionBBDD();
             String SQL = "SELECT * FROM TIngresoVenta WHERE Id = \"" + id + "\";";
             ResultSet rs = c.hacerConsulta(SQL);
@@ -366,6 +408,7 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
             jtfPrecioUnidad.setText(rs.getFloat("PrecioUnidad") + "");
             jtfCantidad.setText(rs.getFloat("Cantidad") + "");
             jtfTotal.setText(rs.getFloat("Total") + "");
+            lblCultivar.setText(rs.getString("IdCultivar"));
         } catch (SQLException ex)
         {
             Logger.getLogger(InternalNuevoIngresoVenta.class.getName()).log(Level.SEVERE, null, ex);
@@ -378,6 +421,7 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private com.toedter.calendar.JDateChooser dateIngreso;
     private javax.swing.JLabel jLabel1;
@@ -388,11 +432,11 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JComboBox jcbCultivar;
     private javax.swing.JTextField jtfCantidad;
     private javax.swing.JTextField jtfCliente;
     private javax.swing.JTextField jtfId;
     private javax.swing.JTextField jtfPrecioUnidad;
     private javax.swing.JTextField jtfTotal;
+    private javax.swing.JLabel lblCultivar;
     // End of variables declaration//GEN-END:variables
 }
