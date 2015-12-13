@@ -271,7 +271,12 @@ public class InternalTTrabajador extends javax.swing.JInternalFrame
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt)//GEN-FIRST:event_formInternalFrameClosing
     {//GEN-HEADEREND:event_formInternalFrameClosing
-        btnTrabajador.setEnabled(true);
+        try
+        {
+            btnTrabajador.setEnabled(true);
+        } catch (Exception e)
+        {
+        }
     }//GEN-LAST:event_formInternalFrameClosing
 
     private void jtfNombreBuscarKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfNombreBuscarKeyReleased
@@ -298,7 +303,7 @@ public class InternalTTrabajador extends javax.swing.JInternalFrame
 
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSeleccionarActionPerformed
     {//GEN-HEADEREND:event_btnSeleccionarActionPerformed
-        lblTrabajador.setText(jtbTrabajador.getValueAt(jtbTrabajador.getSelectedRow(), 0)+"");
+        lblTrabajador.setText(jtbTrabajador.getValueAt(jtbTrabajador.getSelectedRow(), 0) + "");
         dispose();
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 

@@ -1,6 +1,7 @@
 package gui.internal.nuevo;
 
 import conexion.ConexionBBDD;
+import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -34,6 +35,7 @@ public class InternalNuevoTrabajador extends javax.swing.JInternalFrame
         jTable = jt;
         this.id = id;
         jtfDNI.setEditable(false);
+        jtfDNI.setBackground(new Color(200,200,200));
         jtfDNI.setText(id);
         try
         {
