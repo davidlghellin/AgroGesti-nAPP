@@ -338,7 +338,9 @@ SELECT * FROM TIngresoOtro;
 ####################################
 INSERT INTO TTrabajador (DNI,Nombre) VALUES ("12345600J","Pepe");
 INSERT INTO TTrabajador (DNI,Nombre) VALUES ("53138898X","Andres");
-INSERT INTO TTrabajador (DNI,Nombre) VALUES ("78add64","Juean");
+INSERT INTO TTrabajador (DNI,Nombre) VALUES ("11223344T","Juan");
+INSERT INTO TTrabajador (DNI,Nombre) VALUES ("53149135R","David");
+INSERT INTO TTrabajador (DNI,Nombre) VALUES ("5146078K","Agustin");
 
 SELECT * FROM TTrabajador;  
 

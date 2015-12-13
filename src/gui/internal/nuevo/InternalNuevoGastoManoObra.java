@@ -82,9 +82,6 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
         lblCultivar = new javax.swing.JLabel();
 
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setVisible(true);
 
         jLabel1.setText("Fecha inicio");
@@ -130,6 +127,13 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
         jtaDescripcion.setColumns(20);
         jtaDescripcion.setLineWrap(true);
         jtaDescripcion.setRows(5);
+        jtaDescripcion.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jtaDescripcionKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtaDescripcion);
 
         btnBuscarDNI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/lupa.png"))); // NOI18N
@@ -402,6 +406,11 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
         }
 
     }//GEN-LAST:event_btnBuscarCultivarActionPerformed
+
+    private void jtaDescripcionKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtaDescripcionKeyTyped
+    {//GEN-HEADEREND:event_jtaDescripcionKeyTyped
+       utils.UtilsTamanyo.maxTamanyo( jtaDescripcion, 300);
+    }//GEN-LAST:event_jtaDescripcionKeyTyped
     public void rellenarCampos() throws SQLException, Exception
     {
         try

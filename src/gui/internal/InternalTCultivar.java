@@ -312,11 +312,18 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnModificarActionPerformed
     {//GEN-HEADEREND:event_btnModificarActionPerformed
-        int id = (int) jtbCultivar.getValueAt(jtbCultivar.getSelectedRow(), 0);
-        InternalNuevoCultivar internal = new InternalNuevoCultivar(jtbCultivar, id);
-        this.getParent().add(internal);
-        internal.toFront();
-        utils.UtilsFrame.centrar(internal);
+        try
+        {
+            int id = (int) jtbCultivar.getValueAt(jtbCultivar.getSelectedRow(), 0);
+            InternalNuevoCultivar internal = new InternalNuevoCultivar(jtbCultivar, id);
+            this.getParent().add(internal);
+            internal.toFront();
+            utils.UtilsFrame.centrar(internal);
+        } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(this.getParent(), "Selecione la fila a modificar");
+            Logger.getLogger(InternalTCultivar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt)//GEN-FIRST:event_formInternalFrameClosing

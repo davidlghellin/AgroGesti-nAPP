@@ -65,9 +65,6 @@ public class InternalNuevoCultivar extends javax.swing.JInternalFrame
         btnBuscarParcela = new javax.swing.JButton();
 
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setVisible(true);
 
         btnAceptar.setText("Aceptar");

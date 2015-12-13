@@ -65,12 +65,17 @@ public class InternalNuevoGastoProducto extends javax.swing.JInternalFrame
         lblCultivar = new javax.swing.JLabel();
 
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setVisible(true);
 
         jLabel1.setText("Fecha factura");
+
+        jtfProveedor.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jtfProveedorKeyTyped(evt);
+            }
+        });
 
         jLabel2.setText("Proveedor");
 
@@ -79,6 +84,13 @@ public class InternalNuevoGastoProducto extends javax.swing.JInternalFrame
         jtaDescripcion.setColumns(20);
         jtaDescripcion.setLineWrap(true);
         jtaDescripcion.setRows(5);
+        jtaDescripcion.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jtaDescripcionKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtaDescripcion);
 
         jLabel4.setText("Cantidad");
@@ -234,7 +246,41 @@ public class InternalNuevoGastoProducto extends javax.swing.JInternalFrame
         boolean error = false;
         if (modificar)
         {
-
+            try
+            {
+                fecha = formatoFecha.format(dateFactura.getDate());
+                proveedor = jtfProveedor.getText().toString();
+                descripcion = jtaDescripcion.getText().toString();
+                cantidad = Float.parseFloat(jtfCantidad.getText().toString());
+                total = Float.parseFloat(jtfTotal.getText().toString());
+                idCultivar = Integer.parseInt(lblCultivar.getText().toString());
+            } catch (Exception ex)
+            {
+                JOptionPane.showInternalMessageDialog(this.getRootPane(), "Debe introducir todo los datos, los decimales son \'.\'");
+                Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
+                error = true;
+            }
+            if (!error) // Se ha producido un error y no debe cerrarse, ni lanzar la conexión a la BBDD
+            {
+                try
+                {
+                    String SQL = "UPDATE TGastoProducto  SET FechaFatura = \'"
+                            + fecha + "\',Proveedor = \"" + proveedor + "\",Descripcion = \""
+                            + descripcion + "\",Cantidad = \"" + cantidad + "\",Total = \""
+                            + total + "\",IdCultivar = \"" + idCultivar + "\" WHERE Id = \"" + id + "\";";
+                    ConexionBBDD c = new ConexionBBDD();
+                    c.hacerInsercion(SQL);
+                    c.cerrarConexion();
+                    dispose();
+                    utils.UtilisSql.actualizarJtable(jtbGastoProducto, "TGastoProducto");
+                } catch (ClassNotFoundException ex)
+                {
+                    Logger.getLogger(InternalNuevoGastoProducto.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex)
+                {
+                    Logger.getLogger(InternalNuevoGastoProducto.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         } else
         {
             try
@@ -251,7 +297,7 @@ public class InternalNuevoGastoProducto extends javax.swing.JInternalFrame
                 Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
                 error = true;
             }
-            if (!error)
+            if (!error) // Se ha producido un error y no debe cerrarse, ni lanzar la conexión a la BBDD
             {
                 try
                 {
@@ -273,6 +319,16 @@ public class InternalNuevoGastoProducto extends javax.swing.JInternalFrame
             }
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void jtfProveedorKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfProveedorKeyTyped
+    {//GEN-HEADEREND:event_jtfProveedorKeyTyped
+        utils.UtilsTamanyo.maxTamanyo(jtfProveedor, 20);
+    }//GEN-LAST:event_jtfProveedorKeyTyped
+
+    private void jtaDescripcionKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtaDescripcionKeyTyped
+    {//GEN-HEADEREND:event_jtaDescripcionKeyTyped
+        utils.UtilsTamanyo.maxTamanyo(jtaDescripcion, 100);
+    }//GEN-LAST:event_jtaDescripcionKeyTyped
     public void rellenar()
     {
         try

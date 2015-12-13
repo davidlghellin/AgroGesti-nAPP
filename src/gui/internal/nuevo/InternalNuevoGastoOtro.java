@@ -65,9 +65,6 @@ public class InternalNuevoGastoOtro extends javax.swing.JInternalFrame
         btnCancelar = new javax.swing.JButton();
 
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setVisible(true);
 
         jLabel1.setText("Fecha factura");
@@ -75,6 +72,13 @@ public class InternalNuevoGastoOtro extends javax.swing.JInternalFrame
         jtaDescripcion.setColumns(20);
         jtaDescripcion.setLineWrap(true);
         jtaDescripcion.setRows(5);
+        jtaDescripcion.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jtaDescripcionKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtaDescripcion);
 
         jLabel2.setText("Descripción");
@@ -198,7 +202,7 @@ public class InternalNuevoGastoOtro extends javax.swing.JInternalFrame
             if (!error)
             {
                 String SQL = "UPDATE TGastoOtro SET FechaFatura =\'" + fecha + "\', Descripcion = \""
-                        + descripcion + "\", Total = \"" + total + "\", IdCultivar = \"" 
+                        + descripcion + "\", Total = \"" + total + "\", IdCultivar = \""
                         + idCultivar + "\" WHERE Id = \"" + id + "\";";
                 System.out.println(SQL);
                 try
@@ -272,6 +276,11 @@ public class InternalNuevoGastoOtro extends javax.swing.JInternalFrame
             Logger.getLogger(InternalNuevoGastoOtro.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jtaDescripcionKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtaDescripcionKeyTyped
+    {//GEN-HEADEREND:event_jtaDescripcionKeyTyped
+        utils.UtilsTamanyo.maxTamanyo(jtaDescripcion, 100);
+    }//GEN-LAST:event_jtaDescripcionKeyTyped
     public void rellenar()
     {
         try

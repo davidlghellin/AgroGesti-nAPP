@@ -246,10 +246,18 @@ public class InternalTVariedad extends javax.swing.JInternalFrame
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnModificarActionPerformed
     {//GEN-HEADEREND:event_btnModificarActionPerformed
-        String id = (String) jtbProducto.getValueAt(jtbProducto.getSelectedRow(), 0);
-        InternalNuevaVariedad internal = new InternalNuevaVariedad(jtbProducto, id);
-        this.getParent().add(internal);
-        internal.toFront();
+        try
+        {
+            String id = (String) jtbProducto.getValueAt(jtbProducto.getSelectedRow(), 0);
+            InternalNuevaVariedad internal = new InternalNuevaVariedad(jtbProducto, id);
+            this.getParent().add(internal);
+            internal.toFront();
+            utils.UtilsFrame.centrar(internal);
+        } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(this.getParent(), "Selecione la fila a modificar");
+            Logger.getLogger(InternalTVariedad.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt)//GEN-FIRST:event_formInternalFrameClosing
@@ -286,7 +294,7 @@ public class InternalTVariedad extends javax.swing.JInternalFrame
 
     private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSelecionarActionPerformed
     {//GEN-HEADEREND:event_btnSelecionarActionPerformed
-        lblVariedad.setText(jtbProducto.getValueAt(jtbProducto.getSelectedRow(), 0)+"");
+        lblVariedad.setText(jtbProducto.getValueAt(jtbProducto.getSelectedRow(), 0) + "");
         System.out.println("eee");
         dispose();
     }//GEN-LAST:event_btnSelecionarActionPerformed

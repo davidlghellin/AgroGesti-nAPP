@@ -78,6 +78,7 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
         btnBuscar = new javax.swing.JButton();
         lblCultivar = new javax.swing.JLabel();
 
+        setClosable(true);
         setVisible(true);
 
         jLabel1.setText("Identificador");
@@ -114,6 +115,14 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
 
         jtfId.setEditable(false);
         jtfId.setBackground(new java.awt.Color(200, 200, 200));
+
+        jtfCliente.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jtfClienteKeyTyped(evt);
+            }
+        });
 
         jtfPrecioUnidad.addFocusListener(new java.awt.event.FocusAdapter()
         {
@@ -275,7 +284,7 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
                 {
                     c = new ConexionBBDD();
 
-                //fecha = formatoFecha.format(dateIngreso.getDate());
+                    //fecha = formatoFecha.format(dateIngreso.getDate());
                     //  precioUnidad = Float.parseFloat(jtfPrecioUnidad.getText().toString());
                     // cantidad = Float.parseFloat(jtfCantidad.getText().toString());
                     if (!jtfPrecioUnidad.getText().toString().equals("") && !jtfCantidad.getText().toString().equals(""))
@@ -306,7 +315,7 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
 
                 try
                 {
-                // fecha = formatoFecha.format(dateIngreso.getDate());
+                    // fecha = formatoFecha.format(dateIngreso.getDate());
                     //nombre = jtfCliente.getText().toString();
                     // precioUnidad = Float.parseFloat(jtfPrecioUnidad.getText().toString());
                     // cantidad = Float.parseFloat(jtfCantidad.getText().toString());
@@ -378,6 +387,11 @@ public class InternalNuevoIngresoVenta extends javax.swing.JInternalFrame
             Logger.getLogger(InternalNuevoIngresoVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void jtfClienteKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfClienteKeyTyped
+    {//GEN-HEADEREND:event_jtfClienteKeyTyped
+        utils.UtilsTamanyo.maxTamanyo(jtfCliente, 20);
+    }//GEN-LAST:event_jtfClienteKeyTyped
     /*  void rellenarCombo() throws ClassNotFoundException, SQLException, Exception
      {
      ConexionBBDD c = new ConexionBBDD();

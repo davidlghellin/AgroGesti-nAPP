@@ -284,6 +284,7 @@ public class InternalTFinca extends javax.swing.JInternalFrame
             InternalNuevaFinca internal = new InternalNuevaFinca(jtbFinca, id);
             this.getParent().add(internal);
             internal.toFront();
+            utils.UtilsFrame.centrar(internal);
         } catch (Exception ex)
         {
             JOptionPane.showInternalMessageDialog(jtbFinca.getRootPane(), "Tiene que selecionar la fila a modificar");
@@ -374,8 +375,8 @@ public class InternalTFinca extends javax.swing.JInternalFrame
 
     private void btnSelecionarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnSelecionarActionPerformed
     {//GEN-HEADEREND:event_btnSelecionarActionPerformed
-       lblFinca.setText(jtbFinca.getValueAt(jtbFinca.getSelectedRow(), 0)+"");
-       dispose();
+        lblFinca.setText(jtbFinca.getValueAt(jtbFinca.getSelectedRow(), 0) + "");
+        dispose();
     }//GEN-LAST:event_btnSelecionarActionPerformed
 
     //Actualizar en las busquedas

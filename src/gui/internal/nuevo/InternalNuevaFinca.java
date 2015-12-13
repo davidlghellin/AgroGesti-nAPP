@@ -1,10 +1,7 @@
 package gui.internal.nuevo;
 
 import conexion.ConexionBBDD;
-import java.awt.AWTException;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.Robot;
+import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -37,6 +34,7 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
         this.id = id;
         this.jtbFinca = jtbFinca;
         jtfNombreFinca.setEditable(false);
+        jtfNombreFinca.setBackground(new Color(200,200,200));
         rellenarCampos();
     }
 
@@ -54,7 +52,7 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
         jtfNombreFinca = new javax.swing.JTextField();
         jtfLocalizacionFinca = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtfDescripcionFinca = new javax.swing.JTextArea();
+        jtaDescripcionFinca = new javax.swing.JTextArea();
 
         setClosable(true);
         try
@@ -116,6 +114,17 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
                 jtfNombreFincaActionPerformed(evt);
             }
         });
+        jtfNombreFinca.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jtfNombreFincaKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                jtfNombreFincaKeyReleased(evt);
+            }
+        });
 
         jtfLocalizacionFinca.setColumns(20);
         jtfLocalizacionFinca.addKeyListener(new java.awt.event.KeyAdapter()
@@ -124,19 +133,27 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
             {
                 jtfLocalizacionFincaKeyTyped(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                jtfLocalizacionFincaKeyReleased(evt);
+            }
         });
 
-        jtfDescripcionFinca.setColumns(20);
-        jtfDescripcionFinca.setLineWrap(true);
-        jtfDescripcionFinca.setRows(5);
-        jtfDescripcionFinca.addKeyListener(new java.awt.event.KeyAdapter()
+        jtaDescripcionFinca.setColumns(20);
+        jtaDescripcionFinca.setLineWrap(true);
+        jtaDescripcionFinca.setRows(5);
+        jtaDescripcionFinca.addKeyListener(new java.awt.event.KeyAdapter()
         {
             public void keyTyped(java.awt.event.KeyEvent evt)
             {
-                jtfDescripcionFincaKeyTyped(evt);
+                jtaDescripcionFincaKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                jtaDescripcionFincaKeyReleased(evt);
             }
         });
-        jScrollPane1.setViewportView(jtfDescripcionFinca);
+        jScrollPane1.setViewportView(jtaDescripcionFinca);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -215,7 +232,7 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
          */
         String Nombre = (String) jtfNombreFinca.getText().toString();
         String Localizacion = (String) jtfLocalizacionFinca.getText().toString();
-        String Descripcion = (String) jtfDescripcionFinca.getText().toString();
+        String Descripcion = (String) jtaDescripcionFinca.getText().toString();
         ConexionBBDD c = null;
         if (modificar)//modificar datos ==> distinto sql
         {
@@ -287,19 +304,13 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
 
     private void jtfLocalizacionFincaKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfLocalizacionFincaKeyTyped
     {//GEN-HEADEREND:event_jtfLocalizacionFincaKeyTyped
-        if (jtfLocalizacionFinca.getText().length() > 9)
-        {
-            jtfLocalizacionFinca.setText(jtfLocalizacionFinca.getText().toString().substring(0, 9));
-        }
+        utils.UtilsTamanyo.maxTamanyo(jtfLocalizacionFinca, 20);
     }//GEN-LAST:event_jtfLocalizacionFincaKeyTyped
 
-    private void jtfDescripcionFincaKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfDescripcionFincaKeyTyped
-    {//GEN-HEADEREND:event_jtfDescripcionFincaKeyTyped
-        if (jtfDescripcionFinca.getText().length() > 99)
-        {
-            jtfDescripcionFinca.setText(jtfDescripcionFinca.getText().toString().substring(0, 99));
-        }
-    }//GEN-LAST:event_jtfDescripcionFincaKeyTyped
+    private void jtaDescripcionFincaKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtaDescripcionFincaKeyTyped
+    {//GEN-HEADEREND:event_jtaDescripcionFincaKeyTyped
+        utils.UtilsTamanyo.maxTamanyo(jtaDescripcionFinca, 100);
+    }//GEN-LAST:event_jtaDescripcionFincaKeyTyped
 
     private void formFocusLost(java.awt.event.FocusEvent evt)//GEN-FIRST:event_formFocusLost
     {//GEN-HEADEREND:event_formFocusLost
@@ -308,24 +319,31 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
 
     private void formMouseExited(java.awt.event.MouseEvent evt)//GEN-FIRST:event_formMouseExited
     {//GEN-HEADEREND:event_formMouseExited
-        Point punto = MouseInfo.getPointerInfo().getLocation();
-        int x = punto.x;
-        int y = punto.y;
-        System.out.println(punto);
-        /*// No puedo usar los botones ni entrar a los campos de texto, 
-         Robot robot = null;
-         try
-         {
-         robot = new Robot();
-         } catch (AWTException ex)
-         {
-         Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
-         }
- 
-         //cambia la posición en pantalla del puntero a las coordenadas
-         //X=300 e Y=600.
-         robot.mouseMove(this.getParent().getWidth()/2,this.getParent().getHeight()/2 );*/
+        // prueba fallida
     }//GEN-LAST:event_formMouseExited
+
+    private void jtfNombreFincaKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfNombreFincaKeyReleased
+    {//GEN-HEADEREND:event_jtfNombreFincaKeyReleased
+        // utils.UtilsTamanyo.maxTamanyo(jtfNombreFinca, 5);
+        // no me gusta el resultado
+    }//GEN-LAST:event_jtfNombreFincaKeyReleased
+
+    private void jtfLocalizacionFincaKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfLocalizacionFincaKeyReleased
+    {//GEN-HEADEREND:event_jtfLocalizacionFincaKeyReleased
+        // utils.UtilsTamanyo.maxTamanyo(jtfLocalizacionFinca, 5);
+        // no me gusta el resultado
+    }//GEN-LAST:event_jtfLocalizacionFincaKeyReleased
+
+    private void jtaDescripcionFincaKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtaDescripcionFincaKeyReleased
+    {//GEN-HEADEREND:event_jtaDescripcionFincaKeyReleased
+        // utils.UtilsTamanyo.maxTamanyo(jtaDescripcionFinca, 5);
+        // no me gusta el resultado
+    }//GEN-LAST:event_jtaDescripcionFincaKeyReleased
+
+    private void jtfNombreFincaKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfNombreFincaKeyTyped
+    {//GEN-HEADEREND:event_jtfNombreFincaKeyTyped
+       utils.UtilsTamanyo.maxTamanyo(jtfNombreFinca, 20);
+    }//GEN-LAST:event_jtfNombreFincaKeyTyped
     public void rellenarCampos() throws SQLException, Exception
     {
         try
@@ -346,7 +364,7 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
 
             jtfNombreFinca.setText(rs.getString("Nombre") + "");
             jtfLocalizacionFinca.setText(rs.getString("Localizacion") + "");
-            jtfDescripcionFinca.setText(rs.getString("Descripcion") + "");
+            jtaDescripcionFinca.setText(rs.getString("Descripcion") + "");
             c.cerrarConexion();
         } catch (ClassNotFoundException ex)
         {
@@ -362,7 +380,7 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jtfDescripcionFinca;
+    private javax.swing.JTextArea jtaDescripcionFinca;
     private javax.swing.JTextField jtfLocalizacionFinca;
     private javax.swing.JTextField jtfNombreFinca;
     // End of variables declaration//GEN-END:variables

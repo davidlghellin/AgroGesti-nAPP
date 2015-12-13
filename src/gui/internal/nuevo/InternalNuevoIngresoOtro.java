@@ -71,9 +71,6 @@ public class InternalNuevoIngresoOtro extends javax.swing.JInternalFrame
         lblCultivar = new javax.swing.JLabel();
 
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setVisible(true);
 
         btnAceptar.setText("Aceptar");
@@ -109,9 +106,24 @@ public class InternalNuevoIngresoOtro extends javax.swing.JInternalFrame
         jtfId.setEditable(false);
         jtfId.setBackground(new java.awt.Color(200, 200, 200));
 
+        jtfProcedencia.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jtfProcedenciaKeyTyped(evt);
+            }
+        });
+
         jtaDescripcion.setColumns(20);
         jtaDescripcion.setLineWrap(true);
         jtaDescripcion.setRows(5);
+        jtaDescripcion.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jtaDescripcionKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtaDescripcion);
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/lupa.png"))); // NOI18N
@@ -308,6 +320,16 @@ public class InternalNuevoIngresoOtro extends javax.swing.JInternalFrame
             Logger.getLogger(InternalNuevoIngresoOtro.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void jtfProcedenciaKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfProcedenciaKeyTyped
+    {//GEN-HEADEREND:event_jtfProcedenciaKeyTyped
+        utils.UtilsTamanyo.maxTamanyo( jtfProcedencia ,20);
+    }//GEN-LAST:event_jtfProcedenciaKeyTyped
+
+    private void jtaDescripcionKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtaDescripcionKeyTyped
+    {//GEN-HEADEREND:event_jtaDescripcionKeyTyped
+        utils.UtilsTamanyo.maxTamanyo( jtaDescripcion, 100);
+    }//GEN-LAST:event_jtaDescripcionKeyTyped
     public void rellenar() throws ClassNotFoundException, SQLException
     {
         String SQL = "SELECT * FROM TIngresoOtro WHERE Id= \"" + id + "\";";

@@ -63,6 +63,7 @@ public class InternalNuevaVariedad extends javax.swing.JInternalFrame
         lblTipo = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
 
+        setClosable(true);
         setVisible(true);
 
         btnCancelarVariedad.setText("Cancelar");
@@ -80,6 +81,14 @@ public class InternalNuevaVariedad extends javax.swing.JInternalFrame
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 btnAceptarVariedadActionPerformed(evt);
+            }
+        });
+
+        jtfNombre.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jtfNombreKeyTyped(evt);
             }
         });
 
@@ -160,7 +169,7 @@ public class InternalNuevaVariedad extends javax.swing.JInternalFrame
         String tipo = lblTipo.getText().toString();
         if (nombre.equals("") || tipo.equals(""))
         {
-            JOptionPane.showMessageDialog(this.getParent(),"Tiene que introducir nombre y seleccionar tipo");
+            JOptionPane.showMessageDialog(this.getParent(), "Tiene que introducir nombre y seleccionar tipo");
         } else
         {
             if (modificar)
@@ -224,6 +233,11 @@ public class InternalNuevaVariedad extends javax.swing.JInternalFrame
             Logger.getLogger(InternalNuevaVariedad.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void jtfNombreKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfNombreKeyTyped
+    {//GEN-HEADEREND:event_jtfNombreKeyTyped
+        utils.UtilsTamanyo.maxTamanyo(jtfNombre, 20);
+    }//GEN-LAST:event_jtfNombreKeyTyped
     /*  void rellenarCombo()
      {
      try

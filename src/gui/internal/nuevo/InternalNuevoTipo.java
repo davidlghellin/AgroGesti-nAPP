@@ -62,15 +62,31 @@ public class InternalNuevoTipo extends javax.swing.JInternalFrame
         btnAceptarNueva = new javax.swing.JButton();
         btnCancelarNueva = new javax.swing.JButton();
 
+        setClosable(true);
         setVisible(true);
 
         jLabel1.setText("Nombre");
+
+        jtfNombre.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jtfNombreKeyTyped(evt);
+            }
+        });
 
         jLabel2.setText("Descripción");
 
         jtaDescripcion.setColumns(20);
         jtaDescripcion.setLineWrap(true);
         jtaDescripcion.setRows(5);
+        jtaDescripcion.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jtaDescripcionKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtaDescripcion);
 
         btnAceptarNueva.setText("Aceptar");
@@ -198,6 +214,16 @@ public class InternalNuevoTipo extends javax.swing.JInternalFrame
     {//GEN-HEADEREND:event_btnCancelarNuevaActionPerformed
         dispose();
     }//GEN-LAST:event_btnCancelarNuevaActionPerformed
+
+    private void jtfNombreKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfNombreKeyTyped
+    {//GEN-HEADEREND:event_jtfNombreKeyTyped
+        utils.UtilsTamanyo.maxTamanyo( jtfNombre, 20);
+    }//GEN-LAST:event_jtfNombreKeyTyped
+
+    private void jtaDescripcionKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtaDescripcionKeyTyped
+    {//GEN-HEADEREND:event_jtaDescripcionKeyTyped
+       utils.UtilsTamanyo.maxTamanyo( jtaDescripcion, 300);
+    }//GEN-LAST:event_jtaDescripcionKeyTyped
 
     public void rellenarCampo()
     {

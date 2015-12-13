@@ -75,9 +75,6 @@ public class InternalNuevoTrabajador extends javax.swing.JInternalFrame
         jtfNombre = new javax.swing.JTextField();
 
         setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
         setVisible(true);
 
         jLabel1.setText("DNI");
@@ -99,6 +96,22 @@ public class InternalNuevoTrabajador extends javax.swing.JInternalFrame
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 btnCCancelarActionPerformed(evt);
+            }
+        });
+
+        jtfDNI.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jtfDNIKeyTyped(evt);
+            }
+        });
+
+        jtfNombre.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jtfNombreKeyTyped(evt);
             }
         });
 
@@ -171,7 +184,7 @@ public class InternalNuevoTrabajador extends javax.swing.JInternalFrame
             {
                 nombre = jtfNombre.getText().toString();
                 c = new ConexionBBDD();
-                String SQL = "UPDATE TTrabajador SET Nombre = \"" + nombre 
+                String SQL = "UPDATE TTrabajador SET Nombre = \"" + nombre
                         + "\" WHERE DNI = \"" + id + "\";";
                 c.hacerInsercion(SQL);
                 c.cerrarConexion();
@@ -206,6 +219,16 @@ public class InternalNuevoTrabajador extends javax.swing.JInternalFrame
         }
         dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void jtfDNIKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfDNIKeyTyped
+    {//GEN-HEADEREND:event_jtfDNIKeyTyped
+        utils.UtilsTamanyo.maxTamanyo(jtfDNI, 10);
+    }//GEN-LAST:event_jtfDNIKeyTyped
+
+    private void jtfNombreKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfNombreKeyTyped
+    {//GEN-HEADEREND:event_jtfNombreKeyTyped
+        utils.UtilsTamanyo.maxTamanyo(jtfNombre, 10);
+    }//GEN-LAST:event_jtfNombreKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

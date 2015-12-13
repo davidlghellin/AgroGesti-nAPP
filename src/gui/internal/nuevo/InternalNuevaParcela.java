@@ -71,6 +71,7 @@ public class InternalNuevaParcela extends javax.swing.JInternalFrame
         lblFinca = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
 
+        setClosable(true);
         setVisible(true);
 
         jLabel1.setText("Nombre");
@@ -88,9 +89,24 @@ public class InternalNuevaParcela extends javax.swing.JInternalFrame
             }
         });
 
+        jtfINombredParcela.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jtfINombredParcelaKeyTyped(evt);
+            }
+        });
+
         jtaDescripcionNuevo.setColumns(20);
         jtaDescripcionNuevo.setLineWrap(true);
         jtaDescripcionNuevo.setRows(5);
+        jtaDescripcionNuevo.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                jtaDescripcionNuevoKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtaDescripcionNuevo);
 
         jButton2.setText("Cancelar");
@@ -250,6 +266,16 @@ public class InternalNuevaParcela extends javax.swing.JInternalFrame
             Logger.getLogger(InternalNuevaParcela.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void jtfINombredParcelaKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfINombredParcelaKeyTyped
+    {//GEN-HEADEREND:event_jtfINombredParcelaKeyTyped
+       utils.UtilsTamanyo.maxTamanyo( jtfINombredParcela, 20);
+    }//GEN-LAST:event_jtfINombredParcelaKeyTyped
+
+    private void jtaDescripcionNuevoKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtaDescripcionNuevoKeyTyped
+    {//GEN-HEADEREND:event_jtaDescripcionNuevoKeyTyped
+        utils.UtilsTamanyo.maxTamanyo( jtaDescripcionNuevo, 100);
+    }//GEN-LAST:event_jtaDescripcionNuevoKeyTyped
 
     void rellenarCampos()
     {
