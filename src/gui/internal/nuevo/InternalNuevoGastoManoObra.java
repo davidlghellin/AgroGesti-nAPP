@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -69,7 +70,6 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jtfCaegoria = new javax.swing.JTextField();
         jcbTipo = new javax.swing.JComboBox();
         jtfCantidadTipo = new javax.swing.JTextField();
         jtfPrecioTipo = new javax.swing.JTextField();
@@ -80,6 +80,7 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
         btnBuscarDNI = new javax.swing.JButton();
         btnBuscarCultivar = new javax.swing.JButton();
         lblCultivar = new javax.swing.JLabel();
+        jcbCategoria = new javax.swing.JComboBox();
 
         setClosable(true);
         setVisible(true);
@@ -124,6 +125,22 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
 
         jcbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dias", "Horas" }));
 
+        jtfCantidadTipo.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
+                jtfCantidadTipoFocusLost(evt);
+            }
+        });
+
+        jtfPrecioTipo.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
+                jtfPrecioTipoFocusLost(evt);
+            }
+        });
+
         jtaDescripcion.setColumns(20);
         jtaDescripcion.setLineWrap(true);
         jtaDescripcion.setRows(5);
@@ -154,6 +171,15 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
             }
         });
 
+        jcbCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fumigar", "Labrar", "Podar", "Recolectar", "Regar", "Sembrar", "Otros" }));
+        jcbCategoria.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jcbCategoriaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,20 +203,23 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
                                 .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(dateFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jtfCaegoria)
-                            .addComponent(jcbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jtfCantidadTipo)
-                            .addComponent(jtfPrecioTipo)
-                            .addComponent(jtfTotal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnBuscarDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 1, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(dateInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(dateFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jcbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jtfCantidadTipo)
+                                    .addComponent(jtfPrecioTipo)
+                                    .addComponent(jtfTotal)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnBuscarDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                            .addComponent(jcbCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -213,7 +242,7 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jtfCaegoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -239,7 +268,7 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnBuscarCultivar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -263,6 +292,7 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
     {//GEN-HEADEREND:event_btnAceptarActionPerformed
         ConexionBBDD c = null;
         String fechaInicio = null, fechaFin = null;
+        Date fInicio, fFin;
         String categoria;
         String dni;
         String tipo = null;
@@ -275,6 +305,8 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
         {
             try
             {
+                fInicio = dateInicio.getDate();
+                fFin = dateFin.getDate();
                 //obtener variables, TODO agrupar en un método
                 try
                 {
@@ -286,28 +318,33 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
                     Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 dni = lblDNI.getText().toString();
-                categoria = jtfCaegoria.getText().toString();
+                categoria = jcbCategoria.getSelectedItem().toString();
                 cantidadTipo = Float.parseFloat(jtfCantidadTipo.getText().toString());
                 precioTipo = Float.parseFloat(jtfPrecioTipo.getText().toString());
                 total = Float.parseFloat(jtfTotal.getText().toString());
                 descripcion = jtaDescripcion.getText().toString();
                 idCultivar = Integer.parseInt(lblCultivar.getText().toString());
                 tipo = jcbTipo.getSelectedItem().toString();
-                
-                
-                String SQL = "UPDATE TGastosManoObra SET FechaInicio = \'" + fechaInicio
-                        + "\', FechaFin =\'" + fechaFin + "\' ,Categoria = \"" + categoria + "\","
-                        + " DNI = \"" + dni + "\", Tipo =\"" + tipo + "\", CantidadTipo = \"" + cantidadTipo
-                        + "\",PrecioTipo =\"" +precioTipo+ "\",Total =\""+total+"\",Descripcion =\""+descripcion
-                        + "\", IdCultivar = \"" +idCultivar
-                        +"\" WHERE Id = \"" + id + "\";";
-           
-                System.out.println(SQL);
-                c = new ConexionBBDD();
-                System.out.println(SQL);
-                c.hacerInsercion(SQL);
-                c.cerrarConexion();
-                this.dispose();
+
+                if (fInicio.after(fFin))    //las fechas no están bien introdcidas
+                {
+                    JOptionPane.showInternalMessageDialog(jtbGastoManoObra.getRootPane(), "Debe selecionar las fechas correctas");
+                } else
+                {
+                    String SQL = "UPDATE TGastosManoObra SET FechaInicio = \'" + fechaInicio
+                            + "\', FechaFin =\'" + fechaFin + "\' ,Categoria = \"" + categoria + "\","
+                            + " DNI = \"" + dni + "\", Tipo =\"" + tipo + "\", CantidadTipo = \"" + cantidadTipo
+                            + "\",PrecioTipo =\"" + precioTipo + "\",Total =\"" + total + "\",Descripcion =\"" + descripcion
+                            + "\", IdCultivar = \"" + idCultivar
+                            + "\" WHERE Id = \"" + id + "\";";
+
+                    System.out.println(SQL);
+                    c = new ConexionBBDD();
+                    System.out.println(SQL);
+                    c.hacerInsercion(SQL);
+                    c.cerrarConexion();
+                    this.dispose();
+                }
                 try
                 {
                     jtbGastoManoObra = utils.UtilisSql.rellenarJTable("SELECT * FROM TGastosManoObra;", jtbGastoManoObra);
@@ -329,6 +366,8 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
         {
             try
             {   //obtener variables, TODO agrupar en un método
+                fInicio = dateInicio.getDate();
+                fFin = dateFin.getDate();
                 try
                 {
                     fechaInicio = formatoFecha.format(dateInicio.getDate());
@@ -339,24 +378,31 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
                     Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 dni = lblDNI.getText().toString();
-                categoria = jtfCaegoria.getText().toString();
+                categoria = jcbCategoria.getSelectedItem().toString();
                 cantidadTipo = Float.parseFloat(jtfCantidadTipo.getText().toString());
                 precioTipo = Float.parseFloat(jtfPrecioTipo.getText().toString());
                 total = Float.parseFloat(jtfTotal.getText().toString());
                 descripcion = jtaDescripcion.getText().toString();
                 idCultivar = Integer.parseInt(lblCultivar.getText().toString());
                 tipo = jcbTipo.getSelectedItem().toString();
-                String SQL = "INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) \n"
-                        + " VALUES (\'" + fechaInicio + "\',\'" + fechaFin
-                        + "\',\"" + categoria + "\",\"" + dni + "\",\"" + tipo
-                        + "\",\"" + cantidadTipo + "\",\"" + precioTipo + "\",\""
-                        + total + "\",\"" + descripcion + "\",\"" + idCultivar + "\");";
-                //System.out.println(SQL);
-                c = new ConexionBBDD();
-                System.out.println(SQL);
-                c.hacerInsercion(SQL);
-                c.cerrarConexion();
-                this.dispose();
+
+                if (fInicio.after(fFin))    //las fechas no están bien introdcidas
+                {
+                    JOptionPane.showInternalMessageDialog(jtbGastoManoObra.getRootPane(), "Debe selecionar las fechas correctas");
+                } else
+                {
+                    String SQL = "INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) \n"
+                            + " VALUES (\'" + fechaInicio + "\',\'" + fechaFin
+                            + "\',\"" + categoria + "\",\"" + dni + "\",\"" + tipo
+                            + "\",\"" + cantidadTipo + "\",\"" + precioTipo + "\",\""
+                            + total + "\",\"" + descripcion + "\",\"" + idCultivar + "\");";
+                    //System.out.println(SQL);
+                    c = new ConexionBBDD();
+                    System.out.println(SQL);
+                    c.hacerInsercion(SQL);
+                    c.cerrarConexion();
+                    this.dispose();
+                }
             } catch (Exception e)
             {
                 JOptionPane.showInternalMessageDialog(this, "Debe introducir todos los datos execto el id, use \'.\' para los decimales");
@@ -383,9 +429,11 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
             this.getParent().add(internal);
             internal.toFront();
             utils.UtilsFrame.centrar(internal, 800, 500);
+
         } catch (Exception ex)
         {
-            Logger.getLogger(InternalNuevoGastoManoObra.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InternalNuevoGastoManoObra.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnBuscarDNIActionPerformed
 
@@ -397,20 +445,44 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
             this.getParent().add(internal);
             internal.toFront();
             utils.UtilsFrame.centrar(internal, 700, 400);
+
         } catch (SQLException ex)
         {
-            Logger.getLogger(InternalNuevoGastoManoObra.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InternalNuevoGastoManoObra.class
+                    .getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex)
         {
-            Logger.getLogger(InternalNuevoGastoManoObra.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InternalNuevoGastoManoObra.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_btnBuscarCultivarActionPerformed
 
     private void jtaDescripcionKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtaDescripcionKeyTyped
     {//GEN-HEADEREND:event_jtaDescripcionKeyTyped
-       utils.UtilsTamanyo.maxTamanyo( jtaDescripcion, 300);
+        utils.UtilsTamanyo.maxTamanyo(jtaDescripcion, 300);
     }//GEN-LAST:event_jtaDescripcionKeyTyped
+
+    private void jtfCantidadTipoFocusLost(java.awt.event.FocusEvent evt)//GEN-FIRST:event_jtfCantidadTipoFocusLost
+    {//GEN-HEADEREND:event_jtfCantidadTipoFocusLost
+        if (!jtfCantidadTipo.getText().toString().equals("") && !jtfPrecioTipo.getText().toString().equals(""))
+        {
+            jtfTotal.setText(Float.parseFloat(jtfCantidadTipo.getText().toString()) * Float.parseFloat(jtfPrecioTipo.getText().toString()) + "");
+        }
+    }//GEN-LAST:event_jtfCantidadTipoFocusLost
+
+    private void jtfPrecioTipoFocusLost(java.awt.event.FocusEvent evt)//GEN-FIRST:event_jtfPrecioTipoFocusLost
+    {//GEN-HEADEREND:event_jtfPrecioTipoFocusLost
+        if (!jtfCantidadTipo.getText().toString().equals("") && !jtfPrecioTipo.getText().toString().equals(""))
+        {
+            jtfTotal.setText(Float.parseFloat(jtfCantidadTipo.getText().toString()) * Float.parseFloat(jtfPrecioTipo.getText().toString()) + "");
+        }
+    }//GEN-LAST:event_jtfPrecioTipoFocusLost
+
+    private void jcbCategoriaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jcbCategoriaActionPerformed
+    {//GEN-HEADEREND:event_jcbCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbCategoriaActionPerformed
     public void rellenarCampos() throws SQLException, Exception
     {
         try
@@ -423,7 +495,7 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
 
             dateInicio.setDate(rs.getDate("FechaInicio"));
             dateFin.setDate(rs.getDate("FechaFin"));
-            jtfCaegoria.setText(rs.getString("Categoria"));
+            jcbCategoria.getModel().setSelectedItem(rs.getString("Categoria"));
             lblDNI.setText(rs.getString("DNI"));
             jcbTipo.getModel().setSelectedItem(rs.getString("Tipo"));
             jtfCantidadTipo.setText(rs.getFloat("CantidadTipo") + "");
@@ -432,9 +504,11 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
             jtaDescripcion.setText(rs.getString("Descripcion"));
             lblCultivar.setText(rs.getString("IdCultivar"));
             c.cerrarConexion();
+
         } catch (ClassNotFoundException ex)
         {
-            Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InternalNuevaFinca.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -456,9 +530,9 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox jcbCategoria;
     private javax.swing.JComboBox jcbTipo;
     private javax.swing.JTextArea jtaDescripcion;
-    private javax.swing.JTextField jtfCaegoria;
     private javax.swing.JTextField jtfCantidadTipo;
     private javax.swing.JTextField jtfPrecioTipo;
     private javax.swing.JTextField jtfTotal;

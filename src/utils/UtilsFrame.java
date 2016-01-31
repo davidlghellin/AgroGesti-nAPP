@@ -2,6 +2,7 @@ package utils;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 
 /**
@@ -52,6 +53,16 @@ public class UtilsFrame
 	 * @param altoFrame
 	 */
 	public static void centrar(JInternalFrame jiframe, int anchoFrame, int altoFrame)
+	{
+		Toolkit miPantalla = Toolkit.getDefaultToolkit();
+		Dimension resolucion = miPantalla.getScreenSize();
+		int altura = resolucion.height;
+		int anchura = resolucion.width;
+		jiframe.setBounds((anchura - anchoFrame) / 2,
+				((altura - altoFrame) / 2)-200, anchoFrame, altoFrame);
+                jiframe.toFront();
+	}
+        public static void centrar(JFrame jiframe, int anchoFrame, int altoFrame)
 	{
 		Toolkit miPantalla = Toolkit.getDefaultToolkit();
 		Dimension resolucion = miPantalla.getScreenSize();

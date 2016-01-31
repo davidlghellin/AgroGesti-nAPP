@@ -5,6 +5,7 @@
  */
 package gui.internal;
 
+import conexion.ConexionBBDD;
 import gui.internal.nuevo.InternalNuevoGastoOtro;
 import gui.internal.nuevo.InternalNuevoIngresoOtro;
 import java.sql.SQLException;
@@ -59,6 +60,8 @@ public class InternalTGastoOtro extends javax.swing.JInternalFrame
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jtfMayorBuscar = new javax.swing.JTextField();
+        btnPagado = new javax.swing.JButton();
+        btnNoPagado = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -174,6 +177,25 @@ public class InternalTGastoOtro extends javax.swing.JInternalFrame
             }
         });
 
+        btnPagado.setText("Pagado");
+        btnPagado.setToolTipText("Seleccione fila para pagar");
+        btnPagado.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnPagadoActionPerformed(evt);
+            }
+        });
+
+        btnNoPagado.setText("No pagado");
+        btnNoPagado.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnNoPagadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -182,28 +204,35 @@ public class InternalTGastoOtro extends javax.swing.JInternalFrame
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(dateAntes, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(dateDespues, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jtfMenorBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jtfMayorBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(104, Short.MAX_VALUE))
+                        .addComponent(jtfMayorBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnPagado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnNoPagado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,12 +249,14 @@ public class InternalTGastoOtro extends javax.swing.JInternalFrame
                     .addComponent(dateDespues, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jtfMenorBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jtfMayorBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jtfMayorBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnNoPagado)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAlta)
                     .addComponent(btnModificar)
-                    .addComponent(btnEliminar))
+                    .addComponent(btnEliminar)
+                    .addComponent(btnPagado))
                 .addContainerGap())
         );
 
@@ -335,6 +366,69 @@ public class InternalTGastoOtro extends javax.swing.JInternalFrame
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 
+    private void btnNoPagadoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnNoPagadoActionPerformed
+    {//GEN-HEADEREND:event_btnNoPagadoActionPerformed
+        int[] filas = jtbTGastoOtro.getSelectedRows();
+
+        if (filas.length == 0)
+        {
+            JOptionPane.showInternalMessageDialog(jtbTGastoOtro.getRootPane(), "Tiene que selecionar las filas a marcar como no pagado");
+        } else
+        {
+            for (int f : filas)
+            {
+                if (!((String) jtbTGastoOtro.getValueAt(f, 5).toString()).equals("No pagado"))
+                {
+                    int id = Integer.parseInt((String) jtbTGastoOtro.getValueAt(f, 0).toString());
+
+                    String SQL = "UPDATE TGastoOtro SET Pagado= \"No pagado\" WHERE Id = \"" + id + "\";";
+
+                    try
+                    {
+                        ConexionBBDD c = new ConexionBBDD();
+                        c.hacerInsercion(SQL);
+                        c.cerrarConexion();
+                        utils.UtilisSql.actualizarJtable(jtbTGastoOtro, "TGastoOtro");
+                    } catch (Exception ex)
+                    {
+                        Logger.getLogger(InternalTGastoOtro.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_btnNoPagadoActionPerformed
+
+    private void btnPagadoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPagadoActionPerformed
+    {//GEN-HEADEREND:event_btnPagadoActionPerformed
+        int[] filas = jtbTGastoOtro.getSelectedRows();
+        if (filas.length == 0)
+        {
+            JOptionPane.showInternalMessageDialog(jtbTGastoOtro.getRootPane(), "Tiene que selecionar las filas a marcar como pagado");
+        } else
+        {
+            for (int f : filas)
+            {
+                if (!((String) jtbTGastoOtro.getValueAt(f, 5).toString()).equals("Pagado"))
+                {
+                    int id = Integer.parseInt((String) jtbTGastoOtro.getValueAt(f, 0).toString());
+
+                    String SQL = "UPDATE TGastoOtro SET Pagado= \"Pagado\" WHERE Id = \"" + id + "\";";
+
+                    try
+                    {
+                        ConexionBBDD c = new ConexionBBDD();
+                        c.hacerInsercion(SQL);
+                        c.cerrarConexion();
+                        utils.UtilisSql.actualizarJtable(jtbTGastoOtro, "TGastoOtro");
+                    } catch (Exception ex)
+                    {
+                        Logger.getLogger(InternalTGastoOtro.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_btnPagadoActionPerformed
+
     //Actualizar en las busquedas
     void buscarFiltro() throws SQLException, Exception
     {
@@ -393,6 +487,8 @@ public class InternalTGastoOtro extends javax.swing.JInternalFrame
     private javax.swing.JButton btnAlta;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnNoPagado;
+    private javax.swing.JButton btnPagado;
     private com.toedter.calendar.JDateChooser dateAntes;
     private com.toedter.calendar.JDateChooser dateDespues;
     private javax.swing.JLabel jLabel1;

@@ -7,6 +7,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,7 +35,7 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
         this.id = id;
         this.jtbFinca = jtbFinca;
         jtfNombreFinca.setEditable(false);
-        jtfNombreFinca.setBackground(new Color(200,200,200));
+        jtfNombreFinca.setBackground(new Color(200, 200, 200));
         rellenarCampos();
     }
 
@@ -234,44 +235,20 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
         String Localizacion = (String) jtfLocalizacionFinca.getText().toString();
         String Descripcion = (String) jtaDescripcionFinca.getText().toString();
         ConexionBBDD c = null;
-        if (modificar)//modificar datos ==> distinto sql
+        if (Nombre.equals("") || Localizacion.equals("") || Descripcion.equals(""))
         {
-            try
-            {
-                c = new ConexionBBDD();
-                String SQL = "UPDATE TFinca SET Localizacion = \"" + Localizacion
-                        + "\", Descripcion =\"" + Descripcion
-                        + "\" WHERE Nombre = \"" + Nombre + "\";";
-                c.hacerInsercion(SQL);
-                c.cerrarConexion();
-            } catch (ClassNotFoundException ex)
-            {
-                Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex)
-            {
-                Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try
-            {
-                jtbFinca = utils.UtilisSql.rellenarJTable("SELECT * FROM TFinca;", jtbFinca);
-            } catch (SQLException ex)
-            {
-                Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex)
-            {
-                Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            this.dispose();
-
+            JOptionPane.showMessageDialog(this.getParent(), "Tiene que insertar nombre y localización y descripción");
         } else
         {
-            try
+            if (modificar)//modificar datos ==> distinto sql
             {
                 try
                 {
                     c = new ConexionBBDD();
-                    c.hacerInsercion("INSERT INTO TFinca (Nombre,Localizacion,Descripcion) VALUES (\""
-                            + Nombre + "\",\"" + Localizacion + "\",\"" + Descripcion + "\")");
+                    String SQL = "UPDATE TFinca SET Localizacion = \"" + Localizacion
+                            + "\", Descripcion =\"" + Descripcion
+                            + "\" WHERE Nombre = \"" + Nombre + "\";";
+                    c.hacerInsercion(SQL);
                     c.cerrarConexion();
                 } catch (ClassNotFoundException ex)
                 {
@@ -280,14 +257,44 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
                 {
                     Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                jtbFinca = utils.UtilisSql.rellenarJTable("SELECT * FROM TFinca;", jtbFinca);
+                try
+                {
+                    jtbFinca = utils.UtilisSql.rellenarJTable("SELECT * FROM TFinca;", jtbFinca);
+                } catch (SQLException ex)
+                {
+                    Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex)
+                {
+                    Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 this.dispose();
-            } catch (SQLException ex)
+
+            } else
             {
-                Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex)
-            {
-                Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
+                try
+                {
+                    try
+                    {
+                        c = new ConexionBBDD();
+                        c.hacerInsercion("INSERT INTO TFinca (Nombre,Localizacion,Descripcion) VALUES (\""
+                                + Nombre + "\",\"" + Localizacion + "\",\"" + Descripcion + "\")");
+                        c.cerrarConexion();
+                    } catch (ClassNotFoundException ex)
+                    {
+                        Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (Exception ex)
+                    {
+                        Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    jtbFinca = utils.UtilisSql.rellenarJTable("SELECT * FROM TFinca;", jtbFinca);
+                    this.dispose();
+                } catch (SQLException ex)
+                {
+                    Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex)
+                {
+                    Logger.getLogger(InternalNuevaFinca.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }//GEN-LAST:event_btnAceptarNuevaFincaActionPerformed
@@ -342,7 +349,7 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
 
     private void jtfNombreFincaKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfNombreFincaKeyTyped
     {//GEN-HEADEREND:event_jtfNombreFincaKeyTyped
-       utils.UtilsTamanyo.maxTamanyo(jtfNombreFinca, 20);
+        utils.UtilsTamanyo.maxTamanyo(jtfNombreFinca, 20);
     }//GEN-LAST:event_jtfNombreFincaKeyTyped
     public void rellenarCampos() throws SQLException, Exception
     {

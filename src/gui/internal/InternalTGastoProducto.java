@@ -5,6 +5,7 @@
  */
 package gui.internal;
 
+import conexion.ConexionBBDD;
 import gui.internal.nuevo.InternalNuevoGastoProducto;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -56,6 +57,8 @@ public class InternalTGastoProducto extends javax.swing.JInternalFrame
         dateAntes = new com.toedter.calendar.JDateChooser();
         dateDespues = new com.toedter.calendar.JDateChooser();
         jtfProveedorBuscar = new javax.swing.JTextField();
+        btnPagado = new javax.swing.JButton();
+        btnNoPagado = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -161,6 +164,25 @@ public class InternalTGastoProducto extends javax.swing.JInternalFrame
             }
         });
 
+        btnPagado.setText("Pagado");
+        btnPagado.setToolTipText("Seleccione fila para pagar");
+        btnPagado.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnPagadoActionPerformed(evt);
+            }
+        });
+
+        btnNoPagado.setText("No pagado");
+        btnNoPagado.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnNoPagadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -174,18 +196,22 @@ public class InternalTGastoProducto extends javax.swing.JInternalFrame
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(dateDespues, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(jtfProveedorBuscar))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jtfProveedorBuscar)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnPagado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnNoPagado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,12 +225,15 @@ public class InternalTGastoProducto extends javax.swing.JInternalFrame
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(dateDespues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateAntes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfProveedorBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtfProveedorBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnNoPagado)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAlta)
                     .addComponent(btnModificar)
-                    .addComponent(btnEliminar))
+                    .addComponent(btnEliminar)
+                    .addComponent(btnPagado))
                 .addContainerGap())
         );
 
@@ -293,7 +322,7 @@ public class InternalTGastoProducto extends javax.swing.JInternalFrame
         try
         {
             int id = (int) jtbTGastoProducto.getValueAt(jtbTGastoProducto.getSelectedRow(), 0);
-            InternalNuevoGastoProducto internal = new InternalNuevoGastoProducto(jtbTGastoProducto,id);
+            InternalNuevoGastoProducto internal = new InternalNuevoGastoProducto(jtbTGastoProducto, id);
             this.getParent().add(internal);
             this.toFront();
             utils.UtilsFrame.centrar(internal);
@@ -302,6 +331,68 @@ public class InternalTGastoProducto extends javax.swing.JInternalFrame
             JOptionPane.showInternalMessageDialog(jtbTGastoProducto.getRootPane(), "Tiene que selecionar la fila a modificar");
         }
     }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnNoPagadoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnNoPagadoActionPerformed
+    {//GEN-HEADEREND:event_btnNoPagadoActionPerformed
+        int[] filas = jtbTGastoProducto.getSelectedRows();
+        if (filas.length == 0)
+        {
+            JOptionPane.showInternalMessageDialog(jtbTGastoProducto.getRootPane(), "Tiene que selecionar las filas a marcar como no pagado");
+        } else
+        {
+            for (int f : filas)
+            {
+                if (!((String) jtbTGastoProducto.getValueAt(f, 7).toString()).equals("No pagado"))
+                {
+                    int id = Integer.parseInt((String) jtbTGastoProducto.getValueAt(f, 0).toString());
+
+                    String SQL = "UPDATE TGastoProducto SET Pagado= \"No pagado\" WHERE Id = \"" + id + "\";";
+
+                    try
+                    {
+                        ConexionBBDD c = new ConexionBBDD();
+                        c.hacerInsercion(SQL);
+                        c.cerrarConexion();
+                        utils.UtilisSql.actualizarJtable(jtbTGastoProducto, "TGastoProducto");
+                    } catch (Exception ex)
+                    {
+                        Logger.getLogger(InternalTGastoProducto.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_btnNoPagadoActionPerformed
+
+    private void btnPagadoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnPagadoActionPerformed
+    {//GEN-HEADEREND:event_btnPagadoActionPerformed
+        int[] filas = jtbTGastoProducto.getSelectedRows();
+        if (filas.length == 0)
+        {
+            JOptionPane.showInternalMessageDialog(jtbTGastoProducto.getRootPane(), "Tiene que selecionar las filas a marcar como pagado");
+        } else
+        {
+            for (int f : filas)
+            {
+                if (!((String) jtbTGastoProducto.getValueAt(f, 7).toString()).equals("Pagado"))
+                {
+                    int id = Integer.parseInt((String) jtbTGastoProducto.getValueAt(f, 0).toString());
+
+                    String SQL = "UPDATE TGastoProducto SET Pagado= \"Pagado\" WHERE Id = \"" + id + "\";";
+
+                    try
+                    {
+                        ConexionBBDD c = new ConexionBBDD();
+                        c.hacerInsercion(SQL);
+                        c.cerrarConexion();
+                        utils.UtilisSql.actualizarJtable(jtbTGastoProducto, "TGastoProducto");
+                    } catch (Exception ex)
+                    {
+                        Logger.getLogger(InternalTGastoProducto.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_btnPagadoActionPerformed
 
     //Actualizar en las busquedas
     void buscarFiltro() throws SQLException, Exception
@@ -334,6 +425,8 @@ public class InternalTGastoProducto extends javax.swing.JInternalFrame
     private javax.swing.JButton btnAlta;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnNoPagado;
+    private javax.swing.JButton btnPagado;
     private com.toedter.calendar.JDateChooser dateAntes;
     private com.toedter.calendar.JDateChooser dateDespues;
     private javax.swing.JLabel jLabel1;

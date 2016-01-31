@@ -40,6 +40,7 @@ public class InternalTTrabajador extends javax.swing.JInternalFrame
         initComponents();
         lblTrabajador = lblDNI;
         jtbTrabajador = utils.UtilisSql.rellenarJTable("SELECT * FROM TTrabajador;", jtbTrabajador);
+        //jtbTrabajador.removeColumnSelectionInterval(3,4);
         //Imagenes
         btnAlta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_01.png")));
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/001_02.png")));

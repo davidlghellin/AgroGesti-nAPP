@@ -35,7 +35,7 @@ public class InternalNuevoTrabajador extends javax.swing.JInternalFrame
         jTable = jt;
         this.id = id;
         jtfDNI.setEditable(false);
-        jtfDNI.setBackground(new Color(200,200,200));
+        jtfDNI.setBackground(new Color(200, 200, 200));
         jtfDNI.setText(id);
         try
         {
@@ -44,6 +44,9 @@ public class InternalNuevoTrabajador extends javax.swing.JInternalFrame
             ResultSet rs = c.hacerConsulta(SQL);
             rs.next();
             jtfNombre.setText(rs.getString("Nombre"));
+          /*  if(rs.getString("Tipo").equals("normal"))
+                jcbTipo.setSelectedIndex(0);
+            else if(rs.getString("Tipo").equals("root"))jcbTipo.setSelectedIndex(1);*/
             c.cerrarConexion();
         } catch (ClassNotFoundException ex)
         {
@@ -75,6 +78,10 @@ public class InternalNuevoTrabajador extends javax.swing.JInternalFrame
         btnCCancelar = new javax.swing.JButton();
         jtfDNI = new javax.swing.JTextField();
         jtfNombre = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jcbTipo = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        jpasContrasenya = new javax.swing.JPasswordField();
 
         setClosable(true);
         setVisible(true);
@@ -117,6 +124,12 @@ public class InternalNuevoTrabajador extends javax.swing.JInternalFrame
             }
         });
 
+        jLabel3.setText("Tipo");
+
+        jcbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "normal", "root" }));
+
+        jLabel4.setText("Contraseña");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -126,16 +139,24 @@ public class InternalNuevoTrabajador extends javax.swing.JInternalFrame
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnAceptar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCCancelar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                         .addGap(49, 49, 49)
+                        .addComponent(jtfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtfNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
-                            .addComponent(jtfDNI))))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jpasContrasenya)
+                            .addComponent(jcbTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -145,11 +166,19 @@ public class InternalNuevoTrabajador extends javax.swing.JInternalFrame
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jtfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jcbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jpasContrasenya, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCCancelar))
@@ -178,16 +207,20 @@ public class InternalNuevoTrabajador extends javax.swing.JInternalFrame
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnAceptarActionPerformed
     {//GEN-HEADEREND:event_btnAceptarActionPerformed
         String dni = null;
-        String nombre;
+        String nombre, tipo, contrasenya;
         ConexionBBDD c = null;
         if (modificar)
         {
             try
             {
-                nombre = jtfNombre.getText().toString();
+                nombre = jtfNombre.getText().toString();                
+                tipo = jcbTipo.getSelectedItem().toString();
+                contrasenya = jpasContrasenya.getText().toString();
                 c = new ConexionBBDD();
                 String SQL = "UPDATE TTrabajador SET Nombre = \"" + nombre
-                        + "\" WHERE DNI = \"" + id + "\";";
+                        + "\",Tipo = \""+ tipo + "\", Contrasenya = \""  + contrasenya + "\""
+                        +" WHERE DNI = \"" + id + "\";";
+                System.out.println(SQL);
                 c.hacerInsercion(SQL);
                 c.cerrarConexion();
                 utils.UtilisSql.actualizarJtable(jTable, "TTrabajador");
@@ -205,9 +238,17 @@ public class InternalNuevoTrabajador extends javax.swing.JInternalFrame
             {
                 dni = jtfDNI.getText().toString();
                 nombre = jtfNombre.getText().toString();
+                tipo = jcbTipo.getSelectedItem().toString();
+                contrasenya = jpasContrasenya.getText().toString();
+                System.out.println(contrasenya);
                 c = new ConexionBBDD();
-                String SQL = "INSERT INTO TTrabajador (DNI,Nombre) VALUES (\""
-                        + dni + "\",\"" + nombre + "\");";
+                //INSERT INTO TTrabajador (DNI,Nombre,Tipo,Contrasenya) VALUES ("dni","name","root","pass");
+                String SQL = "INSERT INTO TTrabajador (DNI,Nombre,Tipo,Contrasenya) VALUES (\""
+                        + dni + "\",\""
+                        + nombre + "\",\""
+                        + tipo + "\",\""
+                        + contrasenya + "\""
+                        + ");";
                 c.hacerInsercion(SQL);
                 c.cerrarConexion();
                 utils.UtilisSql.actualizarJtable(jTable, "TTrabajador");
@@ -238,7 +279,11 @@ public class InternalNuevoTrabajador extends javax.swing.JInternalFrame
     private javax.swing.JButton btnCCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JComboBox jcbTipo;
+    private javax.swing.JPasswordField jpasContrasenya;
     private javax.swing.JTextField jtfDNI;
     private javax.swing.JTextField jtfNombre;
     // End of variables declaration//GEN-END:variables

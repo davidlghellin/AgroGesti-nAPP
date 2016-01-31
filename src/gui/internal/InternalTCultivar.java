@@ -16,8 +16,8 @@ import javax.swing.JOptionPane;
 public class InternalTCultivar extends javax.swing.JInternalFrame
 {
 
-    JButton btnCultivar;
-    JLabel lblCultivar;
+    private JButton btnCultivar;
+    private JLabel lblCultivar;
 
     public InternalTCultivar(JButton btnCultivar) throws ClassNotFoundException, SQLException, Exception
     {
@@ -71,6 +71,16 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
         dateAntes = new com.toedter.calendar.JDateChooser();
         dateDespues = new com.toedter.calendar.JDateChooser();
         btnSeleccionar = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jmGastosManoObra = new javax.swing.JMenu();
+        jmGastosPrductos = new javax.swing.JMenuItem();
+        jmGastosOtros = new javax.swing.JMenuItem();
+        jmIngresosVenta = new javax.swing.JMenuItem();
+        jmIngresosOtros = new javax.swing.JMenuItem();
+        jmResumenResultados = new javax.swing.JMenuItem();
+        jmGastosPendientesAbonar = new javax.swing.JMenuItem();
+        jmIngresosPendientesCobrar = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         setClosable(true);
         setIconifiable(true);
@@ -273,6 +283,92 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
                 .addGap(18, 18, 18))
         );
 
+        jmGastosManoObra.setText("Informes");
+
+        jmGastosPrductos.setText("Gastos de mano de obra");
+        jmGastosPrductos.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmGastosPrductosActionPerformed(evt);
+            }
+        });
+        jmGastosManoObra.add(jmGastosPrductos);
+
+        jmGastosOtros.setText("Gastos de productos");
+        jmGastosOtros.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmGastosOtrosActionPerformed(evt);
+            }
+        });
+        jmGastosManoObra.add(jmGastosOtros);
+
+        jmIngresosVenta.setText("Gastos variados / otros");
+        jmIngresosVenta.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmIngresosVentaActionPerformed(evt);
+            }
+        });
+        jmGastosManoObra.add(jmIngresosVenta);
+
+        jmIngresosOtros.setText("Ingresos por venta");
+        jmIngresosOtros.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmIngresosOtrosActionPerformed(evt);
+            }
+        });
+        jmGastosManoObra.add(jmIngresosOtros);
+
+        jmResumenResultados.setText("Otros ingresos");
+        jmResumenResultados.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmResumenResultadosActionPerformed(evt);
+            }
+        });
+        jmGastosManoObra.add(jmResumenResultados);
+
+        jmGastosPendientesAbonar.setText("Resumen de resultados");
+        jmGastosPendientesAbonar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmGastosPendientesAbonarActionPerformed(evt);
+            }
+        });
+        jmGastosManoObra.add(jmGastosPendientesAbonar);
+
+        jmIngresosPendientesCobrar.setText("Gastos pendientes por abonar");
+        jmIngresosPendientesCobrar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmIngresosPendientesCobrarActionPerformed(evt);
+            }
+        });
+        jmGastosManoObra.add(jmIngresosPendientesCobrar);
+
+        jMenuItem8.setText("Ingresos pendientes");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jmGastosManoObra.add(jMenuItem8);
+
+        jMenuBar1.add(jmGastosManoObra);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -283,7 +379,7 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -403,6 +499,110 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
         dispose();
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
+    private void jmGastosPrductosActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmGastosPrductosActionPerformed
+    {//GEN-HEADEREND:event_jmGastosPrductosActionPerformed
+        try
+        {
+            int id = (int) jtbCultivar.getValueAt(jtbCultivar.getSelectedRow(), 0);
+
+        } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(this.getParent(), "Selecione la fila para sacar el informe");
+            Logger.getLogger(InternalTCultivar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jmGastosPrductosActionPerformed
+
+    private void jmGastosOtrosActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmGastosOtrosActionPerformed
+    {//GEN-HEADEREND:event_jmGastosOtrosActionPerformed
+        try
+        {
+            int id = (int) jtbCultivar.getValueAt(jtbCultivar.getSelectedRow(), 0);
+
+        } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(this.getParent(), "Selecione la fila para sacar el informe");
+            Logger.getLogger(InternalTCultivar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jmGastosOtrosActionPerformed
+
+    private void jmIngresosVentaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmIngresosVentaActionPerformed
+    {//GEN-HEADEREND:event_jmIngresosVentaActionPerformed
+        try
+        {
+            int id = (int) jtbCultivar.getValueAt(jtbCultivar.getSelectedRow(), 0);
+
+        } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(this.getParent(), "Selecione la fila para sacar el informe");
+            Logger.getLogger(InternalTCultivar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jmIngresosVentaActionPerformed
+
+    private void jmIngresosOtrosActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmIngresosOtrosActionPerformed
+    {//GEN-HEADEREND:event_jmIngresosOtrosActionPerformed
+        try
+        {
+            int id = (int) jtbCultivar.getValueAt(jtbCultivar.getSelectedRow(), 0);
+
+        } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(this.getParent(), "Selecione la fila para sacar el informe");
+            Logger.getLogger(InternalTCultivar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jmIngresosOtrosActionPerformed
+
+    private void jmResumenResultadosActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmResumenResultadosActionPerformed
+    {//GEN-HEADEREND:event_jmResumenResultadosActionPerformed
+        try
+        {
+            int id = (int) jtbCultivar.getValueAt(jtbCultivar.getSelectedRow(), 0);
+
+        } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(this.getParent(), "Selecione la fila para sacar el informe");
+            Logger.getLogger(InternalTCultivar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jmResumenResultadosActionPerformed
+
+    private void jmGastosPendientesAbonarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmGastosPendientesAbonarActionPerformed
+    {//GEN-HEADEREND:event_jmGastosPendientesAbonarActionPerformed
+        try
+        {
+            int id = (int) jtbCultivar.getValueAt(jtbCultivar.getSelectedRow(), 0);
+
+        } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(this.getParent(), "Selecione la fila para sacar el informe");
+            Logger.getLogger(InternalTCultivar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jmGastosPendientesAbonarActionPerformed
+
+    private void jmIngresosPendientesCobrarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmIngresosPendientesCobrarActionPerformed
+    {//GEN-HEADEREND:event_jmIngresosPendientesCobrarActionPerformed
+        try
+        {
+            int id = (int) jtbCultivar.getValueAt(jtbCultivar.getSelectedRow(), 0);
+
+        } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(this.getParent(), "Selecione la fila para sacar el informe");
+            Logger.getLogger(InternalTCultivar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jmIngresosPendientesCobrarActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem8ActionPerformed
+    {//GEN-HEADEREND:event_jMenuItem8ActionPerformed
+        try
+        {
+            int id = (int) jtbCultivar.getValueAt(jtbCultivar.getSelectedRow(), 0);
+
+        } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(this.getParent(), "Selecione la fila para sacar el informe");
+            Logger.getLogger(InternalTCultivar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
     //Actualizar en las busquedas
     void buscarFiltro() throws SQLException, Exception
     {
@@ -443,8 +643,18 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenu jmGastosManoObra;
+    private javax.swing.JMenuItem jmGastosOtros;
+    private javax.swing.JMenuItem jmGastosPendientesAbonar;
+    private javax.swing.JMenuItem jmGastosPrductos;
+    private javax.swing.JMenuItem jmIngresosOtros;
+    private javax.swing.JMenuItem jmIngresosPendientesCobrar;
+    private javax.swing.JMenuItem jmIngresosVenta;
+    private javax.swing.JMenuItem jmResumenResultados;
     private javax.swing.JTable jtbCultivar;
     private javax.swing.JTextField jtfParcelaBuscar;
     private javax.swing.JTextField jtfVariedadBuscar;

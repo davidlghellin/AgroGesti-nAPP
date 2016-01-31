@@ -1,6 +1,8 @@
 package gui.internal;
 
+import conexion.ConexionBBDD;
 import gui.internal.nuevo.InternalNuevoIngresoOtro;
+import gui.internal.nuevo.InternalNuevoIngresoVenta;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -46,6 +48,8 @@ public class InternalTIngresoOtro extends javax.swing.JInternalFrame
         dateAntes = new com.toedter.calendar.JDateChooser();
         dateDespues = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
+        btnCobrado = new javax.swing.JButton();
+        btnNoCobrado = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -152,6 +156,25 @@ public class InternalTIngresoOtro extends javax.swing.JInternalFrame
 
         jLabel3.setText("Procedencia");
 
+        btnCobrado.setText("Cobrado");
+        btnCobrado.setToolTipText("Seleccione fila para cobrar");
+        btnCobrado.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnCobradoActionPerformed(evt);
+            }
+        });
+
+        btnNoCobrado.setText("No cobrado");
+        btnNoCobrado.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btnNoCobradoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -164,7 +187,9 @@ public class InternalTIngresoOtro extends javax.swing.JInternalFrame
                         .addGap(18, 18, 18)
                         .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                        .addComponent(btnCobrado, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,14 +197,17 @@ public class InternalTIngresoOtro extends javax.swing.JInternalFrame
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(dateDespues, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtfProcedenciaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel3)))))
-                .addContainerGap(41, Short.MAX_VALUE))
+                                .addComponent(jLabel3)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(dateDespues, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtfProcedenciaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnNoCobrado)))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,12 +222,15 @@ public class InternalTIngresoOtro extends javax.swing.JInternalFrame
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(dateDespues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dateAntes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtfProcedenciaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jtfProcedenciaBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnNoCobrado)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAlta)
                     .addComponent(btnModificar)
-                    .addComponent(btnEliminar))
+                    .addComponent(btnEliminar)
+                    .addComponent(btnCobrado))
                 .addContainerGap())
         );
 
@@ -293,6 +324,65 @@ public class InternalTIngresoOtro extends javax.swing.JInternalFrame
         }
     }//GEN-LAST:event_dateAntesPropertyChange
 
+    private void btnCobradoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnCobradoActionPerformed
+    {//GEN-HEADEREND:event_btnCobradoActionPerformed
+        int[] filas = jtbIngresoOtro.getSelectedRows();
+        if (filas.length == 0)
+        {
+            JOptionPane.showInternalMessageDialog(jtbIngresoOtro.getRootPane(), "Tiene que selecionar las filas a marcar como cobrado");
+        } else
+        {
+            for (int f : filas)
+            {
+                if (!((String) jtbIngresoOtro.getValueAt(f, 6).toString()).equals("Cobrado"))
+                {
+                    int id = Integer.parseInt((String) jtbIngresoOtro.getValueAt(f, 0).toString());
+                    String SQL = "UPDATE  TIngresoOtro SET Cobrado= \"Cobrado\" WHERE Id = \"" + id + "\";";
+
+                    try
+                    {
+                        ConexionBBDD c = new ConexionBBDD();
+                        c.hacerInsercion(SQL);
+                        c.cerrarConexion();
+                        utils.UtilisSql.actualizarJtable(jtbIngresoOtro, "TIngresoOtro");
+                    } catch (Exception ex)
+                    {
+                        Logger.getLogger(InternalNuevoIngresoVenta.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_btnCobradoActionPerformed
+
+    private void btnNoCobradoActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnNoCobradoActionPerformed
+    {//GEN-HEADEREND:event_btnNoCobradoActionPerformed
+        int[] filas = jtbIngresoOtro.getSelectedRows();
+        if (filas.length == 0)
+        {
+            JOptionPane.showInternalMessageDialog(jtbIngresoOtro.getRootPane(), "Tiene que selecionar las filas a marcar como no cobrado");
+        } else
+        {
+            for (int f : filas)
+            {
+                if (!((String) jtbIngresoOtro.getValueAt(f, 6).toString()).equals("No cobrado"))
+                {
+                    int id = Integer.parseInt((String) jtbIngresoOtro.getValueAt(f, 0).toString());
+                    String SQL = "UPDATE  TIngresoOtro SET Cobrado= \"No cobrado\" WHERE Id = \"" + id + "\";";
+                    try
+                    {
+                        ConexionBBDD c = new ConexionBBDD();
+                        c.hacerInsercion(SQL);
+                        c.cerrarConexion();
+                        utils.UtilisSql.actualizarJtable(jtbIngresoOtro, "TIngresoOtro");
+                    } catch (Exception ex)
+                    {
+                        Logger.getLogger(InternalNuevoIngresoVenta.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_btnNoCobradoActionPerformed
+
     //Actualizar en las busquedas
     void buscarFiltro() throws SQLException, Exception
     {
@@ -322,8 +412,10 @@ public class InternalTIngresoOtro extends javax.swing.JInternalFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlta;
+    private javax.swing.JButton btnCobrado;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnNoCobrado;
     private com.toedter.calendar.JDateChooser dateAntes;
     private com.toedter.calendar.JDateChooser dateDespues;
     private javax.swing.JLabel jLabel1;

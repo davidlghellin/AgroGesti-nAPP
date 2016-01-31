@@ -1,11 +1,14 @@
 package utils;
 
 import conexion.ConexionBBDD;
+import gui.FramePrincipal;
+import gui.trabajador.FrameTrabajador;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -17,6 +20,47 @@ import javax.swing.table.DefaultTableModel;
 public class UtilisSql
 {
 
+    /**
+     * Método para comprobar si el usario está en la BBDD
+     *
+     * @param user
+     * @param pass
+     * @param frame
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
+    public static void loginUser(String user, String pass, JFrame frame) throws ClassNotFoundException, SQLException
+    {
+        ConexionBBDD c = new ConexionBBDD();
+        String DNI = null;
+        String bbddPass = null;
+        String tipo = null;
+        try
+        {
+            ResultSet rs = c.hacerConsulta("SELECT DNI, Contrasenya,Tipo FROM TTrabajador WHERE DNI = \"" + user + "\";");
+            rs.next();
+            DNI=rs.getString(1);
+            bbddPass = rs.getString(2);
+            tipo = rs.getString(3);
+            if (pass.equals(bbddPass) && tipo.equals("root"))
+            {
+                new FramePrincipal().setVisible(true);
+                frame.dispose();
+            } else if (pass.equals(bbddPass) && tipo.equals("normal"))
+            {
+                new FrameTrabajador(DNI).setVisible(true);
+                frame.dispose();
+            } else
+            {
+                JOptionPane.showMessageDialog(frame, "Contraseña no válida", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(frame, "Usuario no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
     public static JTable rellenarJTable(String consulta, JTable table) throws ClassNotFoundException, SQLException, Exception
     {
         JTable jtable = table;
@@ -24,7 +68,17 @@ public class UtilisSql
         ResultSet rs = c.hacerConsulta(consulta);
         DefaultTableModel modelo = (DefaultTableModel) jtable.getModel();
         ResultSetMetaData rsmd = rs.getMetaData();
-        int cantidadColumnas = rsmd.getColumnCount();
+        int cantidadColumnas;
+
+        // con esto nos aseguramos que no se muestre la contraseña y el tipo de usuario
+        if (consulta.contains("TTrabajador"))
+        {
+            cantidadColumnas = 3;
+        } else
+        {
+            cantidadColumnas = rsmd.getColumnCount();
+
+        }
         modelo.setColumnCount(0);
         modelo.setRowCount(0);
         for (int i = 1; i <= cantidadColumnas; i++)
@@ -78,7 +132,7 @@ public class UtilisSql
                 actualizarJtable(jtable, nombreTabla);
             } catch (Exception e)
             {
-                 // JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Hace referencia a otra tabla");
+                // JOptionPane.showInternalMessageDialog(jtable.getRootPane(), "Hace referencia a otra tabla");
                 Logger.getLogger(UtilisSql.class.getName()).log(Level.SEVERE, null, e);
             }
         } catch (Exception e)

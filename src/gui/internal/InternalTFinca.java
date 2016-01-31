@@ -1,18 +1,12 @@
 package gui.internal;
 
-import conexion.ConexionBBDD;
 import gui.internal.nuevo.InternalNuevaFinca;
-import java.awt.Dimension;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *

@@ -98,6 +98,11 @@
                       <Component id="jtfClienteBuscar" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btnNoCobrado" max="32767" attributes="0"/>
+                      <Component id="btnCobrado" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -114,13 +119,17 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="dateAntes" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="dateDespues" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtfClienteBuscar" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                          <Component id="jtfClienteBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnNoCobrado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnAlta" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnModificar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnCobrado" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -180,6 +189,23 @@
         <Component class="javax.swing.JTextField" name="jtfClienteBuscar">
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfClienteBuscarKeyReleased"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnCobrado">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cobrado"/>
+            <Property name="toolTipText" type="java.lang.String" value="Seleccione fila para marcar como cobrado"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCobradoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnNoCobrado">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="No cobrado"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNoCobradoActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

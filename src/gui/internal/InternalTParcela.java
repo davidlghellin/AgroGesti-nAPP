@@ -1,6 +1,5 @@
 package gui.internal;
 
-import conexion.ConexionBBDD;
 import gui.internal.nuevo.InternalNuevaParcela;
 import java.sql.SQLException;
 import java.util.logging.Level;
