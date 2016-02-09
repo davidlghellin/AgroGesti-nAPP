@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author david
+ * @author David López González
  */
 public class InternalTGastoManoObra extends javax.swing.JInternalFrame
 {
@@ -49,9 +49,6 @@ public class InternalTGastoManoObra extends javax.swing.JInternalFrame
         jScrollPane2 = new javax.swing.JScrollPane();
         jtbTGastosManoObra = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        jmTrabajosRealizados = new javax.swing.JMenuItem();
-        jmTrabajosRealizadosPendientesCobro = new javax.swing.JMenuItem();
 
         setClosable(true);
         setIconifiable(true);
@@ -242,16 +239,6 @@ public class InternalTGastoManoObra extends javax.swing.JInternalFrame
         ));
         jScrollPane2.setViewportView(jtbTGastosManoObra);
 
-        jMenu2.setText("Informe");
-
-        jmTrabajosRealizados.setText("Trabajos realizados");
-        jMenu2.add(jmTrabajosRealizados);
-
-        jmTrabajosRealizadosPendientesCobro.setText("Trabajos realizados y pendientes de cobro");
-        jMenu2.add(jmTrabajosRealizadosPendientesCobro);
-
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -264,7 +251,7 @@ public class InternalTGastoManoObra extends javax.swing.JInternalFrame
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -331,7 +318,7 @@ public class InternalTGastoManoObra extends javax.swing.JInternalFrame
         } catch (Exception ex)
         {
             Logger.getLogger(InternalTGastoManoObra.class.getName()).log(Level.SEVERE, null, ex);
-        }// TODO add your handling code here:
+        }
     }//GEN-LAST:event_jcbTipoActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btnModificarActionPerformed
@@ -411,9 +398,7 @@ public class InternalTGastoManoObra extends javax.swing.JInternalFrame
             }
         }
     }//GEN-LAST:event_btnNoPagadoActionPerformed
-
-    //Actualizar en las busquedas
-    void buscarFiltro() throws SQLException, Exception
+    private void buscarFiltro() throws SQLException, Exception
     {
         String dni = jtfDNIBuscar.getText().toString();
         String descripcion = jtfDescripcionBuscar.getText().toString();
@@ -441,13 +426,10 @@ public class InternalTGastoManoObra extends javax.swing.JInternalFrame
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox jcbTipo;
-    private javax.swing.JMenuItem jmTrabajosRealizados;
-    private javax.swing.JMenuItem jmTrabajosRealizadosPendientesCobro;
     private javax.swing.JTable jtbTGastosManoObra;
     private javax.swing.JTextField jtfDNIBuscar;
     private javax.swing.JTextField jtfDescripcionBuscar;

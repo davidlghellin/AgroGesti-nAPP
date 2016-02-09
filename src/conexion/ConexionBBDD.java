@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 /**
  * Clase para el manejo de la base de datos
  *
- * @author david
+ * @author David López González
  */
 public class ConexionBBDD
 {
@@ -83,7 +83,17 @@ public class ConexionBBDD
     }
 
     /**
-     * Realiza la inserción/modificación en la base de datos pasada como parámetro
+     * Devuelve la instancia de la conexión a la BBDD
+     * @return 
+     */
+    public Connection getConexion()
+    {
+        return conexion;
+    }
+
+    /**
+     * Realiza la inserción/modificación en la base de datos pasada como
+     * parámetro
      *
      * @param insert Cadena de texto que paseremos a la BBDD para dar de alta
      * una tupla
@@ -102,13 +112,14 @@ public class ConexionBBDD
             return false;
         }
     }
-    
+
     /**
      * Realiza la consulta de la base de datos que se le pasa como parámetro
      *
      * @param select Cadena de texto que paseremos a la BBDD para hacer una
      * consulta
      * @return Resulset donde se encuentra las consultas
+     * @throws SQLException
      */
     public ResultSet hacerConsulta(String select) throws SQLException
     {
@@ -117,6 +128,16 @@ public class ConexionBBDD
         return rs;
     }
 
+    /**
+     * Realiza la consulta de la base de datos que se le pasa como parámetro,
+     * devolviendo el resultado al jtable especificado
+     *
+     * @param select Cadena de texto que paseremos a la BBDD para hacer una
+     * consulta
+     * @param jtable Donde mostraremos el resultado
+     * @return
+     * @throws SQLException
+     */
     public ResultSet hacerConsulta(String select, JTable jtable) throws SQLException
     {
         stateman = (Statement) conexion.createStatement();
@@ -124,7 +145,7 @@ public class ConexionBBDD
 
         ResultSet rs = stateman.executeQuery(select);
         ResultSetMetaData rsmd = rs.getMetaData();
-        
+
         int cantidadColumnas = rsmd.getColumnCount();
         modelo.setColumnCount(0);
         for (int i = 1; i <= cantidadColumnas; i++)
@@ -147,8 +168,8 @@ public class ConexionBBDD
     /**
      * Realiza el borrado en la base de datos las tuplas correspondientes
      *
-     * @param delete
-     * @return
+     * @param delete Consulta SQL
+     * @return Si se ha realizado correctamente el borrado
      */
     public boolean hacerBorrado(String delete)
     {

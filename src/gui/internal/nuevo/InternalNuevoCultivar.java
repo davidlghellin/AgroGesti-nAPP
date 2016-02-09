@@ -14,7 +14,7 @@ import javax.swing.JTable;
 
 /**
  *
- * @author david
+ * @author David López González
  */
 public class InternalNuevoCultivar extends javax.swing.JInternalFrame
 {
@@ -396,7 +396,7 @@ public class InternalNuevoCultivar extends javax.swing.JInternalFrame
             Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnBuscarParcelaActionPerformed
-    void rellenarCampos()
+    private void rellenarCampos()
     {
         try
         {
@@ -426,27 +426,6 @@ public class InternalNuevoCultivar extends javax.swing.JInternalFrame
             Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    /*
-     void rellenarCombo() throws ClassNotFoundException, SQLException, Exception
-     {
-     ConexionBBDD c = new ConexionBBDD();
-     String SQLparcela = "SELECT IdParcela FROM TParcela;";
-     String SQLvariedad = "SELECT Nombre FROM TVariedad;";
-     // Rellenamos los comboBox
-     ResultSet rs = c.hacerConsulta(SQLvariedad);
-     while (rs.next())
-     {
-     jcbVariedad.addItem(rs.getString(1));
-     }
-     ResultSet rs2 = c.hacerConsulta(SQLparcela);
-     while (rs2.next())
-     {
-     jcbParcela.addItem(rs2.getString(1));
-     }
-
-     c.cerrarConexion();
-     }
-     */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnBuscarParcela;

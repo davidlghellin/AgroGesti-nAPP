@@ -10,34 +10,37 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author david
+ * @author David López González
  */
 public class UtilsTamanyo
 {
 
     /**
      * Método para controlar el número máximo de caracteres
+     *
      * @param textArear
      * @param max máximo de caracteres
      */
     public static void maxTamanyo(JTextField textArear, int max)
     {
-        if (textArear.getText().length() > max-1)
+        if (textArear.getText().length() > max - 1)
         {
-            textArear.setText(textArear.getText().toString().substring(0, max-1));
+            textArear.setText(textArear.getText().toString().substring(0, max - 1));
         }
     }
-     /**
+
+    /**
      * Método para controlar el número máximo de caracteres
+     *
      * @param textArear
      * @param max máximo de caracteres
      */
     public static void maxTamanyo(JTextArea textArear, int max)
     {
-        if (textArear.getText().length() > max-1)
+        if (textArear.getText().length() > max - 1)
         {
-            textArear.setText(textArear.getText().toString().substring(0, max-1));
+            textArear.setText(textArear.getText().toString().substring(0, max - 1));
         }
     }
-    
+
 }

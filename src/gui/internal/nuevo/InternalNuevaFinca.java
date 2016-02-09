@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author david
+ * @author David López González
  */
 public class InternalNuevaFinca extends javax.swing.JInternalFrame
 {
@@ -351,7 +351,7 @@ public class InternalNuevaFinca extends javax.swing.JInternalFrame
     {//GEN-HEADEREND:event_jtfNombreFincaKeyTyped
         utils.UtilsTamanyo.maxTamanyo(jtfNombreFinca, 20);
     }//GEN-LAST:event_jtfNombreFincaKeyTyped
-    public void rellenarCampos() throws SQLException, Exception
+    private void rellenarCampos() throws SQLException, Exception
     {
         try
         {

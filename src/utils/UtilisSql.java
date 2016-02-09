@@ -14,8 +14,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author david
+ * Clase auxiliar para facilitar el manejor de JTable y su correspondientes actualizaciones
+ * 
+ * @author David López González
  */
 public class UtilisSql
 {
@@ -39,7 +40,7 @@ public class UtilisSql
         {
             ResultSet rs = c.hacerConsulta("SELECT DNI, Contrasenya,Tipo FROM TTrabajador WHERE DNI = \"" + user + "\";");
             rs.next();
-            DNI=rs.getString(1);
+            DNI = rs.getString(1);
             bbddPass = rs.getString(2);
             tipo = rs.getString(3);
             if (pass.equals(bbddPass) && tipo.equals("root"))
@@ -61,6 +62,17 @@ public class UtilisSql
 
     }
 
+    /**
+     * Método genérico para rellenar un Jtable a partir de una consulta SQL, se encarga
+     * solo de rellenar con los campos apropiados
+     *
+     * @param consulta
+     * @param table
+     * @return
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws Exception
+     */
     public static JTable rellenarJTable(String consulta, JTable table) throws ClassNotFoundException, SQLException, Exception
     {
         JTable jtable = table;

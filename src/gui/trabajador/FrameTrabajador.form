@@ -4,17 +4,17 @@
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jmAnyadirGastoManoObra">
+        <Menu class="javax.swing.JMenu" name="jmTrabajos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Trabajos"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+            <MenuItem class="javax.swing.JMenuItem" name="jmAnyadirGastoManoObra">
               <Properties>
                 <Property name="text" type="java.lang.String" value="A&#xf1;adir"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmAnyadirGastoManoObraActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmModificarGastoManoObra">
@@ -40,17 +40,20 @@
             <Property name="text" type="java.lang.String" value="Informe"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jmTrabajosRealizados">
+            <MenuItem class="javax.swing.JMenuItem" name="jmInformeTrabajosRealizados">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Trabajos realizados"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmInformeTrabajosRealizadosActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jmTrabajosRealizadosPendientesCobro">
+            <MenuItem class="javax.swing.JMenuItem" name="jmInformeRealizadosPendientesCobro">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Trabajos realizados y pendientes de cobro"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmTrabajosRealizadosPendientesCobroActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmInformeRealizadosPendientesCobroActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -112,6 +115,7 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="jtbTGastosManoObra">
               <Properties>
+                <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="4">
                     <Column editable="true" title="Title 1" type="java.lang.Object"/>

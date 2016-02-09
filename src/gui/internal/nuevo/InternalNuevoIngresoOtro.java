@@ -12,7 +12,7 @@ import javax.swing.JTable;
 
 /**
  *
- * @author david
+ * @author David López González
  */
 public class InternalNuevoIngresoOtro extends javax.swing.JInternalFrame
 {
@@ -330,7 +330,7 @@ public class InternalNuevoIngresoOtro extends javax.swing.JInternalFrame
     {//GEN-HEADEREND:event_jtaDescripcionKeyTyped
         utils.UtilsTamanyo.maxTamanyo( jtaDescripcion, 100);
     }//GEN-LAST:event_jtaDescripcionKeyTyped
-    public void rellenar() throws ClassNotFoundException, SQLException
+    private void rellenar() throws ClassNotFoundException, SQLException
     {
         String SQL = "SELECT * FROM TIngresoOtro WHERE Id= \"" + id + "\";";
         ConexionBBDD c = new ConexionBBDD();

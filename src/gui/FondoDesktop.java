@@ -10,12 +10,15 @@ import javax.swing.border.Border;
 
 /**
  *
- * @author david
+ * @author  David López González
  */
 public class FondoDesktop implements Border
 {
 
-    public BufferedImage back;
+    /**
+     * Variable deonde almacenaremos la imagen del fondo 
+     */
+    private BufferedImage back;
 
     public FondoDesktop()
     {

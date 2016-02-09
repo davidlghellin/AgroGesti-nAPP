@@ -82,7 +82,6 @@ CREATE TABLE TGastosManoObra
     Id              INT             PRIMARY KEY AUTO_INCREMENT,       
     FechaInicio     DATE            NOT NULL,
     FechaFin        DATE            NOT NULL,
-    #Categoria      INT             NOT NULL,
     Categoria       ENUM('Fumigar','Labrar','Podar','Recolectar','Regar','Sembrar','Otros') NOT NULL DEFAULT 'Otros',
     DNI             VARCHAR(10)     NOT NULL,
     Tipo            ENUM('Horas','Dias') NOT NULL DEFAULT 'Dias',

@@ -1,7 +1,12 @@
 package gui.trabajador;
 
+import com.mysql.jdbc.Connection;
 import conexion.ConexionBBDD;
+import gui.internal.InternalTCultivar;
+import jasper.AbstractaJasperReports;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -17,6 +22,9 @@ public class FrameTrabajador extends javax.swing.JFrame
 
     /**
      * Creates new form FrameTrabajador
+     * @param DNI
+     * @throws java.sql.SQLException
+     * @throws java.lang.Exception
      */
     public FrameTrabajador(String DNI) throws SQLException, Exception
     {
@@ -40,16 +48,17 @@ public class FrameTrabajador extends javax.swing.JFrame
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbTGastosManoObra = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jmAnyadirGastoManoObra = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jmTrabajos = new javax.swing.JMenu();
+        jmAnyadirGastoManoObra = new javax.swing.JMenuItem();
         jmModificarGastoManoObra = new javax.swing.JMenuItem();
         jmEliminarGastoManoObra = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jmTrabajosRealizados = new javax.swing.JMenuItem();
-        jmTrabajosRealizadosPendientesCobro = new javax.swing.JMenuItem();
+        jmInformeTrabajosRealizados = new javax.swing.JMenuItem();
+        jmInformeRealizadosPendientesCobro = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jtbTGastosManoObra.setAutoCreateRowSorter(true);
         jtbTGastosManoObra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
@@ -76,17 +85,17 @@ public class FrameTrabajador extends javax.swing.JFrame
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
         );
 
-        jmAnyadirGastoManoObra.setText("Trabajos");
+        jmTrabajos.setText("Trabajos");
 
-        jMenuItem3.setText("Añadir");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener()
+        jmAnyadirGastoManoObra.setText("Añadir");
+        jmAnyadirGastoManoObra.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jMenuItem3ActionPerformed(evt);
+                jmAnyadirGastoManoObraActionPerformed(evt);
             }
         });
-        jmAnyadirGastoManoObra.add(jMenuItem3);
+        jmTrabajos.add(jmAnyadirGastoManoObra);
 
         jmModificarGastoManoObra.setText("Modificar");
         jmModificarGastoManoObra.addActionListener(new java.awt.event.ActionListener()
@@ -96,7 +105,7 @@ public class FrameTrabajador extends javax.swing.JFrame
                 jmModificarGastoManoObraActionPerformed(evt);
             }
         });
-        jmAnyadirGastoManoObra.add(jmModificarGastoManoObra);
+        jmTrabajos.add(jmModificarGastoManoObra);
 
         jmEliminarGastoManoObra.setText("Eliminar");
         jmEliminarGastoManoObra.addActionListener(new java.awt.event.ActionListener()
@@ -106,24 +115,31 @@ public class FrameTrabajador extends javax.swing.JFrame
                 jmEliminarGastoManoObraActionPerformed(evt);
             }
         });
-        jmAnyadirGastoManoObra.add(jmEliminarGastoManoObra);
+        jmTrabajos.add(jmEliminarGastoManoObra);
 
-        jMenuBar1.add(jmAnyadirGastoManoObra);
+        jMenuBar1.add(jmTrabajos);
 
         jMenu2.setText("Informe");
 
-        jmTrabajosRealizados.setText("Trabajos realizados");
-        jMenu2.add(jmTrabajosRealizados);
-
-        jmTrabajosRealizadosPendientesCobro.setText("Trabajos realizados y pendientes de cobro");
-        jmTrabajosRealizadosPendientesCobro.addActionListener(new java.awt.event.ActionListener()
+        jmInformeTrabajosRealizados.setText("Trabajos realizados");
+        jmInformeTrabajosRealizados.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jmTrabajosRealizadosPendientesCobroActionPerformed(evt);
+                jmInformeTrabajosRealizadosActionPerformed(evt);
             }
         });
-        jMenu2.add(jmTrabajosRealizadosPendientesCobro);
+        jMenu2.add(jmInformeTrabajosRealizados);
+
+        jmInformeRealizadosPendientesCobro.setText("Trabajos realizados y pendientes de cobro");
+        jmInformeRealizadosPendientesCobro.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jmInformeRealizadosPendientesCobroActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmInformeRealizadosPendientesCobro);
 
         jMenuBar1.add(jMenu2);
 
@@ -143,17 +159,33 @@ public class FrameTrabajador extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jmTrabajosRealizadosPendientesCobroActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmTrabajosRealizadosPendientesCobroActionPerformed
-    {//GEN-HEADEREND:event_jmTrabajosRealizadosPendientesCobroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jmTrabajosRealizadosPendientesCobroActionPerformed
+    private void jmInformeRealizadosPendientesCobroActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmInformeRealizadosPendientesCobroActionPerformed
+    {//GEN-HEADEREND:event_jmInformeRealizadosPendientesCobroActionPerformed
+        try
+        {
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jMenuItem3ActionPerformed
-    {//GEN-HEADEREND:event_jMenuItem3ActionPerformed
+            ConexionBBDD conn = new ConexionBBDD();
+            HashMap<String, Object> parametros = new HashMap<String, Object>();
+
+            parametros.put("dni", DNI);
+
+            AbstractaJasperReports.crearInforme((Connection) conn.getConexion(), "./src/jasper/bin/c10_Landscape.jasper", parametros);
+            AbstractaJasperReports.verVisor();
+            conn.cerrarConexion();
+
+        } catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(this.getParent(), "Selecione la fila para sacar el informe");
+            Logger.getLogger(FrameTrabajador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jmInformeRealizadosPendientesCobroActionPerformed
+
+    private void jmAnyadirGastoManoObraActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmAnyadirGastoManoObraActionPerformed
+    {//GEN-HEADEREND:event_jmAnyadirGastoManoObraActionPerformed
         NuevoGastoManoObra internal = new NuevoGastoManoObra(jtbTGastosManoObra, DNI);
         internal.setVisible(true);
         utils.UtilsFrame.centrar(internal, 300, 600);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jmAnyadirGastoManoObraActionPerformed
 
     private void jmModificarGastoManoObraActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmModificarGastoManoObraActionPerformed
     {//GEN-HEADEREND:event_jmModificarGastoManoObraActionPerformed
@@ -195,6 +227,13 @@ public class FrameTrabajador extends javax.swing.JFrame
             }
         }
     }//GEN-LAST:event_jmEliminarGastoManoObraActionPerformed
+
+    private void jmInformeTrabajosRealizadosActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jmInformeTrabajosRealizadosActionPerformed
+    {//GEN-HEADEREND:event_jmInformeTrabajosRealizadosActionPerformed
+      TrabajadorFechas t=  new TrabajadorFechas(DNI);
+      t.setVisible(true);
+      utils.UtilsFrame.centrar(t, 500, 200);
+    }//GEN-LAST:event_jmInformeTrabajosRealizadosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -250,14 +289,14 @@ public class FrameTrabajador extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JMenu jmAnyadirGastoManoObra;
+    private javax.swing.JMenuItem jmAnyadirGastoManoObra;
     private javax.swing.JMenuItem jmEliminarGastoManoObra;
+    private javax.swing.JMenuItem jmInformeRealizadosPendientesCobro;
+    private javax.swing.JMenuItem jmInformeTrabajosRealizados;
     private javax.swing.JMenuItem jmModificarGastoManoObra;
-    private javax.swing.JMenuItem jmTrabajosRealizados;
-    private javax.swing.JMenuItem jmTrabajosRealizadosPendientesCobro;
+    private javax.swing.JMenu jmTrabajos;
     private javax.swing.JTable jtbTGastosManoObra;
     // End of variables declaration//GEN-END:variables
 }

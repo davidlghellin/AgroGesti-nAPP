@@ -182,13 +182,13 @@ SELECT * FROM TVariedad;
 ####        TCultivar
 ####################################
 INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela,Unidades) 
-    VALUES ('1999-01-01','1999-01-03',"Morada","Primera LaRomana",'1000');
+    VALUES ('1999-01-01','1999-03-03',"Morada","Primera LaRomana",'1000');
 INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela,Unidades)  
-    VALUES ('1999-01-01','1999-01-03',"Japanesse black","Segunda LaRomana",'1000');
+    VALUES ('1999-01-01','1999-04-03',"Japanesse black","Segunda LaRomana",'1000');
 INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela,Unidades)  
-    VALUES ('2000-01-01','2000-01-03',"Puerro","Primera LaRomana",'1000');
+    VALUES ('2000-01-01','2000-10-03',"Puerro","Primera LaRomana",'1000');
 INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela,Unidades)  
-    VALUES ('2000-01-01','2000-01-03',"Baladre","Segunda LaRomana",'1000');
+    VALUES ('2000-03-01','2000-10-03',"Baladre","Segunda LaRomana",'1000');
 INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela,Unidades)  
     VALUES ('2001-01-01','2001-01-03',"Larga","Primera LaRomana",'1000');
 INSERT INTO TCultivar (FechaInicio,FechaFin,IdVariedad,IdParcela,Unidades)  
@@ -205,13 +205,21 @@ SELECT * FROM TCultivar;
 ####        TIngresoVenta
 ####################################
 INSERT INTO TIngresoVenta (Fecha,NombreCliente,PrecioUnidad,Cantidad,Total,IdCultivar) 
-    VALUES ('2002-01-01',"David L.G.","1.2","1000","120000","1");
+    VALUES ('1999-04-04',"David L.G.","1.2","1000","120000","1");
 INSERT INTO TIngresoVenta (Fecha,NombreCliente,PrecioUnidad,Cantidad,Total,IdCultivar) 
     VALUES ('2002-01-02',"David L.G.","1.2","10000","1200000","2");
 INSERT INTO TIngresoVenta (Fecha,NombreCliente,PrecioUnidad,Cantidad,Total,IdCultivar) 
     VALUES ('2002-01-02',"David L.G.","1.2","10000","1200000","3");
 INSERT INTO TIngresoVenta (Fecha,NombreCliente,PrecioUnidad,Cantidad,Total,IdCultivar) 
-    VALUES ('2002-01-02',"David L.G.","1.2","10000","1200000","4");
+    VALUES ('2002-02-01',"David L.G.","1.2","10000","1200000","4");
+INSERT INTO TIngresoVenta (Fecha,NombreCliente,PrecioUnidad,Cantidad,Total,IdCultivar) 
+    VALUES ('1999-05-04',"David L.G.","1.2","1000","120000","1");
+INSERT INTO TIngresoVenta (Fecha,NombreCliente,PrecioUnidad,Cantidad,Total,IdCultivar) 
+    VALUES ('2002-02-02',"David L.G.","1.2","10000","1200000","2");
+INSERT INTO TIngresoVenta (Fecha,NombreCliente,PrecioUnidad,Cantidad,Total,IdCultivar) 
+    VALUES ('2002-02-02',"David L.G.","1.2","10000","1200000","3");
+INSERT INTO TIngresoVenta (Fecha,NombreCliente,PrecioUnidad,Cantidad,Total,IdCultivar) 
+    VALUES ('2002-02-02',"David L.G.","1.2","10000","1200000","4");
 
 SELECT * FROM TIngresoVenta;  
 
@@ -220,13 +228,17 @@ SELECT * FROM TIngresoVenta;
 ####        TIngresoOtro
 ####################################
 INSERT INTO TIngresoOtro (Fecha,Procedencia,Descripcion,Total,IdCultivar) 
-    VALUES ('2002-01-01',"EEUU","Subvención de los EEUU","10000","1");
+    VALUES ('1999-05-05',"EEUU","Subvención de los EEUU","10000","1");
 INSERT INTO TIngresoOtro (Fecha,Procedencia,Descripcion,Total,IdCultivar) 
-    VALUES ('2002-03-01',"UE","Subvención de los Europa por mantener la siembra","2000","2");
+    VALUES ('1999-04-05',"EU","Subvención de Europa por mantener la siembra","10000","1");
 INSERT INTO TIngresoOtro (Fecha,Procedencia,Descripcion,Total,IdCultivar) 
-    VALUES ('2003-03-01',"España","Subvención por dar trabajo a personas en paro","1900","3");
+    VALUES ('2003-03-01',"UE","Subvención de los Europa por mantener la siembra","10000","2");
 INSERT INTO TIngresoOtro (Fecha,Procedencia,Descripcion,Total,IdCultivar) 
-    VALUES ('2004-03-01',"Albacte","Subvención de Albacete por promover la siembra","15000","4");
+    VALUES ('2003-03-02',"Albacete","Subvención de Albacete por otros gastos","10000","2");
+INSERT INTO TIngresoOtro (Fecha,Procedencia,Descripcion,Total,IdCultivar) 
+    VALUES ('2003-03-01',"España","Subvención por dar trabajo a personas en paro","10000","3");
+INSERT INTO TIngresoOtro (Fecha,Procedencia,Descripcion,Total,IdCultivar) 
+    VALUES ('2004-03-01',"Albacte","Subvención de Albacete por promover la siembra","10000","4");
 
 SELECT * FROM TIngresoOtro;  
 
@@ -240,6 +252,9 @@ INSERT INTO TTrabajador (DNI,Nombre,Contrasenya) VALUES ("11223344T","Juan","Jua
 INSERT INTO TTrabajador (DNI,Nombre,Contrasenya) VALUES ("53149135R","David","David");
 INSERT INTO TTrabajador (DNI,Nombre,Contrasenya) VALUES ("5146078K","Agustin","Agustin");
 
+INSERT INTO TTrabajador (DNI,Nombre,Contrasenya) VALUES ("a","NombreEjemplo","a");
+INSERT INTO TTrabajador (DNI,Nombre,Contrasenya) VALUES ("b","NombreMeses","b");
+
 SELECT * FROM TTrabajador;  
 
 
@@ -247,37 +262,92 @@ SELECT * FROM TTrabajador;
 ####        TGastosManoObra
 ####################################
 INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
-    VALUES ('2015-01-02','2015-01-03',"Podar","5146078K","Horas","2","66","122","Podar","1");
+    VALUES ('1999-01-04','1999-01-04',"Podar","5146078K","Horas","2","50","100","Podar","1");
 INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
-    VALUES ('2015-01-03','2015-01-03',"Labrar","5146078K","Dias","1","99","99","Labrar","1");
+    VALUES ('1999-01-04','1999-01-05',"Labrar","5146078K","Dias","1","100","100","Labrar","1");
 INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
-    VALUES ('2015-01-02','2015-01-03',"Podar","12345600J","Horas","2","66","122","Podar","2");
+    VALUES ('2015-01-02','2015-01-03',"Podar","12345600J","Horas","2","50","100","Podar","2");
 INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
-    VALUES ('2015-01-03','2015-01-03',"Labrar","53138898X","Dias","1","99","99","Labrar","2");
+    VALUES ('2015-01-03','2015-01-03',"Labrar","53138898X","Dias","1","100","100","Labrar","2");
 INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
-    VALUES ('2015-02-02','2015-02-03',"Podar","11223344T","Dias","2","66","122","Podar","2");
+    VALUES ('2015-02-02','2015-02-03',"Podar","11223344T","Dias","2","50","100","Podar","2");
 INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
-    VALUES ('2015-02-03','2015-02-03',"Labrar","53138898X","Horas","1","99","99","Labrar","2");
+    VALUES ('2015-02-03','2015-02-03',"Labrar","53138898X","Horas","1","100","100","Labrar","2");
 INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
-    VALUES ('2015-03-02','2015-03-03',"Podar","12345600J","Dias","2","66","122","Podar","2");
+    VALUES ('2015-03-02','2015-03-03',"Podar","12345600J","Dias","2","50","100","Podar","2");
 INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
-    VALUES ('2015-03-03','2015-03-03',"Labrar","53149135R","Dias","1","99","99","Labrar","2");
+    VALUES ('2015-03-03','2015-03-03',"Labrar","53149135R","Dias","1","100","100","Labrar","2");
 INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
-    VALUES ('2015-04-02','2015-04-03',"Podar","53149135R","Dias","2","66","122","Podar","2");
+    VALUES ('2015-04-02','2015-04-03',"Podar","53149135R","Dias","2","50","100","Podar","2");
 INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
-    VALUES ('2015-04-03','2015-04-03',"Labrar","53138898X","Dias","1","99","99","Labrar","2");
+    VALUES ('2015-04-03','2015-04-03',"Labrar","53138898X","Dias","1","100","100","Labrar","2");
+
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('1999-01-04','1999-01-04',"Podar","a","Horas","2","50","100","Podar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('1999-01-04','1999-01-05',"Labrar","a","Dias","1","100","100","Labrar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('2015-01-02','2015-01-03',"Podar","a","Horas","2","50","100","Podar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('2015-01-03','2015-01-03',"Labrar","a","Dias","1","100","100","Labrar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('2015-02-02','2015-02-03',"Podar","a","Dias","2","50","100","Podar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('2015-02-03','2015-02-03',"Labrar","a","Horas","1","100","100","Labrar","2");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('2015-03-02','2015-03-03',"Podar","a","Dias","2","50","100","Podar","2");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('2015-03-03','2015-03-03',"Labrar","a","Dias","1","100","100","Labrar","2");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('2015-04-02','2015-04-03',"Podar","a","Dias","2","50","100","Podar","2");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('2015-04-03','2015-04-03',"Labrar","a","Dias","1","100","100","Labrar","2");
+
+#para comprobar los gráficos
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('1999-01-04','1999-01-04',"Podar","b","Horas","2","50","100","Podar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('1999-02-04','1999-02-04',"Podar","b","Horas","2","50","100","Podar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('1999-02-04','1999-02-04',"Podar","b","Horas","2","50","100","Podar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('1999-03-04','1999-03-04',"Podar","b","Horas","2","50","100","Podar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('1999-03-04','1999-03-04',"Podar","b","Horas","2","50","100","Podar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('1999-03-04','1999-03-04',"Podar","b","Horas","2","50","100","Podar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('1999-04-04','1999-04-04',"Podar","b","Horas","2","50","100","Podar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('1999-04-04','1999-04-04',"Podar","b","Horas","2","50","100","Podar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('1999-04-04','1999-04-04',"Podar","b","Horas","2","50","100","Podar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('1999-05-04','1999-05-04',"Podar","b","Horas","2","50","100","Podar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('1999-05-04','1999-05-04',"Podar","b","Horas","2","50","100","Podar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('1999-05-04','1999-05-04',"Podar","b","Horas","2","50","100","Podar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('1999-07-04','1999-07-04',"Podar","b","Horas","2","50","100","Podar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('1999-07-04','1999-07-04',"Podar","b","Horas","2","50","100","Podar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('1999-07-04','1999-07-04',"Podar","b","Horas","2","50","100","Podar","1");
+INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) 
+    VALUES ('1999-07-04','1999-07-04',"Podar","b","Horas","2","50","100","Podar","1");
 
 ####################################
 ####        TGastoProducto
 ####################################
 INSERT INTO TGastoProducto (FechaFatura,Proveedor,Descripcion,Cantidad,Total,IdCultivar) 
-    VALUES ('2012-01-02',"PEPE","Peazo gastazo de pepe 2012","333","4444","1");
+    VALUES ('1999-01-01',"PEPE","Peazo gastazo de pepe 2012","100","100","1");
 INSERT INTO TGastoProducto (FechaFatura,Proveedor,Descripcion,Cantidad,Total,IdCultivar) 
-    VALUES ('2013-01-02',"PEPE","Peazo gastazo de pepe 2013","333","1111","1");
+    VALUES ('1999-02-02',"PEPE","Peazo gastazo de pepe 2013","100","100","1");
 INSERT INTO TGastoProducto (FechaFatura,Proveedor,Descripcion,Cantidad,Total,IdCultivar) 
-    VALUES ('2014-01-02',"PEPE","Peazo gastazo de pepe 2014","333","4444","1");
+    VALUES ('1999-02-22',"PEPE","Peazo gastazo de pepe 2014","100","100","1");
 INSERT INTO TGastoProducto (FechaFatura,Proveedor,Descripcion,Cantidad,Total,IdCultivar) 
-    VALUES ('2015-01-02',"PEPE","Peazo gastazo de pepe 2015","333","1111","1");
+    VALUES ('1999-03-01',"PEPE","Peazo gastazo de pepe 2015","100","100","1");
 
 SELECT * FROM TGastoProducto;  
 
@@ -286,17 +356,17 @@ SELECT * FROM TGastoProducto;
 ####        TGastoOtro
 ####################################
 INSERT INTO TGastoOtro (FechaFatura,Descripcion,Total,IdCultivar) 
-    VALUES ('2012-01-02',"Peazo gastazo enero","4444","1");
+    VALUES ('1999-01-04',"Peazo gastazo enero","1000","1");
 INSERT INTO TGastoOtro (FechaFatura,Descripcion,Total,IdCultivar) 
-    VALUES ('2012-03-02',"Peazo gastazo marzo","5555","1");
+    VALUES ('1999-02-04',"Peazo gastazo febrero","1000","1");
 INSERT INTO TGastoOtro (FechaFatura,Descripcion,Total,IdCultivar) 
-    VALUES ('2012-06-02',"Peazo gastazo junio","4666444","1");
+    VALUES ('1999-02-20',"Peazo gastazo","1000","1");
 INSERT INTO TGastoOtro (FechaFatura,Descripcion,Total,IdCultivar) 
-    VALUES ('2012-01-02',"Peazo gastazo enero","4444","2");
+    VALUES ('2012-01-02',"Peazo gastazo enero","1000","2");
 INSERT INTO TGastoOtro (FechaFatura,Descripcion,Total,IdCultivar) 
-    VALUES ('2012-03-02',"Peazo gastazo marzo","5555","2");
+    VALUES ('2012-03-02',"Peazo gastazo marzo","1000","2");
 INSERT INTO TGastoOtro (FechaFatura,Descripcion,Total,IdCultivar) 
-    VALUES ('2012-06-02',"Peazo gastazo junio","4666444","2");
+    VALUES ('2012-06-02',"Peazo gastazo junio","1000","2");
 
 SELECT * FROM TGastoOtro;  
 

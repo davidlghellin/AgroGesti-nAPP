@@ -9,11 +9,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author david
+ * @author David López González
  */
 public class InternalTIngresoOtro extends javax.swing.JInternalFrame
 {
@@ -382,9 +381,7 @@ public class InternalTIngresoOtro extends javax.swing.JInternalFrame
             }
         }
     }//GEN-LAST:event_btnNoCobradoActionPerformed
-
-    //Actualizar en las busquedas
-    void buscarFiltro() throws SQLException, Exception
+    private void buscarFiltro() throws SQLException, Exception
     {
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         String procedencia = jtfProcedenciaBuscar.getText().toString();
