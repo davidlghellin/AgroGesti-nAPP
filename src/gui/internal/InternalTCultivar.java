@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import gui.internal.nuevo.InternalNuevoCultivar;
+import java.net.URL;
 
 /**
  *
@@ -543,9 +544,13 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
             HashMap<String, Object> parametros = new HashMap<String, Object>();
 
             parametros.put("idCultivar", id);
-
-            AbstractaJasperReports.crearInforme((Connection) conn.getConexion(), "./src/jasper/bin/c01_Landscape.jasper", parametros);
-            AbstractaJasperReports.verVisor();
+            try
+            {
+                AbstractaJasperReports.crearInforme((Connection) conn.getConexion(), "./src/jasper/bin/c01_Landscape.jasper", parametros);
+                AbstractaJasperReports.crearInforme((Connection) conn.getConexion(), "c01_Landscape.jasper", parametros);
+                AbstractaJasperReports.verVisor();
+            } catch (Exception e){}
+            
             conn.cerrarConexion();
             // TODO solucionar cuando no hay ningún dato para ese informe
         } catch (Exception ex)
@@ -567,6 +572,7 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
             parametros.put("idCultivar", id);
 
             AbstractaJasperReports.crearInforme((Connection) conn.getConexion(), "./src/jasper/bin/c02_Landscape.jasper", parametros);
+            AbstractaJasperReports.crearInforme((Connection) conn.getConexion(), "c02_Landscape.jasper", parametros);
             AbstractaJasperReports.verVisor();
             conn.cerrarConexion();
         } catch (Exception ex)
@@ -588,6 +594,7 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
             parametros.put("idCultivar", id);
 
             AbstractaJasperReports.crearInforme((Connection) conn.getConexion(), "./src/jasper/bin/c03_A4.jasper", parametros);
+            AbstractaJasperReports.crearInforme((Connection) conn.getConexion(), "c03_A4.jasper", parametros);
             AbstractaJasperReports.verVisor();
             conn.cerrarConexion();
 
@@ -610,6 +617,7 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
             parametros.put("idCultivar", id);
 
             AbstractaJasperReports.crearInforme((Connection) conn.getConexion(), "./src/jasper/bin/c04_Landscape.jasper", parametros);
+            AbstractaJasperReports.crearInforme((Connection) conn.getConexion(), "c04_Landscape.jasper", parametros);
             AbstractaJasperReports.verVisor();
             conn.cerrarConexion();
         } catch (Exception ex)
@@ -631,6 +639,7 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
             parametros.put("idCultivar", id);
 
             AbstractaJasperReports.crearInforme((Connection) conn.getConexion(), "./src/jasper/bin/c05_Landscape.jasper", parametros);
+            AbstractaJasperReports.crearInforme((Connection) conn.getConexion(), "c05_Landscape.jasper", parametros);
             AbstractaJasperReports.verVisor();
             conn.cerrarConexion();
 
@@ -687,6 +696,7 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
             parametros.put("resultado", (float) total / unidades);
 
             AbstractaJasperReports.crearInforme((Connection) conn.getConexion(), "./src/jasper/bin/c06_A4.jasper", parametros);
+            AbstractaJasperReports.crearInforme((Connection) conn.getConexion(), "c06_A4.jasper", parametros);
             AbstractaJasperReports.verVisor();
 
             conn.cerrarConexion();
@@ -716,6 +726,7 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
             rs.close();
 
             AbstractaJasperReports.crearInforme((Connection) conn.getConexion(), "./src/jasper/bin/c07_A4.jasper", parametros);
+            AbstractaJasperReports.crearInforme((Connection) conn.getConexion(), "c07_A4.jasper", parametros);
             AbstractaJasperReports.verVisor();
             conn.cerrarConexion();
 
@@ -744,6 +755,7 @@ public class InternalTCultivar extends javax.swing.JInternalFrame
             rs.close();
 
             AbstractaJasperReports.crearInforme((Connection) conn.getConexion(), "./src/jasper/bin/c08_A4.jasper", parametros);
+            AbstractaJasperReports.crearInforme((Connection) conn.getConexion(), "c08_A4.jasper", parametros);
             AbstractaJasperReports.verVisor();
             conn.cerrarConexion();
         } catch (Exception ex)

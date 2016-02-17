@@ -4,13 +4,11 @@ import conexion.ConexionBBDD;
 import gui.internal.InternalTCultivar;
 import gui.internal.InternalTTrabajador;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -307,6 +305,7 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
                     JOptionPane.showInternalMessageDialog(this.getRootPane(), "Debe selecionar las fechas");
                     Logger.getLogger(InternalNuevoCultivar.class.getName()).log(Level.SEVERE, null, ex);
                 }
+
                 dni = lblDNI.getText().toString();
                 categoria = jcbCategoria.getSelectedItem().toString();
                 cantidadTipo = Float.parseFloat(jtfCantidadTipo.getText().toString());
@@ -316,7 +315,7 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
                 idCultivar = Integer.parseInt(lblCultivar.getText().toString());
                 tipo = jcbTipo.getSelectedItem().toString();
 
-                if (fInicio.after(fFin))    //las fechas no están bien introdcidas
+                if (fInicio.after(fFin))    //las fechas no están bien introducidas
                 {
                     JOptionPane.showInternalMessageDialog(jtbGastoManoObra.getRootPane(), "Debe selecionar las fechas correctas");
                 } else
@@ -379,6 +378,10 @@ public class InternalNuevoGastoManoObra extends javax.swing.JInternalFrame
                 if (fInicio.after(fFin))    //las fechas no están bien introdcidas
                 {
                     JOptionPane.showInternalMessageDialog(jtbGastoManoObra.getRootPane(), "Debe selecionar las fechas correctas");
+                } else if (dni.equals(""))
+                {
+                    JOptionPane.showInternalMessageDialog(jtbGastoManoObra.getRootPane(), "Debe selecionar al trabajador");
+
                 } else
                 {
                     String SQL = "INSERT INTO TGastosManoObra (FechaInicio,FechaFin,Categoria,DNI,Tipo,CantidadTipo,PrecioTipo,Total,Descripcion,IdCultivar) \n"

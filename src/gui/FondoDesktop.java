@@ -24,7 +24,7 @@ public class FondoDesktop implements Border
     {
         try
         {
-            URL imagePath = new URL(getClass().getResource("../recursos/minimalista01.jpg").toString());   ////Ruta a la imágen
+            URL imagePath = new URL(getClass().getResource("/recursos/minimalista01.jpg").toString());   ////Ruta a la imágen
             back = ImageIO.read(imagePath);
         } catch (Exception ex)
         {
