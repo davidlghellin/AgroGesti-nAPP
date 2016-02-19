@@ -152,6 +152,13 @@ public class FrameCliente extends javax.swing.JFrame
         lblCantidad = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowClosing(java.awt.event.WindowEvent evt)
+            {
+                cerrandoConexionFrame(evt);
+            }
+        });
 
         btnConectar.setText("Conectar");
         btnConectar.addActionListener(new java.awt.event.ActionListener()
@@ -904,6 +911,11 @@ public class FrameCliente extends javax.swing.JFrame
         actualizarLasPestanyas(pestañaSelecionada);
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
+    private void cerrandoConexionFrame(java.awt.event.WindowEvent evt)//GEN-FIRST:event_cerrandoConexionFrame
+    {//GEN-HEADEREND:event_cerrandoConexionFrame
+      try{ cerrarComunicacionServidor();}catch(Exception e){}
+    }//GEN-LAST:event_cerrandoConexionFrame
+
     public void miInit()
     {
         FConexionServidor con = new FConexionServidor();
@@ -922,30 +934,7 @@ public class FrameCliente extends javax.swing.JFrame
         }
     }
 
-    public void cerrarComunicacionServidor()
-    {
-        try
-        {
-            mensajeServidor = ("FIN");
-            paraServidor.writeBytes(mensajeServidor + '\n');
-            Date fechaAct = new Date();
-            mensajeServidor = fechaAct.toString();
-            paraServidor.writeBytes(mensajeServidor + '\n');
-
-            respuestaServidor = delServidor.readLine();
-            if (respuestaServidor.compareToIgnoreCase(("OK_FIN")) == 0)
-            {
-                System.out.println("El cliente se ha cerrado con exito");
-                finalizar = true;
-                conectadoConServidor = false;
-            }
-
-        } catch (IOException ex)
-        {
-            Logger.getLogger(FrameCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
+    
     public void inicioComunicacionServidor()
     {
         try
@@ -977,6 +966,30 @@ public class FrameCliente extends javax.swing.JFrame
             e.printStackTrace();
             System.out.println("Error de comunicación con el servidor");
             finalizar = true;
+        }
+    }
+
+    public void cerrarComunicacionServidor()
+    {
+        try
+        {
+            mensajeServidor = ("FIN");
+            paraServidor.writeBytes(mensajeServidor + '\n');
+            Date fechaAct = new Date();
+            mensajeServidor = fechaAct.toString();
+            paraServidor.writeBytes(mensajeServidor + '\n');
+
+            respuestaServidor = delServidor.readLine();
+            if (respuestaServidor.compareToIgnoreCase(("OK_FIN")) == 0)
+            {
+                System.out.println("El cliente se ha cerrado con exito");
+                finalizar = true;
+                conectadoConServidor = false;
+            }
+
+        } catch (IOException ex)
+        {
+            Logger.getLogger(FrameCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

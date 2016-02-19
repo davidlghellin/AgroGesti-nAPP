@@ -59,7 +59,6 @@ public class UtilisSql
         {
             JOptionPane.showMessageDialog(frame, "Usuario no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
     }
 
     /**
