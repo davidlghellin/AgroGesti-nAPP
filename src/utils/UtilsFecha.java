@@ -30,19 +30,38 @@ public class UtilsFecha
         return fecha;
     }
 
-    public static String formatearFechas(Date fecha)
+     public static String formatearFechas(Date fecha)
     {
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        return formatearFechas(fecha, "yyyy-MM-dd");
+    }
+
+    public static String formatearFechas(Date fecha, String formatoFechaVisualizar)
+    {
+        SimpleDateFormat formatoFecha = new SimpleDateFormat(formatoFechaVisualizar);
         return formatoFecha.format(fecha);
     }
 
     public static String formatearFechas(Calendar fecha)
-    {   // GregorianCalendar va incluido 
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+    {
+        return formatearFechas(fecha, "yyyy-MM-dd");
+    }
+
+    public static String formatearFechas(Calendar fecha, String formatoFechaVisualizar)
+    {
+        SimpleDateFormat formatoFecha = new SimpleDateFormat(formatoFechaVisualizar);
         return formatoFecha.format(fecha.getTime());
     }
 
     public static boolean comprobarFechas(Date fechaInicio, Date fechaFin)
+    {
+        if (fechaInicio.after(fechaFin))    //las fechas no están bien introdcidas
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean comprobarFechas(Calendar fechaInicio, Calendar fechaFin)
     {
         if (fechaInicio.after(fechaFin))    //las fechas no están bien introdcidas
         {
